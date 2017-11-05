@@ -1,3 +1,8 @@
+//Toggling between languages
+var fin = document.getElementsByClassName("toggleFinn"), i;
+var eng = document.getElementsByClassName("toggleEng"), i;
+$('.toggleEng').hide();
+
 (function($) {
   "use strict"; // Start of use strict
 
@@ -41,11 +46,8 @@
 
 })(jQuery); // End of use strict
 
-var fin = document.getElementsByClassName("toggleFinn"), i;
-var eng = document.getElementsByClassName("toggleEng"), i;
-// fin.style.display = "none";
-$('.toggleEng').hide();
 
+//Toggling between languages
 function toggleFinn() {
   if (!$('.toggleFinn').is(":visible")) {
       $('.toggleFinn').show();
