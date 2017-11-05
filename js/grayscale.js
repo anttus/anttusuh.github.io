@@ -48,16 +48,12 @@ $('.toggleEng').hide();
 
 
 //Toggling between languages
-function toggleFinn() {
-  if (!$('.toggleFinn').is(":visible")) {
-      $('.toggleFinn').show();
-      $('.toggleEng').hide();
-  }
-}
-
-function toggleEng() {
+function toggleLang() {
   if (!$('.toggleEng').is(":visible")) {
-      $('.toggleEng').show();
-      $('.toggleFinn').hide();
+    $('.toggleFinn').hide();
+    $('.toggleEng').show();
+  } else {
+    $('.toggleFinn').show();
+    $('.toggleEng').hide();
   }
 }
