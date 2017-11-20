@@ -1,0 +1,109 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+body {
+  font-family: 'Oswald', sans-serif;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 0;
+  /*background-image: url("../img/soap.jpg");*/
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 120px;
+  padding-top: 20px;
+  margin-bottom: -80px;
+  font-family: 'Oswald', cursive;
+  color: black;
+  text-decoration: underline;
+  text-shadow: 4px 4px 4px #393c3e;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    margin-bottom: 0;
+    font-size: 80px;
+  }
+}
+
+.form-signin, .form-signup {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 15%;
+  margin-bottom: 18%;
+  background-color: black;
+  border: 5px solid black;
+  box-shadow: 4px 4px 4px;
+}
+.form-signin .form-signin-heading, .form-signup .form-signup-heading,
+.form-signin .checkbox, .form-signup .checkbox {
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 10px;
+  color: #F1F1F1;
+  text-align: center;
+}
+.form-signin .checkbox, .form-signup .checkbox{
+  font-weight: normal;
+}
+.form-signin .form-control, .form-signup .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus, .form-signup .form-control:focus {
+  z-index: 2;
+  outline: none;
+}
+.form-signin input[type="text"], .form-signup input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"], .form-signup input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin .btn, .form-signup .btn  {
+  background-color: #080808;
+  color: #f1f1f1;
+  border: none;
+  border-radius: 0;
+}
+
+.form-signin .btn:hover  {
+  background-color: #1d1d1d;
+  color: #f1f1f1;
+  border: none;
+  border-radius: 0;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #777777; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-left: 40%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}

@@ -1,0 +1,229 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+  margin: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+#navbar {
+  margin-bottom: 0;
+}
+
+#rightCol {
+    margin-bottom: 60px;
+    font-family: 'Oswald', sans-serif;
+    font-size: large;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+#leftCol {
+  margin-top: 20px;
+}
+
+#scoreCount {
+  font-size: 22px;
+  border-style: solid;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 33%;
+  margin-right: 33%;
+  width: 33%;
+}
+
+#score {
+  font-size: 25px;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+  overflow: auto;
+}
+
+.row {
+  margin-right: 0;
+}
+
+.sidenav {
+  background-color: #f1f1f1;
+  background-color: transparent;
+}
+
+footer {
+  background-color: #555;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@media (min-width: 768px) {
+  footer {
+    position: fixed;
+  }
+}
+
+body {
+  font-family: 'Oswald';
+  background-color: #f1f1f1;
+  position: relative;
+  min-width: 410px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body::after {
+  content: '';
+  display: block;
+}
+
+#footerText {
+  padding: 20px;
+  margin-bottom: 0;
+  color: #f1f1f1;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  #navbarTitle {
+    font-size: 18px;
+  }
+  .sidenav {
+    height: auto;
+    padding: 15px;
+    padding-right: 0;
+    margin-bottom: -20px;
+  }
+  .row.content {height:100%;}
+
+  #footerText {
+    color: #f1f1f1;
+    position: relative;
+    display: grid;
+  }
+
+  .container-fluid {
+    padding: 0;
+    position: relative;
+    bottom: 0;
+  }
+}
+
+
+@media (min-width: 768px) {
+  #navbarTitle {
+    font-size: 25px;
+  }
+}
+
+#logoutButton {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  width: 100px;
+  float: right;
+  margin: 10px;
+  padding: 13px;
+  border: none;
+  border-radius: 0;
+}
+
+#dishButton {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  font-size: 20px;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+}
+
+#dishButton:hover {
+  background-color: rgba(51, 51, 51, 0.77);
+  color: #f1f1f1;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+}
+
+#dishButton:focus {
+  background-color: #333;
+  color: #f1f1f1;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+  outline: none;
+}
+
+.btn-primary {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  background-color: #333;
+  border: none;
+  border-radius: 0;
+  position: absolute;
+  margin-left: -50%;
+}
+
+.btn-primary:hover {
+  background-color: rgba(51, 51, 51, 0.77);
+}
+
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+    color: #fff;
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #333;
+    border-color: #333;
+}
+
+.dropdown-menu {
+  /*margin-top: 32px;*/
+}
+
+#navbarTitle {
+  color: #f1f1f1;
+  /*font-size: 25px;*/
+  margin-top: -5px;
+  margin-left: 1px;
+}
+
+#successLogin {
+  margin-bottom: 0;
+}
+
+#colHeader {
+  margin-bottom: 30px;
+}
+
+.btn-success {
+  background-color: #333;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 0;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
