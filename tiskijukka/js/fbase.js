@@ -11,16 +11,19 @@
   };
   firebase.initializeApp(config);
 
+  // Get a reference to the database service
+  var database = firebase.database();
 
   //DATABASE SAMPLE
   //Get elements
   const preObject = document.getElementById('object');
 
   //Create references
-  const dbRefObject = firebase.database().ref().child('object');
+  const dbRefObject = database.ref().child('object');
 
   //Sync object changes
   dbRefObject.on('value', snap => {
+    console.log(snap.val());
     preObject.innerHTML = JSON.stringify(snap.val(), null, 3);
   });
 
