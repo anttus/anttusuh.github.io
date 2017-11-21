@@ -18,30 +18,31 @@
   const preObject = document.getElementById('task');
 
   //Create references
-  const dbRefObject = db.ref().child('Tasks');
+  const refObject = db.ref('Tasks').orderByChild('Tasks');
 
   //EXAMPLE
-  //Sync object changes
-  dbRefObject.on('value', snap => {
-    console.log(snap.val());
-    var obj = snap.val();
-    var task = obj.Task;
-    // var objString = JSON.stringify(obj);
-    preObject.innerText = (task.username + ": " + task.date + " | " + task.time + "\n");
-    // preObject.innerText = JSON.stringify(snap.val(), null, 3);
-  });
-
-  //EXAMPLE
-  writeTask("4", "Anttu3", "23.11.2017", "12:57", "3");
+  // writeTask("6", "Heikki", "39.11.2017", "16:43", "1");
+  readTasks();
 
   //WRITING THE TASKS
   function writeTask(userId, username, date, time, groupid) {
     db.ref('Tasks/Task' + userId).set({
       username: username,
-      userid: userId,
       date: date,
       time: time,
-      groupid: groupid
+      userid: userId,
+      groupid: groupid,
+    });
+  }
+
+  function readTasks() {
+    refObject.on("child_added", function(snap) {
+      var node = document.createElement("p");
+      var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+      var textNode = document.createTextNode(task);
+      node.appendChild(textNode);
+      preObject.prepend(node);
+      // preObject.append(snap.val().username + ": " + snap.val().date + " | " + snap.val().time + "\n");
     });
   }
 
