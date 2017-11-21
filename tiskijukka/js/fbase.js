@@ -1,7 +1,7 @@
 (function() {
 
   // Initialize Firebase
-  var config = {
+  const config = {
     apiKey: "AIzaSyCqiuxQhyWc3voH49Zh2j3ze83s73DHaXk",
     authDomain: "tiskijukka-1.firebaseapp.com",
     databaseURL: "https://tiskijukka-1.firebaseio.com",
@@ -12,19 +12,37 @@
   firebase.initializeApp(config);
 
   // Get a reference to the database service
-  var database = firebase.database();
+  const db = firebase.database();
 
-  //DATABASE SAMPLE
   //Get elements
-  const preObject = document.getElementById('object');
+  const preObject = document.getElementById('task');
 
   //Create references
-  const dbRefObject = database.ref().child('object');
+  const dbRefObject = db.ref().child('Tasks');
 
+  //EXAMPLE
   //Sync object changes
   dbRefObject.on('value', snap => {
     console.log(snap.val());
-    preObject.innerHTML = JSON.stringify(snap.val(), null, 3);
+    var obj = snap.val();
+    var task = obj.Task;
+    // var objString = JSON.stringify(obj);
+    preObject.innerText = (task.username + ": " + task.date + " | " + task.time + "\n");
+    // preObject.innerText = JSON.stringify(snap.val(), null, 3);
   });
+
+  //EXAMPLE
+  writeTask("4", "Anttu3", "23.11.2017", "12:57", "3");
+
+  //WRITING THE TASKS
+  function writeTask(userId, username, date, time, groupid) {
+    db.ref('Tasks/Task' + userId).set({
+      username: username,
+      userid: userId,
+      date: date,
+      time: time,
+      groupid: groupid
+    });
+  }
 
 }());

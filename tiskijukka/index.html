@@ -1,4 +1,4 @@
-<?php require "login/loginheader.php";?>
+<!-- <?php require "login/loginheader.php";?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,25 +13,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
   <script src="js/scripts.js"></script>
-  <script src="js/fbase.js"></script>
 
 <!-- ICONS -->
-  <link rel="apple-touch-icon" sizes="57x57" href="../ico/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="../ico/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="../ico/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="../ico/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="../ico/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="../ico/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="../ico/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="../ico/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="../ico/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../ico/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="../ico/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../ico/favicon-16x16.png">
-  <link rel="manifest" href="../ico/manifest.json">
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+  <link rel="manifest" href="ico/manifest.json">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="../ico/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
 <!-- SCRIPTS -->
@@ -72,12 +71,12 @@
       <div class="col-sm-6 sidenav" id="leftCol">
 
         <!-- Profile image -->
-        <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?>
-        <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180">
+        <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
+        <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
         <br />
 
         <!-- BUTTON -->
-        <input method="POST" type="submit" value="Tiskit tehty!" class="btn btn-success" href="#" id="dishButton" onmousedown="sendToDb()" ></input>
+        <input method="POST" type="submit" value="Tiskit tehty!" class="btn btn-success" href="#" id="dishButton" onmousedown="writeTask()" ></input>
         <br />
 
         <!-- SCORES -->
@@ -87,14 +86,19 @@
       </div> <!-- End of the left column -->
 
       <!-- Right column - gets the times from the database -->
-      <div class="col-sm-6 sidenav" id="rightCol"><?php include ('php/getFromDb.php'); ?></div>
-      <pre id="object"></pre>
+      <div class="col-sm-6 sidenav rightCol" id="task"></div>
+      <!-- <div class="col-sm-6 sidenav" id="rightCol"><?php include ('php/getFromDb.php'); ?></div> -->
 
   <!-- FOOTER -->
   <footer class="container-fluid text-center" >
     <div id="footerText">Copyright @ 2017 Anttu Suhonen | Linkit <a target="_blank"  href="https://github.com/anttus/" >GitHubiin</a> ja
-      <a target="_blank"  href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a></div>
+      <a target="_blank"  href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a></br>
+      Powered by Google Firebase | Terms of Service
+    </div>
   </footer>
 
 </body>
+
+<script src="js/fbase.js"></script>
+
 </html>
