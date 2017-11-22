@@ -44,7 +44,7 @@ document.getElementById("dishButton").addEventListener('click',function () {
 //       });
 //       getLatestTime();
 //     });
-}
+// }
 
 // function getLatestTime() {
 // 	$.get("php/getLatestTime.php", function(data){
