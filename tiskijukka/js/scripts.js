@@ -27,7 +27,7 @@ function getTime() {
 document.getElementById("dishButton").addEventListener('click',function () {
 //   writeTask(); //Needs parameters (current user, uid, groupid)?
   // alert("//   writeTask(); //Needs parameters (current user, uid, groupid)?");
-  writeTask(1, "Anttu", 1);
+  writeTask("Anttu", 1);
 });
 
 function sendToDb() {
