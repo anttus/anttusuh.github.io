@@ -46,7 +46,9 @@ function writeTask(username) {
   var groupid = 1;
   var uid = 1;
 
-  firebase.database().ref('Group' + groupid + '/Task' + taskid++).set({ //Sets a new Task table with the task number
+  var taskid = getTaskID();
+
+  firebase.database().ref('Group' + groupid + '/' + taskid).set({ //Sets a new Task table with the task number
     username: username,
     date: getDate(),
     time: getTime(),
@@ -56,14 +58,26 @@ function writeTask(username) {
   });
 }
 
+function getTaskID() {
+  firebase.database().ref('Group1').on("value", function(snap) {
+    var taskIDArr = [];
+    var taskID = snap.val().taskid;
+    // snap.forEach(function(data) {
+    //   taskID = data.key;
+    //   // console.log(data.key + data.val().taskid);
+    // });
+    console.log(taskID);
+    return taskID;
+  });
+}
+
 //Reading and listing the tasks
 function readTasks() {
-    firebase.database().ref('Group1').orderByChild('Group1').on("child_added", function(snap) {
+    firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
     var node = document.createElement("p");
-    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time +" | Task ID: " + snap.val().taskid + " " + getTaskID();
     var textNode = document.createTextNode(task);
     node.appendChild(textNode);
     document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
-    // preObject.append(snap.val().username + ": " + snap.val().date + " | " + snap.val().time + "\n");
   });
 }
