@@ -47,8 +47,10 @@ function writeTask(username) {
   var groupid = 1;
   var uid = 1;
 
+//Returns the number of tasks
   var taskid = returnTaskID();
   taskid++;
+
   firebase.database().ref('Group' + groupid + '/' + taskid).set({ //Sets a new Task table with the task number
     username: username,
     date: getDate(),
@@ -59,14 +61,28 @@ function writeTask(username) {
   });
 }
 
-function getTaskID() {
+//Get (latest) task's data
+function getTaskData() {
   firebase.database().ref('Group1').on("value", function(snap) {
     snap.forEach(function(data) {
       taskID = data.key;
+      latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
     });
     returnTaskID();
+    returnLatestTask();
   });
 }
+
+function returnLatestTask() {
+  var latestTask_ = latestTask;
+  var navbarTitle = document.getElementById('navbarTitle');
+  if (latestTask_ != undefined) {
+    navbarTitle.innerHTML = "Viimeisin: <p></p>" + latestTask_;
+  } else {
+    navbarTitle.innerHTML = "Viimeisin: <p></p>Aikoja ei ole vielä merkitty"
+  }
+}
+
 function returnTaskID() {
   var taskID_ = taskID;
   return taskID_;
@@ -74,8 +90,7 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
-    getTaskID();
-    getLatestTask();
+    getTaskData();
     firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
       var node = document.createElement("p");
       var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
@@ -83,18 +98,4 @@ function readTasks() {
       node.appendChild(textNode);
       document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
   });
-}
-
-function getLatestTask() {
-  firebase.database().ref('Group1').on("value", function(snap) {
-    snap.forEach(function(data) {
-      latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
-    });
-    returnLatestTask();
-  });
-}
-function returnLatestTask() {
-  var latestTask_ = latestTask;
-  var navbarTitle = document.getElementById('navbarTitle');
-  navbarTitle.append(latestTask_);
 }
