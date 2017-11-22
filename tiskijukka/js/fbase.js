@@ -1,3 +1,6 @@
+var taskid = 1;
+// var username, email, photoUrl, uid, emailVerified;
+
 (function() {
 
   // Initialize Firebase
@@ -11,39 +14,57 @@
   };
   firebase.initializeApp(config);
 
-  // Get a reference to the database service
-  const db = firebase.database();
+  // // Get a reference to the database service
+  // const db = firebase.database();
+  //
+  // //Get elements
+  // const preObject = document.getElementById('task');
+  //
+  // //Create references
+  // const refObject = db.ref('Tasks').orderByChild('Tasks');
 
-  //Get elements
-  const preObject = document.getElementById('task');
+  //Getting user's information
+  // var user = firebase.auth().currentUser;
+  //
+  // if (user != null) {
+  //   username = user.displayName;
+  //   email = user.email;
+  //   photoUrl = user.photoURL;
+  //   emailVerified = user.emailVerified;
+  //   uid = user.uid;
+  // }
 
-  //Create references
-  const refObject = db.ref('Tasks').orderByChild('Tasks');
+  //TESTING
+  // writeTask("7", "Petri", "5");
+  // for (var i = 0; i < 10; i++) {
+  //   writeTask(1, "Anttu", 1);
+  // }
 
-  //EXAMPLE
-  // writeTask("6", "Heikki", "39.11.2017", "16:43", "1");
   readTasks();
 
-  //WRITING THE TASKS
-  function writeTask(userId, username, date, time, groupid) {
-    db.ref('Tasks/Task' + userId).set({
-      username: username,
-      date: date,
-      time: time,
-      userid: userId,
-      groupid: groupid,
-    });
-  }
-
-  function readTasks() {
-    refObject.on("child_added", function(snap) {
-      var node = document.createElement("p");
-      var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-      var textNode = document.createTextNode(task);
-      node.appendChild(textNode);
-      preObject.prepend(node);
-      // preObject.append(snap.val().username + ": " + snap.val().date + " | " + snap.val().time + "\n");
-    });
-  }
-
 }());
+
+//Writing the tasks
+//Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
+function writeTask(uid, username, groupid) {
+  firebase.database().ref('Tasks/Task' + taskid++).set({ //Sets a new Task table with the task number
+    username: username,
+    date: getDate(),
+    time: getTime(),
+    uid: uid,
+    groupid: groupid,
+    taskid: taskid
+  });
+}
+
+//Reading and listing the tasks
+function readTasks() {
+    firebase.database().ref('Tasks').orderByChild('Tasks').on("child_added", function(snap) {
+    var node = document.createElement("p");
+    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+    var textNode = document.createTextNode(task);
+    node.appendChild(textNode);
+    document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
+    // preObject.append(snap.val().username + ": " + snap.val().date + " | " + snap.val().time + "\n");
+  });
+}

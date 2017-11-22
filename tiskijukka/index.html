@@ -12,10 +12,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-  <script src="js/scripts.js"></script>
+
 
 <!-- ICONS -->
-  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+  <!-- <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
   <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
   <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png"> -->
   <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
@@ -35,7 +35,7 @@
 
 <!-- SCRIPTS -->
   <script>
-    fadeAlert(2000);
+    // fadeAlert(2000);
     // getLatestTime();
     // getUsernames();
   </script>
@@ -56,7 +56,7 @@
   <div class="container-fluid">
     <a href="login/logout.php" id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
     <div class="navbar-header">
-      <a id="navbarTitle" class="navbar-brand"></a>
+      <a id="navbarTitle" class="navbar-brand">Viimeisin: <p></p></a>
     </div>
   </div>
 </nav>
@@ -76,7 +76,7 @@
         <br />
 
         <!-- BUTTON -->
-        <input method="POST" type="submit" value="Tiskit tehty!" class="btn btn-success" href="#" id="dishButton" onmousedown="writeTask()" ></input>
+        <input type="submit" value="Tiskit tehty!" class="btn btn-success" href="#" id="dishButton" ></input>
         <br />
 
         <!-- SCORES -->
@@ -93,12 +93,14 @@
   <footer class="container-fluid text-center" >
     <div id="footerText">Copyright @ 2017 Anttu Suhonen | Linkit <a target="_blank"  href="https://github.com/anttus/" >GitHubiin</a> ja
       <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a></br>
-      Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</a>
+      <p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a>
     </div>
   </footer>
 
 </body>
 
-<script src="js/fbase.js"></script>
+<script type="text/javascript" src="js/fbase.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+
 
 </html>

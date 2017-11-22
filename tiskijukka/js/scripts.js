@@ -1,21 +1,34 @@
-function fadeAlert(time) {
+//If shown once, don't show again
+window.onload = function fadeAlert(time) {
   window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function(){
           $(this).remove();
       });
-  }, time);
+  }, 2000);
 }
 
-function getDateTime() {
+function getDate() {
   var currentdate = new Date();
-  var dateTime = ("0" + currentdate.getDate()).slice(-2) + "."
+  var date = ("0" + currentdate.getDate()).slice(-2) + "."
                 + ("0" + (currentdate.getMonth()+1)).slice(-2)  + "."
-                + currentdate.getFullYear() + " | "
-                + ("0" + currentdate.getHours()).slice(-2) + ":"
-                + ("0" + currentdate.getMinutes()).slice(-2) + ":"
-                + ("0" + currentdate.getSeconds()).slice(-2);
-  return dateTime;
+                + currentdate.getFullYear();
+  return date;
 }
+
+function getTime() {
+  var currentdate = new Date();
+  var time =  + ("0" + currentdate.getHours()).slice(-2) + ":"
+              + ("0" + currentdate.getMinutes()).slice(-2) + ":"
+              + ("0" + currentdate.getSeconds()).slice(-2);
+  return time;
+}
+
+//Tiskit tehty! -napin toiminallisuus
+document.getElementById("dishButton").addEventListener('click',function () {
+//   writeTask(); //Needs parameters (current user, uid, groupid)?
+  // alert("//   writeTask(); //Needs parameters (current user, uid, groupid)?");
+  writeTask(1, "Anttu", 1);
+});
 
 function sendToDb() {
   var dateTime = getDateTime();
