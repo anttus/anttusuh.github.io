@@ -34,6 +34,12 @@ var taskid = 1;
   //   uid = user.uid;
   // }
 
+  //TESTING
+  // writeTask("7", "Petri", "5");
+  // for (var i = 0; i < 10; i++) {
+  //   writeTask(1, "Anttu", 1);
+  // }
+
   readTasks();
 
 }());
@@ -42,7 +48,6 @@ var taskid = 1;
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask(username) {
 
-//TEMPORARY
   var groupid = 1;
   var uid = 1;
 
@@ -56,11 +61,17 @@ function writeTask(username) {
   });
 }
 
+function getTaskID() {
+  firebase.database().ref('Group1').orderByValue().on("value", function(snap) {
+    return snap.val().time;
+  });
+}
+
 //Reading and listing the tasks
 function readTasks() {
     firebase.database().ref('Group1').orderByChild('Group1').on("child_added", function(snap) {
     var node = document.createElement("p");
-    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time + " " + getTaskID();
     var textNode = document.createTextNode(task);
     node.appendChild(textNode);
     document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
