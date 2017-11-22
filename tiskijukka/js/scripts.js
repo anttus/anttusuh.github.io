@@ -68,6 +68,7 @@ function getCount(name) {
   return result;
 }
 
+//Get usernames and calculate the precentage of entries/user
 function getUsernames() {
     $.ajax({
         type: 'POST',
@@ -93,8 +94,6 @@ function getUsernames() {
         },
     });
 };
-
-
 
 //Dropdown menu
 function dropdown() {
