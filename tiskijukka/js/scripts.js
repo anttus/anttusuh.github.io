@@ -25,35 +25,32 @@ function getTime() {
 
 //Tiskit tehty! -napin toiminallisuus
 document.getElementById("dishButton").addEventListener('click',function () {
-//   writeTask(); //Needs parameters (current user, uid, groupid)?
-  // alert("//   writeTask(); //Needs parameters (current user, uid, groupid)?");
-  writeTask("Anttu");
+  writeTask("Anttu"); //Current user's name
 });
 
-function sendToDb() {
-  var dateTime = getDateTime();
-  $(document).on('click', '#dishButton',function(e) {
-      $.ajax({
-        cache: false,
-        type: "POST",
-        url: "php/sendToDb.php",
-        data: {dateTime},
-        success: function(data) {
-          $('#rightCol').filter(function () { return $.trim(this.innerHTML) == "" }).remove();
-          $('#rightCol').prepend('<p>' + dateTime + '</p>');
-          dateTime = "";
-          },
-      });
-      getLatestTime();
-    });
-
+// function sendToDb() {
+//   var dateTime = getDateTime();
+//   $(document).on('click', '#dishButton',function(e) {
+//       $.ajax({
+//         cache: false,
+//         type: "POST",
+//         url: "php/sendToDb.php",
+//         data: {dateTime},
+//         success: function(data) {
+//           $('#rightCol').filter(function () { return $.trim(this.innerHTML) == "" }).remove();
+//           $('#rightCol').prepend('<p>' + dateTime + '</p>');
+//           dateTime = "";
+//           },
+//       });
+//       getLatestTime();
+//     });
 }
 
-function getLatestTime() {
-	$.get("php/getLatestTime.php", function(data){
-  		$('#navbarTitle').html("Viimeisin: " + '<p></p>' + data);
-	});
-}
+// function getLatestTime() {
+// 	$.get("php/getLatestTime.php", function(data){
+//   		$('#navbarTitle').html("Viimeisin: " + '<p></p>' + data);
+// 	});
+// }
 
 //ANALYTICS
 function getCount(name) {

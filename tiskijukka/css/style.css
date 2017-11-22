@@ -121,6 +121,12 @@ body::after {
   }
 }
 
+#navbarTitle {
+  color: #f1f1f1;
+  margin-top: -5px;
+  margin-left: 1px;
+
+}
 
 @media (min-width: 768px) {
   #navbarTitle {
@@ -195,12 +201,7 @@ body::after {
   /*margin-top: 32px;*/
 }
 
-#navbarTitle {
-  color: #f1f1f1;
-  /*font-size: 25px;*/
-  margin-top: -5px;
-  margin-left: 1px;
-}
+
 
 #successLogin {
   margin-bottom: 0;
