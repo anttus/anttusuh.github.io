@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -27,14 +28,35 @@
 </head>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-inverse" id="navbar">
+<!-- <nav class="navbar navbar-inverse" id="navbar">
   <div class="container-fluid">
-    <a id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
+    <button id="logoutButton" class="navbarButton btn btn-default btn-lg btn-square" >Ulos</button>
+    <button id="groupButton" class="navbarButton btn btn-default btn-lg btn-square" >Luo ryhmä</button>
     <div class="navbar-header">
       <a id="navbarTitle" class="navbar-brand"></a>
     </div>
   </div>
-</nav>
+</nav> -->
+<nav class="navbar navbar-inverse" id="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="navbarTitle"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="toggle-nav">
+          <ul class="nav navbar-nav navbar-right">
+            <button id="logoutButton" class="navbarButton btn btn-default btn-lg btn-square" >Ulos</button>
+            <button id="groupButton" class="navbarButton btn btn-default btn-lg btn-square" >Luo ryhmä</button>
+          </ul>
+        </div>
+      </div> <!-- close container div -->
+    </nav> <!-- close navbar nav -->
 
 <!-- BODY -->
 <body>
@@ -66,7 +88,7 @@
 
   <!-- FOOTER -->
   <footer class="container-fluid text-center" >
-    <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a> |
+    <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
       <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
       <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
     </div>
