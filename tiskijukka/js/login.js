@@ -19,9 +19,9 @@ const mainBody = document.getElementById('mainBody');
 //   modalLogin.style.display = 'block';
 // });
 
-btnClose.addEventListener('click', e => {
-  btnClose.style.display = 'none';
-});
+// btnClose.addEventListener('click', e => {
+//   btnClose.style.display = 'none';
+// });
 
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
@@ -80,16 +80,16 @@ btnGoogle.addEventListener('click', e => {
 });
 
 //Add a realtime listener
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  if(firebaseUser) {
-    console.log(firebaseUser);
-    btnLogout.classList.remove('hide');
-
-  }
-  else {
-    console.log('not logged in');
-  }
-});
+// firebase.auth().onAuthStateChanged(firebaseUser => {
+//   if(firebaseUser) {
+//     console.log(firebaseUser);
+//     btnLogout.classList.remove('hide');
+//
+//   }
+//   else {
+//     console.log('not logged in');
+//   }
+// });
 
 // window.onclick = function(event) {
 //   if(event.target == modalLogin) {
