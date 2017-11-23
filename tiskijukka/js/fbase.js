@@ -79,7 +79,7 @@ function returnLatestTask() {
   if (latestTask_ != undefined) {
     navbarTitle.innerHTML = "Viimeisin: <p></p>" + latestTask_;
   } else {
-    navbarTitle.innerHTML = "Viimeisin: <p></p>Aikoja ei ole vielä merkitty"
+    navbarTitle.innerHTML = "Aikoja ei ole vielä merkitty"
   }
 }
 

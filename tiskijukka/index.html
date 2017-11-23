@@ -25,20 +25,20 @@
   <meta name="theme-color" content="#ffffff">
 
 <!-- SUCCESSFUL LOGIN -->
-  <?php
+  <!-- <?php
     if ($_SESSION["fadeAlertCount"] === 0): ?>
       <div class="form-signin">
-        <div id="successLogin" class="alert alert-success">Olet kirjautunut onnistuneesti sisään käyttäjänä <strong><?php echo $_SESSION['username'] ?></strong>!</div>
+        <div id="successLogin" class="alert alert-success">Olet kirjautunut onnistuneesti sisään käyttäjänä <strong>getCurrentUser</strong>!</div>
       </div>
       <?php $_SESSION["fadeAlertCount"] = 1; ?>
   <?php else: ?>
-  <?php endif; ?>
+  <?php endif; ?> -->
 </head>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-inverse" id="navbar">
   <div class="container-fluid">
-    <a href="login/logout.php" id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
+    <a id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
     <div class="navbar-header">
       <a id="navbarTitle" class="navbar-brand"></a>
     </div>
@@ -75,8 +75,8 @@
 
   <!-- FOOTER -->
   <footer class="container-fluid text-center" >
-    <div id="footerText">Copyright @ 2017 Anttu Suhonen | Linkit <a target="_blank"  href="https://github.com/anttus/" >GitHubiin</a> ja
-      <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a>
+    <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a> |
+      <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
       <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
     </div>
   </footer>

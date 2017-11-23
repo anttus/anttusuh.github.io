@@ -201,10 +201,9 @@ body::after {
   /*margin-top: 32px;*/
 }
 
-
-
 #successLogin {
   margin-bottom: 0;
+  font-size: 15px;
 }
 
 #colHeader {

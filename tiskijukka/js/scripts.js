@@ -1,11 +1,11 @@
 //If shown once, don't show again
-window.onload = function fadeAlert(time) {
-  window.setTimeout(function() {
-      $(".alert").fadeTo(500, 0).slideUp(500, function(){
-          $(this).remove();
-      });
-  }, 2000);
-}
+// window.onload = function fadeAlert() {
+//   window.setTimeout(function() {
+//       $(".alert").fadeTo(1000, 0).slideUp(500, function(){
+//         $(this).remove();
+//       });
+//   }, 2000);
+// }
 
 function getDate() {
   var currentdate = new Date();
@@ -23,9 +23,15 @@ function getTime() {
   return time;
 }
 
-//Tiskit tehty! -napin toiminallisuus
+//"Tiskit tehty!" -button
 document.getElementById("dishButton").addEventListener('click',function () {
   writeTask("Anttu"); //Current user's name
+});
+
+//Logging out
+document.getElementById("logoutButton").addEventListener('click',function () {
+  //Some method for logging out
+  //logout();
 });
 
 // function sendToDb() {
