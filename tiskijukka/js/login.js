@@ -41,21 +41,21 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 
 const mainBody = document.getElementById('mainBody');
 
-btnSignUpTab.addEventListener('click', e=> {
-  divLogIn.style.display = 'none';
-  divSignUp.style.display = 'initial';
-  btnLogInTab.style.background = 'gray';
-  btnSignUpTab.style.background = 'white';
-
-});
-
-btnLogInTab.addEventListener('click', e => {
-  divSignUp.style.display = 'none';
-  divLogIn.style.display = 'initial';
-  btnLogInTab.style.background = 'white';
-  btnSignUpTab.style.background = 'gray';
-
-});
+// btnSignUpTab.addEventListener('click', e=> {
+//   divLogIn.style.display = 'none';
+//   divSignUp.style.display = 'initial';
+//   btnLogInTab.style.background = 'gray';
+//   btnSignUpTab.style.background = 'white';
+//
+// });
+//
+// btnLogInTab.addEventListener('click', e => {
+//   divSignUp.style.display = 'none';
+//   divLogIn.style.display = 'initial';
+//   btnLogInTab.style.background = 'white';
+//   btnSignUpTab.style.background = 'gray';
+//
+// });
 
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
@@ -91,29 +91,29 @@ btnSignUp.addEventListener('click', e => {
 //   firebase.auth().signOut();
 // });
 
-btnGoogle.addEventListener('click', e => {
-  var  provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({
-    'login_hint': 'user@example.com'
-  });
-  auth.signInWithRedirect(provider);
-
-  firebase.auth().getRedirectResult().then(function(result) {
-    var user = result.user;
-    console.log(user);
-
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-    console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
-});
-});
+// btnGoogle.addEventListener('click', e => {
+//   var  provider = new firebase.auth.GoogleAuthProvider();
+//   provider.setCustomParameters({
+//     'login_hint': 'user@example.com'
+//   });
+//   auth.signInWithRedirect(provider);
+//
+//   firebase.auth().getRedirectResult().then(function(result) {
+//     var user = result.user;
+//     console.log(user);
+//
+//   }).catch(function(error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     // ...
+//     console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
+// });
+// });
 
 //Add a realtime listener
 // firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -136,6 +136,6 @@ btnGoogle.addEventListener('click', e => {
 window.onload = function() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
-  divSignUp.style.display = 'none';
-  btnSignUpTab.style.background = 'gray';
+  // divSignUp.style.display = 'none';
+  // btnSignUpTab.style.background = 'gray';
 }

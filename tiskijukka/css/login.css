@@ -22,12 +22,7 @@ input[type=text], input[type=password] {
   font-size: 16px;
   text-align: left;
 }
-.loginRow button {
-  width: 50%;
-  float: left;
-  background-color: white;
-  color: black;
-}
+
 
 /* Set a style for all buttons */
 button {
@@ -44,13 +39,6 @@ button:hover {
     opacity: 0.8;
 }
 
-<<<<<<< HEAD
-#btnFacebook, #btnFbSignUp {
-  background-color: #4266b2;
-}
-
-#btnGoogle, #btnGSignUp {
-=======
 button:active {
   outline: none;
 }
@@ -67,7 +55,6 @@ button:active {
 }
 
 #btnGoogle, #btnGoogleSignUp {
->>>>>>> aafc74209228ea10aa1060c2d6b691baa1b7170b
   background-color: #ea4335;
 }
 
