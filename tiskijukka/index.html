@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,6 +52,23 @@
 
 <!-- BODY -->
 <!-- <body> -->
+<button id="btnLogIn" display="hidden">Login</button>
+    <div id="modalLogin" class="modal">
+    <div class="modal-content animate">
+      <div class="imgcontainer">
+        <span id="btnClose" class="close" title="Close Modal">&times;</span>
+        <img src="../../img/test.jpg" alt="Avatar" class="avatar">
+      </div>
+      <div>
+          <label><b>Username</b></label>
+          <input type="text" id="txtEmail" placeholder="Enter Username"><br>
+          <label><b>Password</b></label>
+          <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
+          <button id="btnSignIn">Log in</button>
+          <button id="btnFacebook">Facebook</button>
+          <button id="btnGoogle">Google</button>
+      </div>
+    </div>
   <div id="mainBody">
 
     <div class="container-fluid text-center">
@@ -93,6 +111,7 @@
 
   <script type="text/javascript" src="js/fbase.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" src="js/login.js"></script>
 
 </body>
 

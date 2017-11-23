@@ -31,6 +31,7 @@ btnSignIn.addEventListener('click', e => {
   //Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+  modalLogin.style.dispaly = 'none';
 });
 
 // btnCancel.addEventListener('click', e => {
