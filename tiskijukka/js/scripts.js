@@ -1,6 +1,3 @@
-
-
-
 function getDate() {
   var currentdate = new Date();
   var date = ("0" + currentdate.getDate()).slice(-2) + "."
