@@ -1,10 +1,5 @@
-/*@import url(https://fonts.googleapis.com/css?family=Roboto);*/
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/css?family=Oswald);
-
-@font-face {
-    font-family: Roboto;
-    src: url(Fonts/Roboto/Roboto-Light.ttf);
-}
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {

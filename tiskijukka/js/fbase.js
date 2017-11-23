@@ -43,11 +43,11 @@ var latestTask;
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask(username) {
 
-//TEMPORARY
+  //TEMPORARY
   var groupid = 1;
   var uid = 1;
 
-//Returns the number of tasks
+  //Returns the number of tasks
   var taskid = returnTaskID();
   taskid++;
 
@@ -90,12 +90,12 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
-    getTaskData();
-    firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
-      var node = document.createElement("p");
-      var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-      var textNode = document.createTextNode(task);
-      node.appendChild(textNode);
-      document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
+  getTaskData();
+  firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
+    var node = document.createElement("p");
+    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+    var textNode = document.createTextNode(task);
+    node.appendChild(textNode);
+    document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
   });
 }
