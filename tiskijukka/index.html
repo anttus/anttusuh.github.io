@@ -31,20 +31,39 @@
 
 <div id="modalLogin" class="modal">
   <div class="modal-content animate">
+    <h1 id="loginHeader">Welcome to Tiskijukka!</h1>
     <div class="imgcontainer">
-      <!-- <span id="btnClose" class="close" title="Close Modal">&times;</span> -->
-      <img src="img/Tiskijukka_logo.png" alt="Avatar" class="avatar">
 
+      <div id="signUpForm" style="display:none">
+        <div class="w3-bar w3-black">
+          <button id="tabSignIn" class="w3-bar-item w3-button" onclick="toggleTab()">Sign In</button>
+        </div>
+        <label><b>Username  </b></label>
+        <input type="text" id="txtEmail" placeholder="Enter Username" autofocus><br>
+        <label><b>Password  </b></label>
+        <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
+        <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Sign up</button>
+        <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
+        <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+      </div>
+
+      <!-- <img src="img/Tiskijukka_logo.png" alt="Avatar" class="avatar"> -->
     </div>
+
+    <!-- Log in -->
     <div id="loginForm">
+      <div class="w3-bar w3-black">
+        <button id="tabSignUp" class="w3-bar-item w3-button" onclick="toggleTab()">Sign Up</button>
+      </div>
       <label><b>Username  </b></label>
-      <input type="text" id="txtEmail" placeholder="Enter Username"><br>
+      <input type="text" id="txtEmail" placeholder="Enter Username" autofocus><br>
       <label><b>Password  </b></label>
       <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
-      <button id="btnSignIn">Log in</button>
+      <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Log in</button>
       <button id="btnFacebook"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
-      <button id="btnGoogle"><i class="fa fa-google" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+      <button id="btnGoogle"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
     </div>
+
   </div>
 </div>
 
