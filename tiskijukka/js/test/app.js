@@ -6,11 +6,23 @@ const auth = firebase.auth();
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
-const btnLogin = document.getElementById('btnLogin');
+const btnLogIn = document.getElementById('btnLogIn');
+const btnClose = document.getElementById('btnClose');
+const btnSignIn = document.getElementById('btnSignIn');
+// const btnCancel = document.getElementById('btnCancel');
 const btnSignUp = document.getElementById('btnSignUp');
-const btnLogout = document.getElementById('btnSignout');
+const btnLogout = document.getElementById('btnSignOut');
+const modalLogin = document.getElementById('modalLogin');
 
-btnLogin.addEventListener('click', e => {
+btnLogIn.addEventListener('click', e => {
+  modalLogin.style.display = 'block';
+});
+
+btnClose.addEventListener('click', e => {
+  btnClose.style.display = 'none';
+});
+
+btnSignIn.addEventListener('click', e => {
   //Get email and pass
   //TODO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
@@ -20,6 +32,10 @@ btnLogin.addEventListener('click', e => {
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 });
+
+// btnCancel.addEventListener('click', e => {
+//   modalLogin.style.display = 'none';
+// });
 
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
@@ -70,3 +86,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log('not logged in');
   }
 });
+
+// window.onclick = function(event) {
+//   if(event.target == modalLogin) {
+//     modalLogin.style.display = 'none';
+//   }
+// }
+
+window.onload = function() {
+  modalLogin.style.display = 'block';
+}
