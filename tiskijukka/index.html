@@ -28,90 +28,91 @@
 
 </head>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-inverse" id="navbar">
-  <!-- <div class="container"> -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" id="navbarTitle"></a>
-  </div>
-
-  <div class="collapse navbar-collapse" id="toggle-nav">
-    <div class="nav navbar-nav navbar-right" id="navbar-nav">
-      <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Ulos</button>
-      <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square" ><i class="glyphicon glyphicon-plus"></i> Luo ryhmä</button>
+<div id="modalLogin" class="modal">
+  <div class="modal-content animate">
+    <div class="imgcontainer">
+      <span id="btnClose" class="close" title="Close Modal">&times;</span>
+      <img src="img/test.jpg" alt="Avatar" class="avatar">
+    </div>
+    <div>
+      <label><b>Username</b></label>
+      <input type="text" id="txtEmail" placeholder="Enter Username"><br>
+      <label><b>Password</b></label>
+      <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
+      <button id="btnSignIn">Log in</button>
+      <button id="btnFacebook">Facebook</button>
+      <button id="btnGoogle">Google</button>
     </div>
   </div>
-  <!-- close container div -->
-</nav> <!-- close navbar nav -->
+</div>
 
-<!-- BODY -->
-<!-- <body> -->
-<button id="btnLogIn" display="hidden">Login</button>
-    <div id="modalLogin" class="modal">
-    <div class="modal-content animate">
-      <div class="imgcontainer">
-        <span id="btnClose" class="close" title="Close Modal">&times;</span>
-        <img src="../../img/test.jpg" alt="Avatar" class="avatar">
-      </div>
-      <div>
-          <label><b>Username</b></label>
-          <input type="text" id="txtEmail" placeholder="Enter Username"><br>
-          <label><b>Password</b></label>
-          <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
-          <button id="btnSignIn">Log in</button>
-          <button id="btnFacebook">Facebook</button>
-          <button id="btnGoogle">Google</button>
+<div id="mainBody">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-inverse" id="navbar">
+    <!-- <div class="container"> -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="navbarTitle"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="toggle-nav">
+      <div class="nav navbar-nav navbar-right" id="navbar-nav">
+        <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Ulos</button>
+        <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square" ><i class="glyphicon glyphicon-plus"></i> Luo ryhmä</button>
       </div>
     </div>
-  <div id="mainBody">
+    <!-- close container div -->
+  </nav> <!-- close navbar nav -->
 
-    <div class="container-fluid text-center">
+  <!-- BODY -->
+  <!-- <body> -->
 
-      <div class="row content">
+  <div class="container-fluid text-center">
 
-        <!-- Beginning of the left column -->
-        <div class="col-sm-6 sidenav" id="leftCol">
+    <div class="row content">
 
-          <!-- Profile image -->
-          <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
-          <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
+      <!-- Beginning of the left column -->
+      <div class="col-sm-6 sidenav" id="leftCol">
 
-          <!-- Profile image from facebook -->
-          <br />
+        <!-- Profile image -->
+        <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
+        <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
 
-          <!-- BUTTON -->
-          <input type="submit" value="Tiskit tehty!" class="btn btn-success" id="dishButton" >
-          <br />
+        <!-- Profile image from facebook -->
+        <br />
 
-          <!-- SCORES -->
-          <div id="scoreCount">
-            TJ-PISTEET: <br/>
-          </div>
-        </div> <!-- End of the left column -->
+        <!-- BUTTON -->
+        <input type="submit" value="Tiskit tehty!" class="btn btn-success" id="dishButton" >
+        <br />
 
-        <!-- Right column - gets the times from the database -->
-        <div class="col-sm-6 sidenav rightCol" id="task"></div>
+        <!-- SCORES -->
+        <div id="scoreCount">
+          TJ-PISTEET: <br/>
+        </div>
+      </div> <!-- End of the left column -->
 
-        <!-- FOOTER -->
-        <footer class="container-fluid text-center" >
-          <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
-            <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
-            <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
-          </div>
-        </footer>
-      </div>
+      <!-- Right column - gets the times from the database -->
+      <div class="col-sm-6 sidenav rightCol" id="task"></div>
+
+      <!-- FOOTER -->
+      <footer class="container-fluid text-center" >
+        <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
+          <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
+          <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
+        </div>
+      </footer>
     </div>
   </div>
+</div>
 
-  <script type="text/javascript" src="js/fbase.js"></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
-  <script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/fbase.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 
 </body>
 

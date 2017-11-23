@@ -14,9 +14,9 @@ const btnSignUp = document.getElementById('btnSignUp');
 const btnLogout = document.getElementById('btnSignOut');
 const modalLogin = document.getElementById('modalLogin');
 
-btnLogIn.addEventListener('click', e => {
-  modalLogin.style.display = 'block';
-});
+// btnLogIn.addEventListener('click', e => {
+//   modalLogin.style.display = 'block';
+// });
 
 btnClose.addEventListener('click', e => {
   btnClose.style.display = 'none';
@@ -38,20 +38,20 @@ btnSignIn.addEventListener('click', e => {
 //   modalLogin.style.display = 'none';
 // });
 
-btnSignUp.addEventListener('click', e => {
-  //Get email and pass
-  //TODO: CHECK FOR REAL EMAIL
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
-  //Sign in
-  const promise = auth.createUserWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
-});
+// btnSignUp.addEventListener('click', e => {
+//   //Get email and pass
+   //TODO: CHECK FOR REAL EMAIL
+//   const email = txtEmail.value;
+//   const pass = txtPassword.value;
+//   const auth = firebase.auth();
+//   //Sign in
+//   const promise = auth.createUserWithEmailAndPassword(email, pass);
+//   promise.catch(e => console.log(e.message));
+// });
 
-btnLogout.addEventListener('click', e => {
-  firebase.auth().signOut();
-});
+// btnLogout.addEventListener('click', e => {
+//   firebase.auth().signOut();
+// });
 
 btnGoogle.addEventListener('click', e => {
   var  provider = new firebase.auth.GoogleAuthProvider();
