@@ -1,4 +1,10 @@
-/* Full-width input fields */
+#loginHeader {
+  padding: 30px;
+  padding-bottom: 0;
+  font-size: 30px;
+  text-align: center;
+}
+
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -6,13 +12,15 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    outline: none;
 }
 
-#loginForm {
+#loginForm, #signUpForm {
   width: 50%;
   margin-left: 25%;
   margin-bottom: 20px;
   font-size: 16px;
+  text-align: left;
 }
 .loginRow button {
   width: 50%;
@@ -36,11 +44,30 @@ button:hover {
     opacity: 0.8;
 }
 
+<<<<<<< HEAD
 #btnFacebook, #btnFbSignUp {
   background-color: #4266b2;
 }
 
 #btnGoogle, #btnGSignUp {
+=======
+button:active {
+  outline: none;
+}
+
+#tabSignUp, #tabSignIn {
+  background-color: #efefef;
+  color: #333;
+  border: none;
+
+}
+
+#btnFacebook, #btnFacebookSignUp {
+  background-color: #4266b2;
+}
+
+#btnGoogle, #btnGoogleSignUp {
+>>>>>>> aafc74209228ea10aa1060c2d6b691baa1b7170b
   background-color: #ea4335;
 }
 
@@ -92,10 +119,10 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 0 auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 35%;
+    width: 500px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
   .modal-content {
     width: 90%;
   }
@@ -139,7 +166,7 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+/*@media screen and (max-width: 767px) {
     span.psw {
        display: block;
        float: none;
@@ -147,4 +174,4 @@ span.psw {
     .cancelbtn {
        width: 100%;
     }
-}
+}*/

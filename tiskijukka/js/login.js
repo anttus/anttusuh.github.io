@@ -1,3 +1,23 @@
+// function changeTab(tabName) {
+//     var i;
+//     var x = document.getElementsByClassName("city");
+//     for (i = 0; i < x.length; i++) {
+//         x[i].style.display = "none";
+//     }
+//     document.getElementById('signUpForm').style.display = "block";
+//     document.getElementById('loginForm').style.display = 'none';
+// }
+
+function toggleTab() {
+  if ($('#loginForm').is(":visible")) {
+    $('#loginForm').hide();
+    $('#signUpForm').show();
+  } else {
+    $('#loginForm').show();
+    $('#signUpForm').hide();
+  }
+}
+
 const auth = firebase.auth();
 
 // auth.signInWithEmailAndPassword(email, pass);
