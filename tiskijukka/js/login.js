@@ -25,7 +25,7 @@ const mainBody = document.getElementById('mainBody');
 
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
-  //TODO: CHECK FOR REAL EMAIL
+  //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();
@@ -42,7 +42,7 @@ btnSignIn.addEventListener('click', e => {
 
 // btnSignUp.addEventListener('click', e => {
 //   //Get email and pass
-   //TODO: CHECK FOR REAL EMAIL
+   //TO DO: CHECK FOR REAL EMAIL
 //   const email = txtEmail.value;
 //   const pass = txtPassword.value;
 //   const auth = firebase.auth();

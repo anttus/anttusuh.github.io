@@ -16,7 +16,7 @@ function getTime() {
 
 // "Tiskit tehty!" -button
 document.getElementById('dishButton').addEventListener('click', function () {
-  writeTask('Anttu'); // Current user's name
+  writeTask(); // Current user's name
 });
 
 // ANALYTICS
