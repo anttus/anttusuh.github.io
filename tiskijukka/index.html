@@ -1,5 +1,3 @@
-<!-- <?php require "login/loginheader.php";?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 
-
-<!-- ICONS -->
+  <!-- ICONS -->
   <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
@@ -24,26 +21,29 @@
   <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-<!-- SUCCESSFUL LOGIN -->
-  <?php
-    if ($_SESSION["fadeAlertCount"] === 0): ?>
-      <div class="form-signin">
-        <div id="successLogin" class="alert alert-success">Olet kirjautunut onnistuneesti sisään käyttäjänä <strong><?php echo $_SESSION['username'] ?></strong>!</div>
-      </div>
-      <?php $_SESSION["fadeAlertCount"] = 1; ?>
-  <?php else: ?>
-  <?php endif; ?>
 </head>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-inverse" id="navbar">
-  <div class="container-fluid">
-    <a href="login/logout.php" id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
+  <!-- <div class="container"> -->
     <div class="navbar-header">
-      <a id="navbarTitle" class="navbar-brand"></a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="navbarTitle"></a>
     </div>
-  </div>
-</nav>
+
+    <div class="collapse navbar-collapse" id="toggle-nav">
+      <ul class="nav navbar-nav navbar-right" id="navbar-nav">
+        <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Ulos</button>
+        <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square" ><i class="glyphicon glyphicon-plus"></i> Luo ryhmä</button>
+      </ul>
+    </div>
+  </div> <!-- close container div -->
+</nav> <!-- close navbar nav -->
 
 <!-- BODY -->
 <body>
@@ -73,18 +73,18 @@
       <div class="col-sm-6 sidenav rightCol" id="task"></div>
       <!-- <div class="col-sm-6 sidenav" id="rightCol"><?php include ('php/getFromDb.php'); ?></div> -->
 
-  <!-- FOOTER -->
-  <footer class="container-fluid text-center" >
-    <div id="footerText">Copyright @ 2017 Anttu Suhonen | Linkit <a target="_blank"  href="https://github.com/anttus/" >GitHubiin</a> ja
-      <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a>
-      <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
-    </div>
-  </footer>
+      <!-- FOOTER -->
+      <footer class="container-fluid text-center" >
+        <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
+          <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
+          <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
+        </div>
+      </footer>
 
-</body>
+    </body>
 
-<script type="text/javascript" src="js/fbase.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/fbase.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <!-- <script type="text/javascript" src="js/login.js"></script> -->
 
-
-</html>
+    </html>

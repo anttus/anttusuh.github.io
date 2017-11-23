@@ -324,7 +324,7 @@ textarea {
 }
 
 a {
-  color: #59a6e8;
+  color: #4dadff;
   text-decoration: none;
 }
 
@@ -4990,9 +4990,9 @@ a.thumbnail:focus {
 
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  /*margin-bottom: 20px;*/
+  /*border: 1px solid transparent;*/
+  /*border-radius: 4px;*/
 }
 
 .alert h4 {
