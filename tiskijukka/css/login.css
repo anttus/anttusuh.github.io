@@ -80,6 +80,17 @@ span.psw {
     width: 50%; /* Could be more or less, depending on screen size */
 }
 
+@media screen and (max-width: 767px) {
+  .modal-content {
+    width: 90%;
+  }
+
+  .modal {
+    padding-top: 0;
+  }
+}
+
+
 /* The Close Button (x) */
 .close {
     position: absolute;
