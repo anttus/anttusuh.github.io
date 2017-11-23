@@ -1,12 +1,3 @@
-//If shown once, don't show again
-// window.onload = function fadeAlert() {
-//   window.setTimeout(function() {
-//       $(".alert").fadeTo(1000, 0).slideUp(500, function(){
-//         $(this).remove();
-//       });
-//   }, 2000);
-// }
-
 function getDate() {
   var currentdate = new Date();
   var date = ("0" + currentdate.getDate()).slice(-2) + "."
@@ -27,36 +18,6 @@ function getTime() {
 document.getElementById("dishButton").addEventListener('click',function () {
   writeTask("Anttu"); //Current user's name
 });
-
-//Logging out
-document.getElementById("logoutButton").addEventListener('click',function () {
-  //Some method for logging out
-  //logout();
-});
-
-// function sendToDb() {
-//   var dateTime = getDateTime();
-//   $(document).on('click', '#dishButton',function(e) {
-//       $.ajax({
-//         cache: false,
-//         type: "POST",
-//         url: "php/sendToDb.php",
-//         data: {dateTime},
-//         success: function(data) {
-//           $('#rightCol').filter(function () { return $.trim(this.innerHTML) == "" }).remove();
-//           $('#rightCol').prepend('<p>' + dateTime + '</p>');
-//           dateTime = "";
-//           },
-//       });
-//       getLatestTime();
-//     });
-// }
-
-// function getLatestTime() {
-// 	$.get("php/getLatestTime.php", function(data){
-//   		$('#navbarTitle').html("Viimeisin: " + '<p></p>' + data);
-// 	});
-// }
 
 //ANALYTICS
 function getCount(name) {
