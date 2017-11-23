@@ -3,25 +3,39 @@ const auth = firebase.auth();
 // auth.signInWithEmailAndPassword(email, pass);
 // auth.createUserWithEmailAndPassword(email, pass);
 // auth.onAuthStateChanged(firebaseUser => {});
+const modalLogin = document.getElementById('modalLogin');
+const btnLogInTab = document.getElementById('btnLogInTab');
+const btnSignUpTab = document.getElementById('btnSignUpTab')
+
+const divLogIn = document.getElementById('divLogIn');
+const divSignUp = document.getElementById('divSignUp');
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
-const btnLogIn = document.getElementById('btnLogIn');
-const btnClose = document.getElementById('btnClose');
+
 const btnSignIn = document.getElementById('btnSignIn');
-// const btnCancel = document.getElementById('btnCancel');
+
 const btnSignUp = document.getElementById('btnSignUp');
-const btnLogout = document.getElementById('btnSignOut');
-const modalLogin = document.getElementById('modalLogin');
+const btnFbSignUp = document.getElementById('btnFbSignUp');
+const btnGSignUp = document.getElementById('btnGSignUp');
+
 const mainBody = document.getElementById('mainBody');
 
-// btnLogIn.addEventListener('click', e => {
-//   modalLogin.style.display = 'block';
-// });
+btnSignUpTab.addEventListener('click', e=> {
+  divLogIn.style.display = 'none';
+  divSignUp.style.display = 'initial';
+  btnLogInTab.style.background = 'gray';
+  btnSignUpTab.style.background = 'white';
 
-// btnClose.addEventListener('click', e => {
-//   btnClose.style.display = 'none';
-// });
+});
+
+btnLogInTab.addEventListener('click', e => {
+  divSignUp.style.display = 'none';
+  divLogIn.style.display = 'initial';
+  btnLogInTab.style.background = 'white';
+  btnSignUpTab.style.background = 'gray';
+
+});
 
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
@@ -40,16 +54,18 @@ btnSignIn.addEventListener('click', e => {
 //   modalLogin.style.display = 'none';
 // });
 
-// btnSignUp.addEventListener('click', e => {
-//   //Get email and pass
-   //TO DO: CHECK FOR REAL EMAIL
-//   const email = txtEmail.value;
-//   const pass = txtPassword.value;
-//   const auth = firebase.auth();
-//   //Sign in
-//   const promise = auth.createUserWithEmailAndPassword(email, pass);
-//   promise.catch(e => console.log(e.message));
-// });
+btnSignUp.addEventListener('click', e => {
+  //Get email and pass
+  //TO DO: CHECK FOR REAL EMAIL
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
+  const auth = firebase.auth();
+  //Sign in
+  const promise = auth.createUserWithEmailAndPassword(email, pass);
+  promise.catch(e => console.log(e.message));
+});
+
+
 
 // btnLogout.addEventListener('click', e => {
 //   firebase.auth().signOut();
@@ -100,4 +116,6 @@ btnGoogle.addEventListener('click', e => {
 window.onload = function() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
+  divSignUp.style.display = 'none';
+  btnSignUpTab.style.background = 'gray';
 }
