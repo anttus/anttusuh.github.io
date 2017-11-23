@@ -13,6 +13,7 @@ const btnSignIn = document.getElementById('btnSignIn');
 const btnSignUp = document.getElementById('btnSignUp');
 const btnLogout = document.getElementById('btnSignOut');
 const modalLogin = document.getElementById('modalLogin');
+const mainBody = document.getElementById('mainBody');
 
 // btnLogIn.addEventListener('click', e => {
 //   modalLogin.style.display = 'block';
@@ -31,7 +32,8 @@ btnSignIn.addEventListener('click', e => {
   //Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
-  modalLogin.style.dispaly = 'none';
+  modalLogin.style.display = 'none';
+  mainBody.style.display = 'initial';
 });
 
 // btnCancel.addEventListener('click', e => {
@@ -82,6 +84,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser) {
     console.log(firebaseUser);
     btnLogout.classList.remove('hide');
+
   }
   else {
     console.log('not logged in');
@@ -96,4 +99,5 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 window.onload = function() {
   modalLogin.style.display = 'block';
+  mainBody.style.display = 'none';
 }
