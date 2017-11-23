@@ -24,6 +24,10 @@
   border-radius: 0;
 }
 
+.navbar-collapse.in {
+  overflow-y: hidden;
+}
+
 a {
   color: #449eeb;
 }
@@ -132,13 +136,20 @@ body::after {
     position: relative;
     bottom: 0;
   }
+
+  .navbarButton {
+    font-size: 15px;
+  }
+
+  #navbar-nav {
+    margin: 0;
+  }
 }
 
 #navbarTitle {
   color: #f1f1f1;
   margin-top: -5px;
   margin-left: 1px;
-
 }
 
 @media (min-width: 768px) {
@@ -150,12 +161,17 @@ body::after {
 .navbarButton {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
-  width: 100px;
-  float: right;
+  text-align: center;
   margin: 10px;
   padding: 13px;
   border: none;
   border-radius: 0;
+  float: right;
+}
+
+.navbarButton:focus {
+  outline: none;
+  border: none;
 }
 
 #dishButton {
