@@ -2,16 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
     <title></title>
   </head>
+
   <body>
-    <input type="text" id="txtEmail"><br>
-    <input type="text" id="txtPassword"><br>
-    <button id="btnLogin">Log in</button>
-    <button id="btnSignUp">Sign up</button>
-    <button id="btnSignout" class="hidden">Log out</button><br>
-    <button id="btnGoogle">Google</button>
-    <button id="btnFacebook">Facebook</button>
+  <button id="btnLogIn" display="hidden">Login</button>
+      <div id="modalLogin" class="modal">
+      <div class="modal-content animate">
+        <div class="imgcontainer">
+          <span id="btnClose" class="close" title="Close Modal">&times;</span>
+          <img src="../../img/test.jpg" alt="Avatar" class="avatar">
+        </div>
+        <div>
+            <label><b>Username</b></label>
+            <input type="text" id="txtEmail" placeholder="Enter Username"><br>
+            <label><b>Password</b></label>
+            <input type="password" id="txtPassword" name="psw" placeholder="Enter Password"><br>
+            <button id="btnSignIn">Log in</button>
+            <button id="btnFacebook">Facebook</button>
+            <button id="btnGoogle">Google</button>
+        </div>
+        <!-- <div class="container" style="background-color:#f1f1f1">
+          <button type="button" id="btnCancel" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div> -->
+  </div>
+</div>
+    <button id="btnSignUp" display="hidden">Sign up</button>
+    <button id="btnSignOut" class="hidden" display="hidden">Log out</button><br>
   </body>
 
 <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
