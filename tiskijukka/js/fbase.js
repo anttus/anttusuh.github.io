@@ -1,7 +1,3 @@
-var uname, email, photoUrl, uid, emailVerified;
-var taskID = 0;
-var latestTask;
-
 (function() {
 
   // Initialize Firebase
@@ -28,8 +24,12 @@ var latestTask;
 
 }());
 
-//Getting user's information
 var user = firebase.auth().currentUser;
+var uname, email, photoUrl, uid, emailVerified;
+var taskID = 0;
+var latestTask;
+
+//Getting user's information
 
 if (user != null) {
   uname = user.displayName;

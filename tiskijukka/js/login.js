@@ -68,6 +68,8 @@ btnSignIn.addEventListener('click', e => {
   promise.catch(e => console.log(e.message));
   modalLogin.style.display = 'none';
   mainBody.style.display = 'initial';
+
+  // console.log(email + " " + pass + " " + auth);
 });
 
 // btnCancel.addEventListener('click', e => {
@@ -87,9 +89,11 @@ btnSignUp.addEventListener('click', e => {
 
 
 
-// btnLogout.addEventListener('click', e => {
-//   firebase.auth().signOut();
-// });
+btnLogout.addEventListener('click', e => {
+  firebase.auth().signOut();
+  modalLogin.style.display = 'block';
+  mainBody.style.display = 'none';
+});
 
 // btnGoogle.addEventListener('click', e => {
 //   var  provider = new firebase.auth.GoogleAuthProvider();
@@ -115,17 +119,17 @@ btnSignUp.addEventListener('click', e => {
 // });
 // });
 
-//Add a realtime listener
-// firebase.auth().onAuthStateChanged(firebaseUser => {
-//   if(firebaseUser) {
-//     console.log(firebaseUser);
-//     btnLogout.classList.remove('hide');
-//
-//   }
-//   else {
-//     console.log('not logged in');
-//   }
-// });
+// Add a realtime listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if(firebaseUser) {
+    console.log(firebaseUser);
+    btnLogout.classList.remove('hide');
+
+  }
+  else {
+    console.log('not logged in');
+  }
+});
 
 // window.onclick = function(event) {
 //   if(event.target == modalLogin) {
