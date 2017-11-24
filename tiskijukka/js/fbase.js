@@ -1,4 +1,4 @@
-var username, email, photoUrl, uid, emailVerified;
+var uname, email, photoUrl, uid, emailVerified;
 var taskID = 0;
 var latestTask;
 
@@ -26,23 +26,24 @@ var latestTask;
   // //Create references
   // const refObject = db.ref('Tasks').orderByChild('Tasks');
 
-  //Getting user's information
-  var user = firebase.auth().currentUser;
-
-  if (user != null) {
-    username = user.displayName;
-    email = user.email;
-    photoUrl = user.photoURL;
-    emailVerified = user.emailVerified;
-    uid = user.uid;
-  }
-
 }());
+
+//Getting user's information
+var user = firebase.auth().currentUser;
+
+if (user != null) {
+  uname = user.displayName;
+  email = user.email;
+  photoUrl = user.photoURL;
+  emailVerified = user.emailVerified;
+  uid = user.uid;
+}
 
 //Writing the tasks
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask() {
-
+  console.log(uname + " " + email + " " + emailVerified + " " + uid);
+  console.log(user);
   //TEMPORARY
   var groupid = 1;
   var uid = 1;
@@ -52,7 +53,7 @@ function writeTask() {
   taskid++;
 
   firebase.database().ref('Group' + groupid + '/' + taskid).set({ //Sets a new Task table with the task number
-    username: username,
+    username: uname,
     date: getDate(),
     time: getTime(),
     uid: uid,
