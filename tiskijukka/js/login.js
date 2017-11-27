@@ -74,9 +74,8 @@ function verifyUser() {
   if (!user.emailVerified) {
     user.sendEmailVerification().then(function() {
       console.log('email sent');
-      displayLogin();
     }).catch(function(error) {
-      console.log('email already sent');
+      console.log('error');
     });
 
     user.updateProfile({
@@ -92,8 +91,8 @@ function verifyUser() {
 //Sign in
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
-  var email = txtEmail.value;
-  var pass = txtPassword.value;
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
 
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass).then(function(user) {
@@ -115,8 +114,8 @@ btnSignIn.addEventListener('click', e => {
 //Sign up
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
-  var email = txtEmail.value;
-  var pass = txtPassword.value;
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
 
   //Sign up
   var promise = auth.createUserWithEmailAndPassword(email, pass);
@@ -129,16 +128,14 @@ btnSignUp.addEventListener('click', e => {
 firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
     readTasks();
-    verifyUser();
-
     if (checkUser.emailVerified) {
       modalLogin.style.display = 'none';
       mainBody.style.display = 'initial';
     } else {
-      // displayLogin();
+      verifyUser();
+      displayLogin();
     }
-
-    // console.log('logged in');
+    console.log('logged in');
   } else {
     displayLogin();
     console.log('logged out');
