@@ -43,7 +43,12 @@ function displayLogin() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
   signUpForm.style.display = 'none';
+  loginForm.style.display = 'block';
+  btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
+  txtEmail.value = "";
+  txtEmail.focus();
+  txtPassword.value = "";
 }
 
 //To be able to press enter on login
@@ -69,8 +74,9 @@ function verifyUser() {
   if (!user.emailVerified) {
     user.sendEmailVerification().then(function() {
       console.log('email sent');
+      displayLogin();
     }).catch(function(error) {
-      console.log('error');
+      console.log('email already sent');
     });
 
     user.updateProfile({
@@ -124,14 +130,15 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
     readTasks();
     verifyUser();
+
     if (checkUser.emailVerified) {
       modalLogin.style.display = 'none';
       mainBody.style.display = 'initial';
-
     } else {
-
+      // displayLogin();
     }
-    console.log('logged in');
+
+    // console.log('logged in');
   } else {
     displayLogin();
     console.log('logged out');
