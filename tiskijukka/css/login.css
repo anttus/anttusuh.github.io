@@ -1,12 +1,14 @@
 
-.loginRow button {
+.loginRow button, .loginRow button:hover {
   width: 50%;
   float: left;
   background-color: white;
   color: black;
-  margin-top: -2px;
+  margin-top: 0px;
   outline: none;
+  border: none;
 }
+
 
 
 #loginHeader {
@@ -121,8 +123,8 @@ span.psw {
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 0 auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
     width: 500px;
+    border-radius: 0px;
 }
 
 @media screen and (max-width: 600px) {
@@ -152,11 +154,6 @@ span.psw {
     cursor: pointer;
 }
 
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
 
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)}
