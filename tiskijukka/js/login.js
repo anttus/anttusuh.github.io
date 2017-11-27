@@ -27,8 +27,8 @@ const modalLogin = document.getElementById('modalLogin');
 const btnLogInTab = document.getElementById('btnLogInTab');
 const btnSignUpTab = document.getElementById('btnSignUpTab')
 
-const divLogIn = document.getElementById('divLogIn');
-const divSignUp = document.getElementById('divSignUp');
+const loginForm = document.getElementById('loginForm');
+const signUpForm = document.getElementById('signUpForm');
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
@@ -42,16 +42,16 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 const mainBody = document.getElementById('mainBody');
 
 btnSignUpTab.addEventListener('click', e=> {
-  divLogIn.style.display = 'none';
-  divSignUp.style.display = 'initial';
+  loginForm.style.display = 'none';
+  signUpForm.style.display = 'block';
   btnLogInTab.style.background = 'gray';
   btnSignUpTab.style.background = 'white';
 
 });
 
 btnLogInTab.addEventListener('click', e => {
-  divSignUp.style.display = 'none';
-  divLogIn.style.display = 'initial';
+  signUpForm.style.display = 'none';
+  loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = 'gray';
 
@@ -160,6 +160,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 window.onload = function() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
-  divSignUp.style.display = 'none';
+  signUpForm.style.display = 'none';
   btnSignUpTab.style.background = 'gray';
 }
