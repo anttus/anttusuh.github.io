@@ -91,6 +91,7 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
+  $("#curUser").html("Logged in as:</br>" + getCurUser());
   getTaskData();
   firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
     var node = document.createElement("p");

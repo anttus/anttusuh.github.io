@@ -26,6 +26,7 @@ btnSignUpTab.addEventListener('click', e=> {
   signUpForm.style.display = 'block';
   btnLogInTab.style.background = '#cccccc';
   btnSignUpTab.style.background = 'white';
+  txtEmail.focus();
 });
 
 btnLogInTab.addEventListener('click', e => {
@@ -33,9 +34,34 @@ btnLogInTab.addEventListener('click', e => {
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
+  txtEmail.focus();
 });
 
 mainBody.style.display = 'none';
+
+function displayLogin() {
+  modalLogin.style.display = 'block';
+  mainBody.style.display = 'none';
+  signUpForm.style.display = 'none';
+  btnSignUpTab.style.background = '#cccccc';
+}
+
+//To be able to press enter on login
+$("#txtPassword").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#btnSignIn").click();
+    }
+});
+$("#txtEmail").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#btnSignIn").click();
+    }
+});
+$("#txtUsername").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#btnSignUp").click();
+    }
+});
 
 function verifyUser() {
   var user = firebase.auth().currentUser;
@@ -60,7 +86,6 @@ function verifyUser() {
 //Sign in
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
-  //TO DO: CHECK FOR REAL EMAIL
   var email = txtEmail.value;
   var pass = txtPassword.value;
 
@@ -84,13 +109,13 @@ btnSignIn.addEventListener('click', e => {
 //Sign up
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
-  //TO DO: CHECK FOR REAL EMAIL
   var email = txtEmail.value;
   var pass = txtPassword.value;
 
   //Sign up
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+
 
 });
 
@@ -99,14 +124,16 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
     readTasks();
     verifyUser();
-    modalLogin.style.display = 'none';
-    mainBody.style.display = 'initial';
+    if (checkUser.emailVerified) {
+      modalLogin.style.display = 'none';
+      mainBody.style.display = 'initial';
+
+    } else {
+
+    }
     console.log('logged in');
   } else {
-    modalLogin.style.display = 'block';
-    mainBody.style.display = 'none';
-    signUpForm.style.display = 'none';
-    btnSignUpTab.style.background = '#cccccc';
+    displayLogin();
     console.log('logged out');
   }
 });
@@ -116,7 +143,9 @@ btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
-  txtEmail.innerHTML = "";
+  txtEmail.value = "";
+  txtEmail.focus();
+  txtPassword.value = "";
 });
 
 // btnGoogle.addEventListener('click', e => {

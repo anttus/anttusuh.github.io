@@ -16,8 +16,23 @@ function getTime() {
 
 // "Tiskit tehty!" -button
 document.getElementById('dishButton').addEventListener('click', function () {
-  writeTask(); // Current user's name
+  writeTask();
 });
+
+function getCurUser() {
+  var user = firebase.auth().currentUser;
+  var uname, email, photoUrl, uid, emailVerified;
+
+  if (user) {
+    //Getting user's information
+    if (user != null) {
+      uname = user.displayName;
+    }
+  }
+  return uname;
+}
+
+//function setProfImg()
 
 // ANALYTICS
 // function getCount(name) {
