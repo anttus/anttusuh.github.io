@@ -1,3 +1,12 @@
+
+.loginRow button {
+  width: 50%;
+  float: left;
+  background-color: white;
+  color: black;
+}
+
+
 #loginHeader {
   padding: 30px;
   padding-bottom: 0;
@@ -57,6 +66,7 @@ button:active {
 #btnGoogle, #btnGoogleSignUp {
   background-color: #ea4335;
 }
+
 
 /* Extra styles for the cancel button */
 .cancelbtn {

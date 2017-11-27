@@ -41,21 +41,21 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 
 const mainBody = document.getElementById('mainBody');
 
-// btnSignUpTab.addEventListener('click', e=> {
-//   divLogIn.style.display = 'none';
-//   divSignUp.style.display = 'initial';
-//   btnLogInTab.style.background = 'gray';
-//   btnSignUpTab.style.background = 'white';
-//
-// });
-//
-// btnLogInTab.addEventListener('click', e => {
-//   divSignUp.style.display = 'none';
-//   divLogIn.style.display = 'initial';
-//   btnLogInTab.style.background = 'white';
-//   btnSignUpTab.style.background = 'gray';
-//
-// });
+btnSignUpTab.addEventListener('click', e=> {
+  divLogIn.style.display = 'none';
+  divSignUp.style.display = 'initial';
+  btnLogInTab.style.background = 'gray';
+  btnSignUpTab.style.background = 'white';
+
+});
+
+btnLogInTab.addEventListener('click', e => {
+  divSignUp.style.display = 'none';
+  divLogIn.style.display = 'initial';
+  btnLogInTab.style.background = 'white';
+  btnSignUpTab.style.background = 'gray';
+
+});
 
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
@@ -140,6 +140,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 window.onload = function() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
-  // divSignUp.style.display = 'none';
-  // btnSignUpTab.style.background = 'gray';
+  divSignUp.style.display = 'none';
+  btnSignUpTab.style.background = 'gray';
 }
