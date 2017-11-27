@@ -62,7 +62,7 @@ btnSignIn.addEventListener('click', e => {
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  const auth = firebase.auth();
+  // const auth = firebase.auth();
   //Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
@@ -102,7 +102,7 @@ btnSignUp.addEventListener('click', e => {
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  const auth = firebase.auth();
+  // const auth = firebase.auth();
 
   //Sign up
   const promise = auth.createUserWithEmailAndPassword(email, pass);
