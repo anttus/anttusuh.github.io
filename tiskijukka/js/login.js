@@ -1,23 +1,3 @@
-// function changeTab(tabName) {
-//     var i;
-//     var x = document.getElementsByClassName("city");
-//     for (i = 0; i < x.length; i++) {
-//         x[i].style.display = "none";
-//     }
-//     document.getElementById('signUpForm').style.display = "block";
-//     document.getElementById('loginForm').style.display = 'none';
-// }
-
-function toggleTab() {
-  if ($('#loginForm').is(":visible")) {
-    $('#loginForm').hide();
-    $('#signUpForm').show();
-  } else {
-    $('#loginForm').show();
-    $('#signUpForm').hide();
-  }
-}
-
 const auth = firebase.auth();
 
 // auth.signInWithEmailAndPassword(email, pass);
@@ -46,7 +26,6 @@ btnSignUpTab.addEventListener('click', e=> {
   signUpForm.style.display = 'block';
   btnLogInTab.style.background = '#cccccc';
   btnSignUpTab.style.background = 'white';
-
 });
 
 btnLogInTab.addEventListener('click', e => {
@@ -54,8 +33,9 @@ btnLogInTab.addEventListener('click', e => {
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
-
 });
+
+mainBody.style.display = 'none';
 
 function verifyUser() {
   var user = firebase.auth().currentUser;
@@ -81,39 +61,53 @@ function verifyUser() {
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
   //TO DO: CHECK FOR REAL EMAIL
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
+  var email = txtEmail.value;
+  var pass = txtPassword.value;
 
   //Sign in
-  const promise = auth.signInWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
+  var promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
 
-  modalLogin.style.display = 'none';
-  mainBody.style.display = 'initial';
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+    } else {
+      alert('The email address is not valid.');
+    }
 
+    console.log(error);
+
+  });
 });
 
 //Sign up
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
   //TO DO: CHECK FOR REAL EMAIL
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
+  var email = txtEmail.value;
+  var pass = txtPassword.value;
 
   //Sign up
-  const promise = auth.createUserWithEmailAndPassword(email, pass);
+  var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 
 });
 
 //Real time listener
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
+firebase.auth().onAuthStateChanged(function(checkUser) {
+  if (checkUser) {
     verifyUser();
+    modalLogin.style.display = 'none';
+    mainBody.style.display = 'block';
+    console.log('logged in');
   } else {
-    console.log('not logged in');
+    modalLogin.style.display = 'block';
+    mainBody.style.display = 'none';
+    signUpForm.style.display = 'none';
+    btnSignUpTab.style.background = '#cccccc';
+    console.log('logged out');
   }
 });
 
@@ -147,21 +141,3 @@ btnLogout.addEventListener('click', e => {
 //     console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
 //   });
 // });
-
-// Add a realtime listener
-// firebase.auth().onAuthStateChanged(firebaseUser => {
-//   if(firebaseUser) {
-//     console.log(firebaseUser);
-//     btnLogout.classList.remove('hide');
-//   }
-//   else {
-//     console.log('not logged in');
-//   }
-// });
-
-window.onload = function() {
-  modalLogin.style.display = 'block';
-  mainBody.style.display = 'none';
-  signUpForm.style.display = 'none';
-  btnSignUpTab.style.background = '#cccccc';
-}
