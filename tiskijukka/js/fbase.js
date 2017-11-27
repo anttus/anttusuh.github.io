@@ -11,7 +11,6 @@
   };
   firebase.initializeApp(config);
 
-  readTasks();
 
   // // Get a reference to the database service
   // const db = firebase.database();

@@ -65,9 +65,10 @@ btnSignIn.addEventListener('click', e => {
   var pass = txtPassword.value;
 
   //Sign in
-  var promise = auth.signInWithEmailAndPassword(email, pass);
-  promise.catch(function(error) {
-    // Handle Errors here.
+  var promise = auth.signInWithEmailAndPassword(email, pass).then(function(user) {
+    // user signed in
+
+  }).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
 
@@ -76,9 +77,7 @@ btnSignIn.addEventListener('click', e => {
     } else {
       alert('The email address is not valid.');
     }
-
     console.log(error);
-
   });
 });
 
@@ -98,9 +97,10 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
+    readTasks();
     verifyUser();
     modalLogin.style.display = 'none';
-    mainBody.style.display = 'block';
+    mainBody.style.display = 'initial';
     console.log('logged in');
   } else {
     modalLogin.style.display = 'block';
@@ -116,6 +116,7 @@ btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
+  txtEmail.innerHTML = "";
 });
 
 // btnGoogle.addEventListener('click', e => {
