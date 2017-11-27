@@ -24,29 +24,30 @@
 
 }());
 
-var user = firebase.auth().currentUser;
-var uname, email, photoUrl, uid, emailVerified;
 var taskID = 0;
 var latestTask;
-
-//Getting user's information
-if (user != null) {
-  uname = user.displayName;
-  email = user.email;
-  photoUrl = user.photoURL;
-  emailVerified = user.emailVerified;
-  uid = user.uid;
-}
 
 //Writing the tasks
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask() {
+  var user = firebase.auth().currentUser;
+  var uname, email, photoUrl, uid, emailVerified;
+
+  if (user) {
+    //Getting user's information
+    if (user != null) {
+      uname = user.displayName;
+      email = user.email;
+      photoUrl = user.photoURL;
+      emailVerified = user.emailVerified;
+      uid = user.uid;
+    }
+  }
+
   console.log(uname + " " + email + " " + emailVerified + " " + uid);
-  console.log(user);
+
   //TEMPORARY
   var groupid = 1;
-  var uid = 1;
-  // uname = "Anttu";
 
   //Returns the number of tasks
   var taskid = returnTaskID();

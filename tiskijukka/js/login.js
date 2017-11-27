@@ -57,52 +57,50 @@ const mainBody = document.getElementById('mainBody');
 //
 // });
 
+function verifyUser() {
+  var user = firebase.auth().currentUser;
+
+  if (!user.emailVerified) {
+    user.sendEmailVerification().then(function() {
+      console.log('email sent');
+    }).catch(function(error) {
+      console.log('error');
+    });
+
+    user.updateProfile({
+      displayName: txtUsername.value
+    }).then(function() {
+      console.log('username set');
+    }).catch(function(error) {
+      console.log('username error');
+    });
+  }
+}
+
+//Sign in
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  // const auth = firebase.auth();
+  const auth = firebase.auth();
+
   //Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+
   modalLogin.style.display = 'none';
   mainBody.style.display = 'initial';
 
-  //IF VERIFIED, DON'T DO THIS
-  // verifyUser();
-
-  console.log(displayName + " " + email + " " + pass + " " + auth);
 });
 
-function verifyUser() {
-  var user = firebase.auth().currentUser;
-
-  user.sendEmailVerification().then(function() {
-    console.log('email sent');
-  }).catch(function(error) {
-    console.log('error');
-  });
-
-  user.updateProfile({
-    displayName: txtUsername.value
-  }).then(function() {
-    console.log('username set');
-  }).catch(function(error) {
-    console.log('username error');
-  });
-}
-
-// btnCancel.addEventListener('click', e => {
-//   modalLogin.style.display = 'none';
-// });
-
+//Sign up
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  // const auth = firebase.auth();
+  const auth = firebase.auth();
 
   //Sign up
   const promise = auth.createUserWithEmailAndPassword(email, pass);
@@ -110,6 +108,16 @@ btnSignUp.addEventListener('click', e => {
 
 });
 
+//Real time listener
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    verifyUser();
+  } else {
+    console.log('not logged in');
+  }
+});
+
+//Logout
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
   modalLogin.style.display = 'block';
@@ -141,21 +149,15 @@ btnLogout.addEventListener('click', e => {
 // });
 
 // Add a realtime listener
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  if(firebaseUser) {
-    console.log(firebaseUser);
-    btnLogout.classList.remove('hide');
-  }
-  else {
-    console.log('not logged in');
-  }
-});
-
-// window.onclick = function(event) {
-//   if(event.target == modalLogin) {
-//     modalLogin.style.display = 'none';
+// firebase.auth().onAuthStateChanged(firebaseUser => {
+//   if(firebaseUser) {
+//     console.log(firebaseUser);
+//     btnLogout.classList.remove('hide');
 //   }
-// }
+//   else {
+//     console.log('not logged in');
+//   }
+// });
 
 window.onload = function() {
   modalLogin.style.display = 'block';
