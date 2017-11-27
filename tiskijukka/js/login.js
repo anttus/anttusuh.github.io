@@ -44,7 +44,7 @@ const mainBody = document.getElementById('mainBody');
 btnSignUpTab.addEventListener('click', e=> {
   loginForm.style.display = 'none';
   signUpForm.style.display = 'block';
-  btnLogInTab.style.background = 'gray';
+  btnLogInTab.style.background = '#cccccc';
   btnSignUpTab.style.background = 'white';
 
 });
@@ -53,7 +53,7 @@ btnLogInTab.addEventListener('click', e => {
   signUpForm.style.display = 'none';
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
-  btnSignUpTab.style.background = 'gray';
+  btnSignUpTab.style.background = '#cccccc';
 
 });
 
@@ -163,5 +163,5 @@ window.onload = function() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
   signUpForm.style.display = 'none';
-  btnSignUpTab.style.background = 'gray';
+  btnSignUpTab.style.background = '#cccccc';
 }
