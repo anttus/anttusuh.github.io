@@ -30,7 +30,6 @@ var taskID = 0;
 var latestTask;
 
 //Getting user's information
-
 if (user != null) {
   uname = user.displayName;
   email = user.email;
@@ -47,6 +46,7 @@ function writeTask() {
   //TEMPORARY
   var groupid = 1;
   var uid = 1;
+  // uname = "Anttu";
 
   //Returns the number of tasks
   var taskid = returnTaskID();

@@ -62,15 +62,36 @@ btnSignIn.addEventListener('click', e => {
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  const auth = firebase.auth();
+  // const auth = firebase.auth();
   //Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
   modalLogin.style.display = 'none';
   mainBody.style.display = 'initial';
 
-  // console.log(email + " " + pass + " " + auth);
+  //IF VERIFIED, DON'T DO THIS
+  // verifyUser();
+
+  console.log(displayName + " " + email + " " + pass + " " + auth);
 });
+
+function verifyUser() {
+  var user = firebase.auth().currentUser;
+
+  user.sendEmailVerification().then(function() {
+    console.log('email sent');
+  }).catch(function(error) {
+    console.log('error');
+  });
+
+  user.updateProfile({
+    displayName: txtUsername.value
+  }).then(function() {
+    console.log('username set');
+  }).catch(function(error) {
+    console.log('username error');
+  });
+}
 
 // btnCancel.addEventListener('click', e => {
 //   modalLogin.style.display = 'none';
@@ -81,13 +102,13 @@ btnSignUp.addEventListener('click', e => {
   //TO DO: CHECK FOR REAL EMAIL
   const email = txtEmail.value;
   const pass = txtPassword.value;
-  const auth = firebase.auth();
-  //Sign in
+  // const auth = firebase.auth();
+
+  //Sign up
   const promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+
 });
-
-
 
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
@@ -116,7 +137,7 @@ btnLogout.addEventListener('click', e => {
 //     var credential = error.credential;
 //     // ...
 //     console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
-// });
+//   });
 // });
 
 // Add a realtime listener
@@ -124,7 +145,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser) {
     console.log(firebaseUser);
     btnLogout.classList.remove('hide');
-
   }
   else {
     console.log('not logged in');
