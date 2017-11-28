@@ -12,6 +12,7 @@ const signUpForm = document.getElementById('signUpForm');
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
+const txtVerifyPassword = document.getElementById('txtVerifyPassword');
 
 const btnSignIn = document.getElementById('btnSignIn');
 
@@ -72,12 +73,15 @@ function verifyUser() {
   var user = firebase.auth().currentUser;
 
   if (!user.emailVerified) {
+
+    //Send verification email
     user.sendEmailVerification().then(function() {
       console.log('email sent');
     }).catch(function(error) {
       console.log('error');
     });
 
+    //Set the provided username
     user.updateProfile({
       displayName: txtUsername.value
     }).then(function() {
