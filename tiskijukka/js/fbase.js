@@ -43,14 +43,14 @@ function writeTask() {
     }
   }
 
-  console.log(uname + " " + email + " " + emailVerified + " " + uid);
-
   //TEMPORARY
   var groupid = 1;
 
   //Returns the number of tasks
   var taskid = returnTaskID();
   taskid++;
+
+  console.log("Username: " + uname + " email: " + email + " email verified: " + emailVerified + " user id: " + uid + " group id: " + groupid);
 
   firebase.database().ref('Group' + groupid + '/' + taskid).set({ //Sets a new Task table with the task number
     username: uname,
