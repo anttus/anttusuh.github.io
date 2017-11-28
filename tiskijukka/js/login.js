@@ -22,6 +22,8 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 
 const mainBody = document.getElementById('mainBody');
 
+var verify;
+
 btnSignUpTab.addEventListener('click', e=> {
   loginForm.style.display = 'none';
   signUpForm.style.display = 'block';
@@ -72,24 +74,25 @@ $("#txtUsername").keyup(function(event) {
 function verifyUser() {
   var user = firebase.auth().currentUser;
 
-  if (!user.emailVerified) {
-
-    //Send verification email
-    user.sendEmailVerification().then(function() {
-      console.log('email sent');
-    }).catch(function(error) {
-      console.log('error');
-    });
-
-    //Set the provided username
+  if(verify) {
+    // Set the provided username
     user.updateProfile({
       displayName: txtUsername.value
     }).then(function() {
-      console.log('username set');
+      console.log('Username set to ' + txtUsername.value);
     }).catch(function(error) {
-      console.log('username error');
+      console.log('Error setting username');
     });
+
+    // Send verification email
+    user.sendEmailVerification().then(function() {
+      console.log('Email sent');
+    }).catch(function(error) {
+      console.log('Error sending email');
+    });
+    verify = false;
   }
+
 }
 
 //Sign in
@@ -101,7 +104,8 @@ btnSignIn.addEventListener('click', e => {
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass).then(function(user) {
     // user signed in
-
+    // modalLogin.style.display = 'none';
+    // mainBody.style.display = 'block';
   }).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -117,26 +121,31 @@ btnSignIn.addEventListener('click', e => {
 
 //Sign up
 btnSignUp.addEventListener('click', e => {
+
   //Get email and pass
   const email = txtEmail.value;
   const pass = txtPassword.value;
+
+  verify = true;
 
   //Sign up
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 
-
 });
 
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
+  var user = firebase.auth().currentUser;
+
   if (checkUser) {
+    verifyUser();
     readTasks();
     if (checkUser.emailVerified) {
       modalLogin.style.display = 'none';
-      mainBody.style.display = 'initial';
+      mainBody.style.display = 'block';
     } else {
-      verifyUser();
+      firebase.auth().signOut();
       displayLogin();
     }
     console.log('logged in');
