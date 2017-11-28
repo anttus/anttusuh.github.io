@@ -165,26 +165,26 @@ btnLogout.addEventListener('click', e => {
   txtPassword.value = "";
 });
 
-// btnGoogle.addEventListener('click', e => {
-//   var  provider = new firebase.auth.GoogleAuthProvider();
-//   provider.setCustomParameters({
-//     'login_hint': 'user@example.com'
-//   });
-//   auth.signInWithRedirect(provider);
-//
-//   firebase.auth().getRedirectResult().then(function(result) {
-//     var user = result.user;
-//     console.log(user);
-//
-//   }).catch(function(error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // The email of the user's account used.
-//     var email = error.email;
-//     // The firebase.auth.AuthCredential type that was used.
-//     var credential = error.credential;
-//     // ...
-//     console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
-//   });
-// });
+btnGoogle.addEventListener('click', e => {
+  var  provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({
+    'login_hint': 'user@example.com'
+  });
+  auth.signInWithRedirect(provider);
+
+  firebase.auth().getRedirectResult().then(function(result) {
+    var user = result.user;
+    console.log(user);
+
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+    console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
+  });
+});
