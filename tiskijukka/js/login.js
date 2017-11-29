@@ -155,7 +155,10 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   var user = firebase.auth().currentUser;
-  var data = checkUser.providerData;
+  var data = "";
+  if(checkUser != null) {
+    data = checkUser.providerData;
+  }
 
   if (checkUser) {
     verifyUser();
