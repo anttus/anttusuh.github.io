@@ -44,6 +44,8 @@ a:hover {
   font-size: large;
   padding-top: 20px;
   padding-bottom: 15px;
+  text-align: left;
+  padding-left: 13%;
 }
 
 #leftCol {
@@ -154,6 +156,7 @@ body::after {
   .rightCol {
     margin-top: 0;
     padding-top: 0;
+    display: inline-block;
   }
 }
 
@@ -271,16 +274,16 @@ body::after {
 
 /* Loading icon */
 @-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
 }
 @-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
 }
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }
 .loader {
   border: 16px solid #333;
