@@ -32,6 +32,7 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 const mainBody = document.getElementById('mainBody');
 
 var verify;
+var fbBool = false;
 
 btnSignUpTab.addEventListener('click', e=> {
   loginForm.style.display = 'none';
@@ -211,8 +212,6 @@ btnGoogle.addEventListener('click', e => {
   });
 });
 
-var fbBool = false;
-var providerId;
 btnFacebook.addEventListener('click', e => {
   var provider = new firebase.auth.FacebookAuthProvider();
   fbBool = true;
@@ -226,7 +225,6 @@ btnFacebook.addEventListener('click', e => {
     }
     // The signed-in user info.
     var user = result.user;
-    providerId = user.providerId;
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
