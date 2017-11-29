@@ -158,7 +158,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
     verifyUser();
     readTasks();
-    if (checkUser.emailVerified) {
+    if (checkUser.emailVerified || checkUser.providerId == 'facebook.com') {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
@@ -172,7 +172,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   } else {
     displayLogin();
     console.log('logged out');
-    console.log(checkUser.providerId);
+    // console.log(checkUser.providerId);
   }
 });
 
