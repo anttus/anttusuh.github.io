@@ -29,9 +29,16 @@ function getCurUser() {
 
 //BUTTONS
 // "Tiskit tehty!" -button
-document.getElementById('btnDish').addEventListener('click', function () {
-  
+const btnDish = document.getElementById('btnDish');
+btnDish.addEventListener('click', function () {
   writeTask();
+  btnDish.disabled = 'true';
+  
+  setTimeout(function() {
+    btnDish.removeAttribute('disabled');
+    $('#btnDish').empty();
+  }, 3000);
+
 });
 
 document.getElementById('btnGroup').addEventListener('click', function() {
