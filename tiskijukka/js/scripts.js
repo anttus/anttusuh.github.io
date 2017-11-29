@@ -30,7 +30,6 @@ function getCurUser() {
 //BUTTONS
 // "Tiskit tehty!" -button
 document.getElementById('btnDish').addEventListener('click', function () {
-  $("body").confirm();
   writeTask();
 });
 
