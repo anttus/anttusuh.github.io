@@ -30,14 +30,24 @@ function getCurUser() {
 //BUTTONS
 // "Tiskit tehty!" -button
 const btnDish = document.getElementById('btnDish');
+var cdBool = false;
 btnDish.addEventListener('click', function () {
-  writeTask();
-  btnDish.disabled = 'true';
-  
-  setTimeout(function() {
-    btnDish.removeAttribute('disabled');
-    $('#btnDish').empty();
-  }, 3000);
+  if(!cdBool) {
+    writeTask();
+    cdBool = true;
+    setTimeout(function() {
+      cdBool = false;
+      $('#dishSuccess').hide();
+    }, 5000);
+  }
+  else {
+    $('#dishSuccess').show();
+    // var dishSuccess = document.getElementById('dishSuccess');
+    // dishSuccess.display = 'block';
+    // dishSuccess.innerHTML = 'Testi!!!';
+
+  }
+
 
 });
 
