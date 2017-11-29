@@ -32,7 +32,6 @@ const btnGSignUp = document.getElementById('btnGSignUp');
 const mainBody = document.getElementById('mainBody');
 
 var verify;
-var fbBool = false;
 
 btnSignUpTab.addEventListener('click', e=> {
   loginForm.style.display = 'none';
@@ -155,10 +154,6 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   var user = firebase.auth().currentUser;
-  var data = "";
-  if(checkUser.providerData != null) {
-    data = checkUser.providerData;
-  }
 
   if (checkUser) {
     verifyUser();
@@ -218,7 +213,6 @@ btnGoogle.addEventListener('click', e => {
 
 btnFacebook.addEventListener('click', e => {
   var provider = new firebase.auth.FacebookAuthProvider();
-  fbBool = true;
   firebase.auth().signInWithRedirect(provider);
 
   firebase.auth().getRedirectResult().then(function(result) {
@@ -240,5 +234,4 @@ btnFacebook.addEventListener('click', e => {
     // Show errors
     console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
   });
-
 });
