@@ -158,7 +158,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   if (checkUser) {
     verifyUser();
     readTasks();
-    if (checkUser.emailVerified || checkUser.providerId == 'facebook.com') {
+    if (checkUser.emailVerified || fbBool) {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
