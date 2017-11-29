@@ -26,6 +26,28 @@
 var taskID = 0;
 var latestTask;
 
+//ID generator
+var ID = function () {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
+
+function writeUser(uname, uid, email) {
+  var ingroup = false;
+  firebase.database().ref('Users' + '/' + uid).set({
+    username: uname,
+    uid: uid,
+    email: email,
+    ingroup: ingroup
+  });
+}
+
+function updateGroupStatus(boolean) {
+  var user = firebase.auth().currentUser;
+  user.updateProfile({
+    ingroup: boolean
+  });
+}
+
 //Writing the tasks
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask() {
@@ -91,7 +113,7 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
-  $("#curUser").html("Kirjautunut käyttäjänä:</br><p></p><strong>" + getCurUser() + "</strong>");
+  $("#curUser").html("<p></p><strong>" + getCurUser() + "</strong><br><p></p>");
   getTaskData();
   firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
     var node = document.createElement("p");

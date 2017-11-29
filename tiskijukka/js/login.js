@@ -73,19 +73,19 @@ function displayLogin() {
 
 //To be able to press enter on login
 $("#txtPassword_SI").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#btnSignIn").click();
-    }
+  if (event.keyCode === 13) {
+    $("#btnSignIn").click();
+  }
 });
 $("#txtEmail_SI").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#btnSignIn").click();
-    }
+  if (event.keyCode === 13) {
+    $("#btnSignIn").click();
+  }
 });
 $("#txtUsername").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#btnSignUp").click();
-    }
+  if (event.keyCode === 13) {
+    $("#btnSignUp").click();
+  }
 });
 
 function verifyUser() {
@@ -159,6 +159,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
     verifyUser();
     readTasks();
     if (checkUser.emailVerified) {
+      writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
     } else {
@@ -212,23 +213,23 @@ btnFacebook.addEventListener('click', e => {
   firebase.auth().signInWithRedirect(provider);
 
   firebase.auth().getRedirectResult().then(function(result) {
-  if (result.credential) {
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    var token = result.credential.accessToken;
-    // ...
-  }
-  // The signed-in user info.
-  var user = result.user;
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // Show errors
-  console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
-});
+    if (result.credential) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // ...
+    }
+    // The signed-in user info.
+    var user = result.user;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // Show errors
+    console.log("Error: " + errorCode +" " + errorMessage + " " + email + credential);
+  });
 
 });
