@@ -168,11 +168,11 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       displayLogin();
     }
     console.log('logged in');
-    console.log(checkUser.providerId);
+    console.log(checkUser.providerData);
   } else {
     displayLogin();
     console.log('logged out');
-    console.log(checkUser.providerId);
+    // console.log(checkUser.providerId);
   }
 });
 
