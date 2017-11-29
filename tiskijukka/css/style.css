@@ -176,7 +176,7 @@ body::after {
   border: none;
 }
 
-#dishButton {
+#btnDish {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   font-size: 20px;
@@ -185,7 +185,7 @@ body::after {
   margin-bottom: 40px;
 }
 
-#dishButton:hover {
+#btnDish:hover {
   background-color: rgba(51, 51, 51, 0.77);
   color: #f1f1f1;
   border: none;
@@ -193,7 +193,7 @@ body::after {
   margin-bottom: 40px;
 }
 
-#dishButton:focus {
+#btnDish:focus {
   background-color: #333;
   color: #f1f1f1;
   border: none;

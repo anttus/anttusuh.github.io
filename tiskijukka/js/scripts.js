@@ -14,11 +14,6 @@ function getTime() {
   return time;
 }
 
-// "Tiskit tehty!" -button
-document.getElementById('dishButton').addEventListener('click', function () {
-  writeTask();
-});
-
 function getCurUser() {
   var user = firebase.auth().currentUser;
   var uname, email, photoUrl, uid, emailVerified;
@@ -31,6 +26,17 @@ function getCurUser() {
   }
   return uname;
 }
+
+//BUTTONS
+// "Tiskit tehty!" -button
+document.getElementById('btnDish').addEventListener('click', function () {
+  $("body").confirm();
+  writeTask();
+});
+
+document.getElementById('btnGroup').addEventListener('click', function() {
+
+});
 
 //function setProfImg()
 
