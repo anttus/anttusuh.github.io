@@ -169,6 +169,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
     }
     console.log('logged in');
     console.log(checkUser.providerData);
+    console.log(providerId);
   } else {
     displayLogin();
     console.log('logged out');
@@ -210,6 +211,8 @@ btnGoogle.addEventListener('click', e => {
   });
 });
 
+var fbBool = false;
+var providerId;
 btnFacebook.addEventListener('click', e => {
   var provider = new firebase.auth.FacebookAuthProvider();
 
@@ -223,6 +226,8 @@ btnFacebook.addEventListener('click', e => {
     }
     // The signed-in user info.
     var user = result.user;
+    fbBool = true;
+    providerId = user.providerId;
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
