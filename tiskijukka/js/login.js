@@ -164,7 +164,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       mainBody.style.display = 'block';
     }
     else {
-      firebase.auth().signOut();
+      //firebase.auth().signOut();
       displayLogin();
     }
     console.log('logged in');
@@ -172,7 +172,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   } else {
     displayLogin();
     console.log('logged out');
-    // console.log(checkUser.providerId);
+    console.log(checkUser.providerId);
   }
 });
 
