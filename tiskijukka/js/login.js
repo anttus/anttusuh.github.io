@@ -59,8 +59,6 @@ btnLogInTab.addEventListener('click', e => {
   // txtEmail.focus();
 });
 
-mainBody.style.display = 'none';
-
 function displayLogin() {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
