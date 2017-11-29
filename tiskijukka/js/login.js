@@ -170,7 +170,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       displayLogin();
     }
     console.log('logged in');
-    console.log(checkUser.providerData[0].providerId);
+    console.log(data);
     // console.log(providerId[0].);
   } else {
     displayLogin();
