@@ -91,7 +91,7 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
-  $("#curUser").html("Kirjautunut käyttäjänä:</br>" + getCurUser());
+  $("#curUser").html("Kirjautunut käyttäjänä:</br><strong>" + getCurUser() + "</strong>");
   getTaskData();
   firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
     var node = document.createElement("p");

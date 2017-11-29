@@ -13,7 +13,7 @@
 
 #loginHeader {
   padding: 30px;
-  padding-bottom: 0;
+  /*padding-bottom: 0;*/
   font-size: 30px;
   text-align: center;
 }
@@ -37,7 +37,7 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 #signUpForm {
-  margin-top: -18px;
+  /*margin-top: -18px;*/
 }
 
 /* Set a style for all buttons */

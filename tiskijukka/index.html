@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="css/login.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
+  <script src="../tiskijukka/vendor/jQuery-Form-Validator-master/form-validator/jquery.form-validator.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
@@ -31,115 +33,135 @@
 
 <body>
 
-<!-- Login window -->
-<div id="modalLogin" class="modal">
-  <div class="modal-content animate">
-    <div class="loginRow">
-      <button id="btnLogInTab">LOGIN</button>
-      <button id="btnSignUpTab">SIGN UP</button>
-    </div>
-    <h1 id="loginHeader">Welcome to Tiskijukka!</h1>
-    <div class="imgcontainer">
+  <!-- Login window -->
+  <div id="modalLogin" class="modal">
+    <div class="modal-content animate">
+      <div class="loginRow">
+        <button id="btnLogInTab">LOGIN</button>
+        <button id="btnSignUpTab">SIGN UP</button>
+      </div>
+      <h1 id="loginHeader">Welcome to Tiskijukka!</h1>
+
+      <!-- <div class="imgcontainer"> -->
       <!-- <img src="img/Tiskijukka_logo.png" alt="Avatar" class="avatar"> -->
-    </div>
-    <div id="inputForm">
-      <label><b>Email  </b></label>
-      <input type="email" id="txtEmail" placeholder="Enter email address" autofocus><br>
+      <!-- </div> -->
+
+      <!-- <div id="inputForm"> -->
+      <!-- <label><b>Email  </b></label>
+      <div><input type="email" name="email" id="txtEmail" placeholder="Enter email address" data-validation="email"
+      data-validation-error-msg="This is not a valid email address"><br></div>
       <label><b>Password  </b></label>
-      <input type="password" id="txtPassword" name="psw" placeholder="Enter password"><br>
-      <span id="inputErrors"></span>
-    </div>
+      <input type="password" id="txtVerifyPassword" placeholder="Enter password"
+      name="pass_confirmation" data-validation-strength="2" data-validation-error-msg="This is not a valid email address"><br> -->
+      <!-- </div> -->
 
       <!-- Sign up -->
       <div id="signUpForm" style="display:none">
-        <label><b>Verify password (needs functionality)</b></label>
-        <input type="password" id="txtVerifyPassword" name="verifyPsw" placeholder="Enter password again"><br>
-        <label><b>Username </b></label>
-        <input type="text" id="txtUsername" name="uname" placeholder="Enter username"><br>
-        <span id="signUpError"></span></br>
-        <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Sign up</button>
-        <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
-        <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
-      </div>
+        <label><b>Email  </b></label>
+        <div><input type="email" name="email" id="txtEmail" placeholder="Enter email address" data-validation="email"
+          data-validation-error-msg="This is not a valid email address"><br></div>
+          <label><b>Password  </b></label>
+          <div><input type="password" id="txtVerifyPassword" placeholder="Enter password"
+            name="pass_confirmation" data-validation="length" data-validation-length="min8"
+            data-validation-error-msg="The password should have at least 8 characters"><br>
 
-    <!-- Log in -->
-    <div id="loginForm">
-      <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Log in</button>
-      <button id="btnFacebook"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
-      <button id="btnGoogle"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
-    </div>
-  </div>
-</div>
+            <label><b>Verify password</b></label>
+            <input type="password" id="txtPassword" name="pass" data-validation="confirmation" data-validation-error-msg="Please type the same password"
+              placeholder="Enter password again"><br></div>
+              <label><b>Username </b></label>
+              <div><input type="text" id="txtUsername" name="user" placeholder="Enter username"
+                data-validation="length alphanumeric" data-validation-length="min3"
+                data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)"><br></div>
+                <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Sign up</button>
+                <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
+                <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+              </div>
 
-<!-- Main page -->
-<div id="mainBody">
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-inverse" id="navbar">
-    <!-- <div class="container"> -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" id="navbarTitle"></a>
-    </div>
+              <!-- Log in -->
+              <div id="loginForm">
+                <label><b>Email  </b></label>
+                <div><input type="email" name="email" id="txtEmail" placeholder="Enter email address" data-validation="email"
+                  data-validation-error-msg="This is not a valid email address"><br></div>
+                  <label><b>Password  </b></label>
+                  <input type="password" id="txtVerifyPassword" placeholder="Enter password"
+                  name="pass_confirmation" data-validation-strength="2" data-validation-error-msg="This is not a valid email address"><br>
 
-    <div class="collapse navbar-collapse" id="toggle-nav">
-      <div class="nav navbar-nav navbar-right" id="navbar-nav">
-        <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
-        <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square" ><i class="glyphicon glyphicon-plus"></i> Luo ryhmä</button>
-      </div>
-    </div>
-    <!-- close container div -->
-  </nav> <!-- close navbar nav -->
+                  <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Log in</button>
+                  <button id="btnFacebook"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
+                  <button id="btnGoogle"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+                </div>
+              </div>
+            </div>
 
-  <!-- BODY -->
-  <!-- <body> -->
+            <!-- Main page -->
+            <div id="mainBody">
+              <!-- NAVBAR -->
+              <nav class="navbar navbar-inverse" id="navbar">
+                <!-- <div class="container"> -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" id="navbarTitle"></a>
+                </div>
 
-  <div class="container-fluid text-center">
+                <div class="collapse navbar-collapse" id="toggle-nav">
+                  <div class="nav navbar-nav navbar-right" id="navbar-nav">
+                    <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
+                    <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square" ><i class="glyphicon glyphicon-plus"></i> Luo ryhmä</button>
+                  </div>
+                </div>
+                <!-- close container div -->
+              </nav> <!-- close navbar nav -->
 
-    <div class="row content">
+              <!-- BODY -->
+              <!-- <body> -->
 
-      <!-- Beginning of the left column -->
-      <div class="col-sm-6 sidenav" id="leftCol">
-        <h1 id="curUser"></h1>
-        <!-- Profile image -->
-        <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
-        <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
+              <div class="container-fluid text-center">
 
-        <!-- Profile image from facebook -->
-        <br />
+                <div class="row content">
 
-        <!-- BUTTON -->
-        <input type="submit" value="Tiskit tehty!" class="btn btn-success" id="dishButton" >
-        <br />
+                  <!-- Beginning of the left column -->
+                  <div class="col-sm-6 sidenav" id="leftCol">
+                    <h1 id="curUser"></h1>
+                    <!-- Profile image -->
+                    <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
+                    <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
 
-        <!-- SCORES -->
-        <div id="scoreCount">
-          TJ-PISTEET: <br/>
-        </div>
-      </div> <!-- End of the left column -->
+                    <!-- Profile image from facebook -->
+                    <br />
 
-      <!-- Right column - gets the times from the database -->
-      <div class="col-sm-6 sidenav rightCol" id="task"></div>
+                    <!-- BUTTON -->
+                    <input type="submit" value="Tiskit tehty!" class="btn btn-success" id="dishButton" >
+                    <br />
 
-      <!-- FOOTER -->
-      <footer class="container-fluid text-center" >
-        <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
-          <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
-          <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
-        </div>
-      </footer>
-    </div>
-  </div>
-</div>
+                    <!-- SCORES -->
+                    <div id="scoreCount">
+                      TJ-PISTEET: <br/>
+                    </div>
+                  </div> <!-- End of the left column -->
 
-<script type="text/javascript" src="js/fbase.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
+                  <!-- Right column - gets the times from the database -->
+                  <div class="col-sm-6 sidenav rightCol" id="task"></div>
 
-</body>
+                  <!-- FOOTER -->
+                  <footer class="container-fluid text-center" >
+                    <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
+                      <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
+                      <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
+                    </div>
+                  </footer>
+                </div>
+              </div>
+            </div>
 
-</html>
+            <script type="text/javascript" src="js/fbase.js"></script>
+            <script type="text/javascript" src="js/scripts.js"></script>
+            <script type="text/javascript" src="js/login.js"></script>
+
+          </body>
+
+          </html>

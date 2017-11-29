@@ -1,3 +1,8 @@
+$.validate({
+  form : '#modalLogin',
+  modules: 'security'
+});
+
 const auth = firebase.auth();
 
 // auth.signInWithEmailAndPassword(email, pass);
@@ -29,7 +34,10 @@ btnSignUpTab.addEventListener('click', e=> {
   signUpForm.style.display = 'block';
   btnLogInTab.style.background = '#cccccc';
   btnSignUpTab.style.background = 'white';
-  txtEmail.focus();
+  // txtEmail.focus();
+  txtEmail.value = "";
+  txtPassword.value = "";
+  txtVerifyPassword.value = "";
 });
 
 btnLogInTab.addEventListener('click', e => {
@@ -37,7 +45,10 @@ btnLogInTab.addEventListener('click', e => {
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
-  txtEmail.focus();
+  // txtEmail.focus();
+  txtEmail.value = "";
+  txtPassword.value = "";
+  txtVerifyPassword.value = "";
 });
 
 mainBody.style.display = 'none';
@@ -50,8 +61,8 @@ function displayLogin() {
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
   txtEmail.value = "";
-  txtEmail.focus();
   txtPassword.value = "";
+  // txtEmail.focus();
 }
 
 //To be able to press enter on login
@@ -86,7 +97,7 @@ function verifyUser() {
 
     // Send verification email
     user.sendEmailVerification().then(function() {
-      console.log('Email sent');
+      console.log('Email sent to ' + txtEmail.value);
     }).catch(function(error) {
       console.log('Error sending email');
     });
@@ -111,9 +122,9 @@ btnSignIn.addEventListener('click', e => {
     var errorMessage = error.message;
 
     if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
+      console.log('Wrong password.');
     } else {
-      alert('The email address is not valid.');
+      console.log('The email address is not valid.');
     }
     console.log(error);
   });
@@ -161,7 +172,7 @@ btnLogout.addEventListener('click', e => {
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
   txtEmail.value = "";
-  txtEmail.focus();
+  // txtEmail.focus();
   txtPassword.value = "";
 });
 
