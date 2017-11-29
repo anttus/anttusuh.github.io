@@ -116,8 +116,10 @@ window.onload = function() {
                 <div class="nav navbar-nav navbar-right" id="navbar-nav">
                   <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
                   <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" ><i class="glyphicon glyphicon-cog"></i> Ryhmät</button>
+                  <h1 id="curUser"></h1>
                 </div>
               </div>
+
               <!-- close container div -->
             </nav> <!-- close navbar nav -->
 
@@ -130,7 +132,7 @@ window.onload = function() {
 
                 <!-- Beginning of the left column -->
                 <div class="col-sm-6 sidenav" id="leftCol">
-                  <h1 id="curUser"></h1>
+
                   <!-- Profile image -->
                   <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
                   <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
