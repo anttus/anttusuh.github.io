@@ -168,8 +168,8 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       displayLogin();
     }
     console.log('logged in');
-    console.log(checkUser.providerData);
-    console.log(providerId);
+    console.log(checkUser.providerData[0].providerId);
+    // console.log(providerId[0].);
   } else {
     displayLogin();
     console.log('logged out');
@@ -215,7 +215,7 @@ var fbBool = false;
 var providerId;
 btnFacebook.addEventListener('click', e => {
   var provider = new firebase.auth.FacebookAuthProvider();
-
+  fbBool = true;
   firebase.auth().signInWithRedirect(provider);
 
   firebase.auth().getRedirectResult().then(function(result) {
@@ -226,7 +226,6 @@ btnFacebook.addEventListener('click', e => {
     }
     // The signed-in user info.
     var user = result.user;
-    fbBool = true;
     providerId = user.providerId;
   }).catch(function(error) {
     // Handle Errors here.
