@@ -162,14 +162,17 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
-    } else {
+    }
+    else {
       firebase.auth().signOut();
       displayLogin();
     }
     console.log('logged in');
+    console.log(user.providerId);
   } else {
     displayLogin();
     console.log('logged out');
+    console.log(user.providerId);
   }
 });
 
