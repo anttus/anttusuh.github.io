@@ -155,6 +155,7 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   var user = firebase.auth().currentUser;
+  var data = checkUser.providerData;
 
   if (checkUser) {
     verifyUser();
@@ -174,7 +175,7 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
   } else {
     displayLogin();
     console.log('logged out');
-    // console.log(checkUser.providerId);
+    console.log(data);
   }
 });
 
