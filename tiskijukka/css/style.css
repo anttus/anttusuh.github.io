@@ -38,16 +38,20 @@ a:hover {
 }
 
 .rightCol {
-    margin-bottom: 60px;
-    margin-top: 20px;
-    font-family: 'Oswald', sans-serif;
-    font-size: large;
-    padding-top: 20px;
-    padding-bottom: 15px;
+  margin-bottom: 70px;
+  margin-top: 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: large;
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
 
 #leftCol {
   margin-top: 20px;
+}
+
+#curUser {
+  margin: 20px;
 }
 
 #scoreCount {
@@ -223,15 +227,15 @@ body::after {
 }
 
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-    color: #fff;
-    background-color: #333;
-    border-color: #333;
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
 }
 
 .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: #333;
-    border-color: #333;
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
 }
 
 .dropdown-menu {
@@ -254,13 +258,38 @@ body::after {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   margin-bottom: 20px;
   border: none;
   border-radius: 0;
 }
 
 .disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading icon */
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+.loader {
+  border: 16px solid #333;
+  border-top: 16px solid #777777;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30%;
 }
