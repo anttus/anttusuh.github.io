@@ -122,7 +122,7 @@ body::after {
     height: auto;
     padding: 15px;
     padding-right: 0;
-    margin-bottom: -20px;
+    margin-bottom: 10px;
   }
   .row.content {height:100%;}
 

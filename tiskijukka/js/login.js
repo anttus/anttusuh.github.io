@@ -15,12 +15,16 @@ const btnSignUpTab = document.getElementById('btnSignUpTab')
 const loginForm = document.getElementById('loginForm');
 const signUpForm = document.getElementById('signUpForm');
 
-const txtEmail = document.getElementById('txtEmail');
-const txtPassword = document.getElementById('txtPassword');
+//Sign up
+const txtEmail_SU = document.getElementById('txtEmail_SU');
+const txtPassword_SU = document.getElementById('txtPassword_SU');
 const txtVerifyPassword = document.getElementById('txtVerifyPassword');
 
-const btnSignIn = document.getElementById('btnSignIn');
+//Sign in
+const txtEmail_SI = document.getElementById('txtEmail_SI');
+const txtPassword_SI = document.getElementById('txtPassword_SI');
 
+const btnSignIn = document.getElementById('btnSignIn');
 const btnSignUp = document.getElementById('btnSignUp');
 const btnFbSignUp = document.getElementById('btnFbSignUp');
 const btnGSignUp = document.getElementById('btnGSignUp');
@@ -34,10 +38,12 @@ btnSignUpTab.addEventListener('click', e=> {
   signUpForm.style.display = 'block';
   btnLogInTab.style.background = '#cccccc';
   btnSignUpTab.style.background = 'white';
-  // txtEmail.focus();
-  txtEmail.value = "";
-  txtPassword.value = "";
+  txtEmail_SI.value = "";
+  txtPassword_SI.value = "";
+  txtEmail_SU.value = "";
+  txtPassword_SU.value = "";
   txtVerifyPassword.value = "";
+  // txtEmail.focus();
 });
 
 btnLogInTab.addEventListener('click', e => {
@@ -45,10 +51,12 @@ btnLogInTab.addEventListener('click', e => {
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
-  // txtEmail.focus();
-  txtEmail.value = "";
-  txtPassword.value = "";
+  txtEmail_SI.value = "";
+  txtPassword_SI.value = "";
+  txtEmail_SU.value = "";
+  txtPassword_SU.value = "";
   txtVerifyPassword.value = "";
+  // txtEmail.focus();
 });
 
 mainBody.style.display = 'none';
@@ -60,18 +68,18 @@ function displayLogin() {
   loginForm.style.display = 'block';
   btnLogInTab.style.background = 'white';
   btnSignUpTab.style.background = '#cccccc';
-  txtEmail.value = "";
-  txtPassword.value = "";
+  txtEmail_SI.value = "";
+  txtPassword_SI.value = "";
   // txtEmail.focus();
 }
 
 //To be able to press enter on login
-$("#txtPassword").keyup(function(event) {
+$("#txtPassword_SI").keyup(function(event) {
     if (event.keyCode === 13) {
         $("#btnSignIn").click();
     }
 });
-$("#txtEmail").keyup(function(event) {
+$("#txtEmail_SI").keyup(function(event) {
     if (event.keyCode === 13) {
         $("#btnSignIn").click();
     }
@@ -97,7 +105,7 @@ function verifyUser() {
 
     // Send verification email
     user.sendEmailVerification().then(function() {
-      console.log('Email sent to ' + txtEmail.value);
+      console.log('Email sent to ' + txtEmail_SU.value);
     }).catch(function(error) {
       console.log('Error sending email');
     });
@@ -109,8 +117,8 @@ function verifyUser() {
 //Sign in
 btnSignIn.addEventListener('click', e => {
   //Get email and pass
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
+  const email = txtEmail_SI.value;
+  const pass = txtPassword_SI.value;
 
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass).then(function(user) {
@@ -122,9 +130,9 @@ btnSignIn.addEventListener('click', e => {
     var errorMessage = error.message;
 
     if (errorCode === 'auth/wrong-password') {
-      console.log('Wrong password.');
+      alert('Wrong password.');
     } else {
-      console.log('The email address is not valid.');
+      alert('The email address is not valid.');
     }
     console.log(error);
   });
@@ -134,8 +142,8 @@ btnSignIn.addEventListener('click', e => {
 btnSignUp.addEventListener('click', e => {
 
   //Get email and pass
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
+  const email = txtEmail_SU.value;
+  const pass = txtPassword_SU.value;
 
   verify = true;
 
@@ -171,9 +179,9 @@ btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
-  txtEmail.value = "";
+  txtEmail_SI.value = "";
   // txtEmail.focus();
-  txtPassword.value = "";
+  txtPassword_SI.value = "";
 });
 
 btnGoogle.addEventListener('click', e => {
