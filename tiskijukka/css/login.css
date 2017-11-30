@@ -44,6 +44,8 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 button:hover {
@@ -58,7 +60,6 @@ button:active {
   background-color: #efefef;
   color: #333;
   border: none;
-
 }
 
 #btnFacebook, #btnFacebookSignUp {
@@ -99,7 +100,7 @@ span.psw {
 }
 
 /* The Modal (background) */
-.modal {
+.modal:nth-of-type(1) {
     background-color: #333;
 }
 

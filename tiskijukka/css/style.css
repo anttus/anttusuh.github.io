@@ -282,7 +282,7 @@ body::after {
 }
 
 /* Loading icon */
-@-moz-keyframes spin {
+/*@-moz-keyframes spin {
   from { -moz-transform: rotate(0deg); }
   to { -moz-transform: rotate(360deg); }
 }
@@ -304,4 +304,4 @@ body::after {
   margin-left: auto;
   margin-right: auto;
   margin-top: 30%;
-}
+}*/
