@@ -33,7 +33,7 @@ var ID = function () {
 
 function writeUser(uname, uid, email) {
   var ingroup = false;
-  firebase.database().ref('Users' + '/' + uid).set({
+  firebase.database().ref('Users' + '/User/' + uid).set({
     username: uname,
     uid: uid,
     email: email,
@@ -52,41 +52,39 @@ function updateGroupStatus(boolean) {
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask() {
   var user = firebase.auth().currentUser;
-  var uname, email, photoUrl, uid, emailVerified;
+  var uname, email, uid, groupid;
 
   if (user) {
     //Getting user's information
     if (user != null) {
       uname = user.displayName;
       email = user.email;
-      photoUrl = user.photoURL;
-      emailVerified = user.emailVerified;
       uid = user.uid;
+      groupid = user.groupid;
     }
   }
 
-  //TEMPORARY
-  var groupid = 1;
-
-  //Returns the number of tasks
+  //Returns the running id of tasks
   var taskid = returnTaskID();
   taskid++;
 
-  console.log("Username: " + uname + " email: " + email + " email verified: " + emailVerified + " user id: " + uid + " group id: " + groupid);
+  console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid);
 
-  firebase.database().ref('Group' + groupid + '/' + taskid).set({ //Sets a new Task table with the task number
+  //Sets a new Task table with task id as an identifier
+  firebase.database().ref('Tasks/' + taskid).set({
     username: uname,
-    date: getDate(),
-    time: getTime(),
+    email: email,
     uid: uid,
-    groupid: groupid,
-    taskid: taskid
+    // groupid: groupid,
+    taskid: taskid,
+    date: getDate(),
+    time: getTime()
   });
 }
 
 //Get (latest) task's data
 function getTaskData() {
-  firebase.database().ref('Group1').on("value", function(snap) {
+  firebase.database().ref('Tasks').on("value", function(snap) {
     snap.forEach(function(data) {
       taskID = data.key;
       latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
@@ -113,13 +111,17 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
+  readUsers();
   $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
   getTaskData();
-  firebase.database().ref('Group1').orderByValue().on("child_added", function(snap) {
-    var node = document.createElement("p");
+  firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
     var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-    var textNode = document.createTextNode(task);
-    node.appendChild(textNode);
-    document.getElementById('task').prepend(node); //Prepend so that the newest task is first on the list
+    document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+  });
+}
+
+function readUsers() {
+  firebase.database().ref('Users').orderByValue().on("child_added", function(snap) {
+    console.log(snap.numChildren());
   });
 }
