@@ -99,6 +99,10 @@ span.psw {
     padding-top: 16px;
 }
 
+#modalLogin {
+  overflow: auto;
+}
+
 /* The Modal (background) */
 .modal:nth-of-type(1) {
     background-color: #333;
@@ -120,6 +124,7 @@ span.psw {
 
   .modal {
     padding-top: 0;
+    overflow: auto;
   }
   #loginForm, #signUpForm {
     width: 250px;

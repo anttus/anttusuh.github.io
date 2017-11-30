@@ -32,11 +32,44 @@ var ID = function () {
 };
 
 function writeUser(uname, uid, email) {
-  var ingroup = false;
+  var user = firebase.auth().currentUser;
+  var uname, email, uid, groupid, ingroup;
+
+  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    const userData = snap.val();
+    if (userData) {
+      // console.log(userData);
+      snap.forEach(function(childSnap) {
+        var childKey = childSnap.key;
+        var childData = childSnap.val();
+        console.log('User ID: ' + childKey + " user in group" + childData.ingroup);
+        ingroup = childData.ingroup;
+      });
+    }
+  });
+
+  if (!ingroup) {
+    console.log(ingroup);
+    user.groupid = ID();
+    user.ingroup = true;
+  }
+
+  if (user) {
+    //Getting user's information
+    if (user != null) {
+      uname = user.displayName;
+      email = user.email;
+      uid = user.uid;
+      groupid = user.groupid;
+      ingroup = user.ingroup;
+    }
+  }
+
   firebase.database().ref('Users' + '/User/' + uid).set({
     username: uname,
     uid: uid,
     email: email,
+    groupid: groupid,
     ingroup: ingroup
   });
 }
@@ -75,7 +108,7 @@ function writeTask() {
     username: uname,
     email: email,
     uid: uid,
-    // groupid: groupid,
+    groupid: groupid,
     taskid: taskid,
     date: getDate(),
     time: getTime()
