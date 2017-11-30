@@ -1,3 +1,17 @@
+// Loading icon
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+    document.getElementById('mainBody').style.visibility="hidden";
+  } else if (state == 'complete') {
+    setTimeout(function(){
+      document.getElementById('interactive');
+      document.getElementById('load').style.visibility="hidden";
+      document.getElementById('mainBody').style.visibility="visible";
+    },1300);
+  }
+}
+
 function getDate() {
   var currentdate = new Date();
   var date = ('0' + currentdate.getDate()).slice(-2) + '.' +
@@ -19,7 +33,7 @@ function getCurUser() {
   var uname, email, photoUrl, uid, emailVerified;
 
   if (user) {
-    //Getting user's information
+    // Getting user's information
     if (user != null) {
       uname = user.displayName;
     }
@@ -27,7 +41,7 @@ function getCurUser() {
   return uname;
 }
 
-//BUTTONS
+// BUTTONS
 // "Tiskit tehty!" -button
 const btnDish = document.getElementById('btnDish');
 var cdBool = false;

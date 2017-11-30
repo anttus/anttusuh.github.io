@@ -281,12 +281,22 @@ body::after {
   cursor: not-allowed;
 }
 
-.confirm {
-  
+#load{
+  border: 16px solid #333;
+  border-top: 16px solid #777777;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-left: 50%;
+  margin-right: auto;
+  margin-top: 30%;
+  position: fixed;
+  z-index:9999;
 }
 
 /* Loading icon */
-/*@-moz-keyframes spin {
+@-moz-keyframes spin {
   from { -moz-transform: rotate(0deg); }
   to { -moz-transform: rotate(360deg); }
 }
@@ -298,14 +308,3 @@ body::after {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
 }
-.loader {
-  border: 16px solid #333;
-  border-top: 16px solid #777777;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30%;
-}*/

@@ -32,19 +32,6 @@
 
 </head>
 
-<!-- Loading icon -->
-<!--
-<script>
-window.onload = function() {
-  if (!($("#mainBody").hasClass("loader"))) {
-    $("#mainBody").addClass("loader");
-  }
-  if (($("#mainBody").hasClass("loader"))) {
-    setTimeout(function(){ $("#mainBody").removeClass("loader"); }, 800);
-  }
-}
-</script> -->
-
 <body>
 
   <!-- Login window -->
@@ -96,9 +83,11 @@ window.onload = function() {
               </div>
             </div>
           </div>
-
+          <!-- Loading icon -->
+          <div id="load"></div>
           <!-- Main page -->
           <div id="mainBody" style="display: none">
+
             <!-- NAVBAR -->
             <nav class="navbar navbar-inverse" id="navbar">
               <!-- <div class="container"> -->
@@ -147,7 +136,7 @@ window.onload = function() {
                     <br>
                   </div>
                   <br />
-                  
+
                   <!-- SCORES -->
                   <div id="scoreCount"><br/></div>
 

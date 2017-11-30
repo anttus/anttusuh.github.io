@@ -121,7 +121,7 @@ function readTasks() {
 }
 
 function readUsers() {
-  firebase.database().ref('Users').orderByValue().on("child_added", function(snap) {
+  firebase.database().ref('Users').on("child_added", function(snap) {
     numUsers = snap.numChildren();
     $('#scoreCount').html('TJ-PISTEET:<br>' + 'Käyttäjiä on ' + numUsers);
   });
