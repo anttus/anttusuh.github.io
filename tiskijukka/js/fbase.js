@@ -42,8 +42,12 @@ function writeUser(uname, uid, email) {
       snap.forEach(function(childSnap) {
         var childKey = childSnap.key;
         var childData = childSnap.val();
+<<<<<<< HEAD
         // console.log('User ID: ' + childKey + " user in group: " + childData.ingroup);
         // console.log('User group: ' + childData.groupid);
+=======
+        console.log('User ID: ' + childKey + " user in group " + childData.ingroup);
+>>>>>>> b48677bfea976d6627138e6ef4af12008cff88d2
         ingroup = childData.ingroup;
         groupid = childData.groupid;
         if (!ingroup) {

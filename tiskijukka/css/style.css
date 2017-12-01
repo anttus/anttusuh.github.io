@@ -54,7 +54,7 @@ a:hover {
 
 #curUser {
   float: right;
-  color: #f1f1f1;
+  color: #ecb206;
   margin-top: 1%;
   margin-bottom: auto;
 }
@@ -281,7 +281,27 @@ body::after {
   cursor: not-allowed;
 }
 
-#load{
+#page {
+    display: none;
+}
+
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Loading icon */
+
+/*#load{
   border: 16px solid #333;
   border-top: 16px solid #777777;
   border-radius: 50%;
@@ -293,10 +313,9 @@ body::after {
   margin-top: 30%;
   position: fixed;
   z-index:9999;
-}
+}*/
 
-/* Loading icon */
-@-moz-keyframes spin {
+/*@-moz-keyframes spin {
   from { -moz-transform: rotate(0deg); }
   to { -moz-transform: rotate(360deg); }
 }
@@ -307,4 +326,4 @@ body::after {
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
-}
+}*/
