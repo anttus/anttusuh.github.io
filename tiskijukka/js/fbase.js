@@ -33,38 +33,41 @@ var ID = function () {
 
 function writeUser(uname, uid, email) {
   var user = firebase.auth().currentUser;
-  var uname, email, uid, groupid, ingroup;
+  // var uname, email, uid, groupid, ingroup;
+  let groupid, ingroup;
 
   firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
     const userData = snap.val();
     if (userData) {
-      // console.log(userData);
       snap.forEach(function(childSnap) {
         var childKey = childSnap.key;
         var childData = childSnap.val();
-        console.log('User ID: ' + childKey + " user in group" + childData.ingroup);
+        // console.log('User ID: ' + childKey + " user in group: " + childData.ingroup);
+        // console.log('User group: ' + childData.groupid);
         ingroup = childData.ingroup;
+        groupid = childData.groupid;
+        if (!ingroup) {
+          groupid = ID();
+          ingroup = true;
+        }
+        updateUser(user.displayName, user.uid, user.email, ingroup, groupid);
+      });
+    }
+    else {
+      console.log('creating a new user for the database.');
+      groupid = ID();
+      firebase.database().ref('Users' + '/User/' + uid).set({
+        username: uname,
+        uid: uid,
+        email: email,
+        groupid: groupid,
+        ingroup: true
       });
     }
   });
+}
 
-  if (!ingroup) {
-    console.log(ingroup);
-    user.groupid = ID();
-    user.ingroup = true;
-  }
-
-  if (user) {
-    //Getting user's information
-    if (user != null) {
-      uname = user.displayName;
-      email = user.email;
-      uid = user.uid;
-      groupid = user.groupid;
-      ingroup = user.ingroup;
-    }
-  }
-
+function updateUser(uname, uid, email, ingroup, groupid) {
   firebase.database().ref('Users' + '/User/' + uid).set({
     username: uname,
     uid: uid,
@@ -73,6 +76,8 @@ function writeUser(uname, uid, email) {
     ingroup: ingroup
   });
 }
+
+
 
 function updateGroupStatus(boolean) {
   var user = firebase.auth().currentUser;
