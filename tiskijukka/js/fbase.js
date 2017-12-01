@@ -42,7 +42,7 @@ function writeUser(uname, uid, email) {
       snap.forEach(function(childSnap) {
         var childKey = childSnap.key;
         var childData = childSnap.val();
-        console.log('User ID: ' + childKey + " user in group" + childData.ingroup);
+        console.log('User ID: ' + childKey + " user in group " + childData.ingroup);
         ingroup = childData.ingroup;
       });
     }

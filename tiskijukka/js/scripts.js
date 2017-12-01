@@ -1,18 +1,22 @@
 // Loading icon
-// document.onreadystatechange = function () {
-//   var state = document.readyState
-//   if (state == 'interactive'  ||  document.getElementById('loginForm').style.display === 'none') {
-//     console.log(document.getElementById('signUpForm').style.display);
-//
-//     document.getElementById('mainBody').style.visibility="hidden";
-//   } else if (state == 'complete') {
-//     setTimeout(function(){
-//       document.getElementById('interactive');
-//       document.getElementById('load').style.visibility="hidden";
-//       document.getElementById('mainBody').style.visibility="visible";
-//     },1300);
-//   }
-// }
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 1300);
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+onReady(function () {
+    show('mainBody', true);
+    show('loading', false);
+});
 
 function getDate() {
   var currentdate = new Date();
