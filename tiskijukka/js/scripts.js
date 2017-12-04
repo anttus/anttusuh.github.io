@@ -65,10 +65,6 @@ btnDish.addEventListener('click', function () {
   }
 });
 
-document.getElementById('btnGroup').addEventListener('click', function() {
-  bootbox.prompt("Lisää käyttäjiä ryhmään käyttäjätunnuksella tai sähköpostilla", function(result){ console.log(result); });
-});
-
 //function setProfImg()
 
 // ANALYTICS
