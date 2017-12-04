@@ -198,9 +198,9 @@ function readTasks() {
           };
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
             getTaskData(dbUser.groupid);
-
+            console.log(snap.val());
             var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-            document.getElementById('task').insertAdjacentHTML("beforeend", task + "<p></p>");
+            document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
           });
         });
       } else {
