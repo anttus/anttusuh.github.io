@@ -211,18 +211,21 @@ function readTasks() {
           };
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
             getTaskData(dbUser.groupid);
-            console.log(snap.val());
+            // console.log(snap.val());
             var task = snap.val().username + " -> " + snap.val().tasktype + ": " + snap.val().date + " | " + snap.val().time;
             // document.getElementById('task').insertAdjacentHTML("beforeend", task + "<p></p>");
             $('#task').append(task + "<p></p>");
           });
 
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on('value', function(snap) {
-            let userArr = [];
+            let userArr = [], uniqueNames = [];
+
             let totalTasks = 0, totalTiskit = 0, totalSiivous = 0, totalImurointi = 0, totalPyykit = 0;
+            let i = 0;
 
             snap.forEach(function(data) {
               let dbData = data.val();
+              userArr[i++] = dbData.username;
 
               totalTasks++;
               switch(dbData.tasktype) {
@@ -241,12 +244,21 @@ function readTasks() {
               }
             });
 
+            $.each(userArr, function(i, el) {
+              if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+            });
+
             $('#scoreCount').html('TJ-PISTEET:<br>' + 'Yhteensä: ' + totalTasks +
              '<br>Tiskit: ' + totalTiskit +
              '<br>Siivous: ' + totalSiivous +
              '<br>Imurointi: ' + totalImurointi +
-             '<br>Pyykit: ' + totalPyykit
+             '<br>Pyykit: ' + totalPyykit +
+             '<p></p>Ryhmä:<br>'
             );
+
+            for (var j = 0; j < uniqueNames.length; j++) {
+              $('#scoreCount').append("<li>" + uniqueNames[j] + "</li>");
+            }
 
           });
         });
@@ -258,9 +270,9 @@ function readTasks() {
   }
 }
 
-// function readUsers() {
-//   firebase.database().ref('Users').on("child_added", function(snap) {
-//     numUsers = snap.numChildren();
-//     $('#scoreCount').html('TJ-PISTEET:<br>' + 'Käyttäjiä on ' + numUsers);
-//   });
-// }
+//Read the total number of users
+function readUsers() {
+  firebase.database().ref('Users').on("child_added", function(snap) {
+    numUsers = snap.numChildren();
+  });
+}
