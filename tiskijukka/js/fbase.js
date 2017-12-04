@@ -84,35 +84,99 @@ function updateUser(uname, uid, email, groupid) {
   });
 }
 
-//Adding people to the group
-document.getElementById('btnGroup').addEventListener('click', function() {
-  var user = firebase.auth().currentUser;
-
-  bootbox.prompt({
-    title: "Lisää käyttäjiä ryhmään käyttäjätunnuksella tai sähköpostilla",
-
-    callback: function (result) {
-      firebase.database().ref().child('Users/User').orderByChild('email').equalTo(result).once('value', snap => {
-        firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
-          const dbUserData = snap.val();
-          if(dbUserData) {
-            snap.forEach((childSnap) => {
-              let dbValue = childSnap.val();
-              dbUser = {
-                username: dbValue.username,
-                uid: dbValue.uid,
-                email: dbValue.email,
-                groupid: dbValue.groupid,
-              };
-            });
-          }
-        });
-        snap.forEach(function(data) {
-          updateUser(data.val().username, data.val().uid, data.val().email, dbUser.groupid);
-        });
-      });
-    }
+function inviteUser(dbUser, inviter) {
+  firebase.database().ref('Users/User/' + uid).set({
+    username: dbUser.username,
+    uid: dbUser.uid,
+    email: dbUser.email,
+    groupid: dbUser.groupid,
+    invitedToGroup: inviter.groupid,
+    invitedBy: inviter.username
   });
+}
+
+//Adding people to the group
+document.getElementById('btnGroup').addEventListener('click', e => {
+  const mainBody = document.getElementById('mainBody');
+  const groupForm = document.getElementById('groupForm');
+  const closeGroup = document.getElementById('groupClose');
+  const groupInvite = document.getElementById('btnGroupInvite');
+  const showInvitation = document.getElementById('showInvitation');
+  const acceptDecline = document.getElementById('divAcceptDecline');
+  const acceptInvite = document.getElementById('btnAcceptInvite');
+  const declineInvite = document.getElementById('btnDeclineInvite');
+
+  mainBody.style.display = 'none';
+  groupForm.style.display = 'block';
+
+  let user = firebase.auth().currentUser;
+  let dbUser, inviter;
+
+  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    snap.forEach((childSnap) => {
+      let dbValue = childSnap.val();
+      if(dbValue.invitedToGroup) {
+        showInvitation.innerHTML = dbValue.invitedBy + " kutsui sinut ryhmään";
+        acceptDecline.style.display = 'block';
+        dbUser = {
+          username: dbValue.username,
+          uid: dbValue.uid,
+          email: dbValue.email,
+          groupid: dbValue.groupid,
+          invitedToGroup: dbValue.invitedToGroup,
+          invitedBy: dbValue.invitedBy
+        }
+        acceptInvite.addEventListener('click', e => {
+          updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.invitedToGroup);
+        });
+
+        declineInvite.addEventListener('click', e => {
+          updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
+        });
+      }
+    });
+  });
+
+  groupInvite.addEventListener('click', e => {
+    firebase.database().ref().child('Users/User').orderByChild('email').equalTo(result).once('value', snap => {
+      firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+        const dbUserData = snap.val();
+        if(dbUserData) {
+          snap.forEach((childSnap) => {
+            let dbValue = childSnap.val();
+            inviter = {
+              username: dbValue.username,
+              uid: dbValue.uid,
+              email: dbValue.email,
+              groupid: dbValue.groupid
+            };
+          });
+        }
+      });
+      snap.forEach(function(data) {
+        let dbData = data.val();
+        dbUser = {
+          username: dbData.username,
+          uid: dbData.uid,
+          email: dbData.email,
+          groupid: dbData.groupid
+        }
+        inviteUser(dbUser, inviter);
+      });
+    });
+  });
+
+  closeGroup.addEventListener('click', e => {
+    groupForm.style.display = 'none';
+    mainBody.style.display = 'block';
+  });
+
+  // bootbox.prompt({
+  //   title: "Lisää käyttäjiä ryhmään käyttäjätunnuksella tai sähköpostilla",
+  //
+  //   callback: function (result) {
+  //   }
+  // });
 });
 
 

@@ -1,0 +1,42 @@
+#groupForm {
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-align: left;
+}
+
+#groupForm h1 {
+  text-align: center;
+
+}
+
+#groupInvite {
+  width: 50%;
+  margin-left: 25%;
+}
+.groupRow .button {
+  width: 49%;
+}
+.button {
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#groupClose {
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}

@@ -9,6 +9,7 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/group.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
@@ -167,12 +168,25 @@
 
 <div id="groupForm" class="modal" style="display: none">
   <div class="modal-content animate">
-    <h1>Invite to your group!</h1>
-    <form>
-      <label for="groupEmail">Email:</label>
-      <input type="text" name="groupEmail"/>
-      <input type="button"> OK! </input>
-    </form>
+    <h1>Ryhmät</h1>
+    <div id="groupInvite">
+      <h3>Kutsu ryhmään</h3>
+      <form>
+        <label for="groupEmail">Email:</label>
+        <input type="text" name="groupEmail"/>
+        <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+      </form>
+      <div id="divInvitations">
+        <h3>Saadut kutsut</h3>
+        <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+        <div class="groupRow" id="divAcceptDecline">
+          <input type="button" id="btnAcceptInvite" class="button" value="Hyväksy"/>
+          <input type="button" id="btnDeclineInvite" class="button" value="Kieltäydy"
+        </div>
+      </div>
+
+      <input type="button" id="groupClose" class="button" value="Sulje"/>
+    </div>
   </div>
 </div>
           <script type="text/javascript" src="js/fbase.js"></script>
