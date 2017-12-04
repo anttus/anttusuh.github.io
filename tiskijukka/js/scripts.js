@@ -58,7 +58,7 @@ btnDish.addEventListener('click', function () {
     setTimeout(function() {
       cdBool = false;
       $('#dishSuccess').hide();
-    }, 5000);
+    }, 3000);
   }
   else {
     $('#dishSuccess').show();

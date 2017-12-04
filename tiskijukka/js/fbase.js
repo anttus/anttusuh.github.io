@@ -23,7 +23,7 @@
 
 }());
 
-var taskID = 0;
+// var taskID = 0;
 var latestTask;
 let dbUser;
 
@@ -121,7 +121,7 @@ document.getElementById('btnGroup').addEventListener('click', function() {
 function writeTask() {
   setDBUser();
   var user = firebase.auth().currentUser;
-  var uname, email, uid, groupid;
+  var uname, email, uid, groupid, taskid;
 
   if (user) {
     //Getting user's information
@@ -133,21 +133,35 @@ function writeTask() {
     }
   }
 
+
   //Returns the running id of tasks
-  var taskid = returnTaskID();
-  taskid++;
+  firebase.database().ref('Tasks').orderByChild('taskid').once("value", function(snap) {
+    let count = 0;
+    snap.forEach(function(data) {
 
-  console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid);
+      if (data.key) {
+        // console.log(data.val().taskid);
+        // taskid = data.key;
+        count++;
+      }
+      // else {
+      //   taskid = 0;
+      // }
+    });
 
-  //Sets a new Task table with task id as an identifier
-  firebase.database().ref('Tasks/' + taskid).set({
-    username: uname,
-    email: email,
-    uid: uid,
-    groupid: groupid,
-    taskid: taskid,
-    date: getDate(),
-    time: getTime()
+    taskid = count;
+    console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid + " task id: " + taskid);
+
+    //Sets a new Task table with task id as an identifier
+    firebase.database().ref('Tasks/' + taskid).set({
+      username: uname,
+      email: email,
+      uid: uid,
+      groupid: groupid,
+      taskid: taskid,
+      date: getDate(),
+      time: getTime()
+    });
   });
 }
 
@@ -155,14 +169,14 @@ function writeTask() {
 function getTaskData(groupid) {
   firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).on("value", function(snap) {
     snap.forEach(function(data) {
-      taskID = data.key;
+      // taskID = data.key;
       latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
     });
-    returnTaskID();
+    // returnTaskID();
     returnLatestTask();
   });
 }
-
+//
 function returnLatestTask() {
   var latestTask_ = latestTask;
   var navbarTitle = document.getElementById('navbarTitle');
@@ -174,8 +188,12 @@ function returnLatestTask() {
 }
 
 function returnTaskID() {
-  var taskID_ = taskID;
-  return taskID_;
+  firebase.database().ref('Tasks').orderByValue().on("value", function(snap) {
+    snap.forEach(function(data) {
+      taskID = data.key;
+    });
+  });
+  return taskID++;
 }
 
 //Reading and listing the tasks
