@@ -245,7 +245,7 @@ function readTasks() {
              '<br>Tiskit: ' + totalTiskit +
              '<br>Siivous: ' + totalSiivous +
              '<br>Imurointi: ' + totalImurointi +
-             '<br>Pyykit: ' + totalPyykit +
+             '<br>Pyykit: ' + totalPyykit
             );
 
           });
