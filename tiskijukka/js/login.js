@@ -152,26 +152,21 @@ btnSignUp.addEventListener('click', e => {
 });
 
 //Real time listener
-firebase.auth().onAuthStateChanged(function(checkUser) {
-  var user = firebase.auth().currentUser;
-
-  if (checkUser) {
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
     verifyUser();
-    if (checkUser.emailVerified || checkUser.providerData[0].providerId == 'facebook.com') {
+    if (user.emailVerified || user.providerData[0].providerId == 'facebook.com') {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
       readTasks();
-
     }
     else {
-      //firebase.auth().signOut();
       displayLogin();
     }
     console.log('logged in');
   } else {
     displayLogin();
-    // console.log('logged out');
   }
 });
 
@@ -179,6 +174,8 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut().then(function() {
     console.log('Signed Out');
+    document.getElementById('task').innerHTML = "";
+    document.getElementById('navbarTitle').innerHTML = "";
   }, function(error) {
     console.error('Sign Out Error', error);
   });
