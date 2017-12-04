@@ -135,21 +135,17 @@ function writeTask() {
 
 
   //Returns the running id of tasks
-  firebase.database().ref('Tasks').orderByChild('taskid').once("value", function(snap) {
+  firebase.database().ref('Tasks').once("value", function(snap) {
     let count = 0;
-    snap.forEach(function(data) {
 
+    snap.forEach(function(data) {
       if (data.key) {
-        // console.log(data.val().taskid);
-        // taskid = data.key;
         count++;
       }
-      // else {
-      //   taskid = 0;
-      // }
     });
 
-    taskid = count;
+    taskid = count + 1;
+    console.log(count);
     console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid + " task id: " + taskid);
 
     //Sets a new Task table with task id as an identifier
