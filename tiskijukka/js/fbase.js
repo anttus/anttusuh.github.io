@@ -153,7 +153,7 @@ function writeTask() {
 
 //Get (latest) task's data
 function getTaskData(groupid) {
-  firebase.database().ref('Tasks').orderByChild(groupid).on("value", function(snap) {
+  firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).on("value", function(snap) {
     snap.forEach(function(data) {
       taskID = data.key;
       latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
@@ -185,10 +185,6 @@ function readTasks() {
   if(user) {
     readUsers();
     $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
-    // firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
-    //   var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-    //   document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
-    // });
     firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
       const dbUserData = snap.val();
       if(dbUserData) {
@@ -200,13 +196,15 @@ function readTasks() {
             email: dbValue.email,
             groupid: dbValue.groupid,
           };
-          firebase.database().ref('Tasks').equalTo(dbUser.groupid).on("child_added", function(snap) {
+          firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
             getTaskData(dbUser.groupid);
 
             var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
             document.getElementById('task').insertAdjacentHTML("beforeend", task + "<p></p>");
           });
         });
+      } else {
+        document.getElementById('task').innerHTML = "";
       }
     });
   }
