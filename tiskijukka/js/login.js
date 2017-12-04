@@ -154,10 +154,10 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   var user = firebase.auth().currentUser;
+  readTasks();
 
   if (checkUser) {
     verifyUser();
-    readTasks();
     if (checkUser.emailVerified || checkUser.providerData[0].providerId == 'facebook.com') {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
