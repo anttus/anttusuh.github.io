@@ -62,11 +62,12 @@ a:hover {
 #scoreCount {
   font-size: 22px;
   border-style: solid;
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  padding-left: 10%;
 }
 
 #score {
@@ -98,6 +99,15 @@ footer {
 @media (min-width: 768px) {
   footer {
     position: fixed;
+  }
+
+  #scoreCount {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding-left: 10%;
   }
 }
 
@@ -205,6 +215,7 @@ body::after {
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
+  height: 58px;
 }
 
 #btnDish:hover {
@@ -232,9 +243,12 @@ body::after {
   border-radius: 0;
   margin-bottom: 40px;
   padding: 13.5px;
+  height: 58px;
 }
 
 #dropdownDish:hover {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
   background-color: rgba(51, 51, 51, 0.77);
   color: #f1f1f1;
   border: none;
@@ -243,6 +257,8 @@ body::after {
 }
 
 #dropdownDish:focus {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
   background-color: #333;
   color: #f1f1f1;
   border: none;
@@ -309,50 +325,50 @@ body::after {
 }
 
 #page {
-    display: none;
+  display: none;
 }
 
 #loading {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(192, 192, 192, 0.5);
-    background-image: url("http://i.stack.imgur.com/MnyxU.gif");
-    background-repeat: no-repeat;
-    background-position: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Loading icon */
 
 /*#load{
-  border: 16px solid #333;
-  border-top: 16px solid #777777;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin-left: 50%;
-  margin-right: auto;
-  margin-top: 30%;
-  position: fixed;
-  z-index:9999;
+border: 16px solid #333;
+border-top: 16px solid #777777;
+border-radius: 50%;
+width: 60px;
+height: 60px;
+animation: spin 1s linear infinite;
+margin-left: 50%;
+margin-right: auto;
+margin-top: 30%;
+position: fixed;
+z-index:9999;
 }*/
 
 /*@-moz-keyframes spin {
-  from { -moz-transform: rotate(0deg); }
-  to { -moz-transform: rotate(360deg); }
+from { -moz-transform: rotate(0deg); }
+to { -moz-transform: rotate(360deg); }
 }
 @-webkit-keyframes spin {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
+from { -webkit-transform: rotate(0deg); }
+to { -webkit-transform: rotate(360deg); }
 }
 @keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
 }*/
 
 /* Prompt window */
