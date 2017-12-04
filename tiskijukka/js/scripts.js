@@ -53,7 +53,7 @@ const btnDish = document.getElementById('btnDish');
 var cdBool = false;
 btnDish.addEventListener('click', function () {
   if(!cdBool) {
-    writeTask();
+    writeTask(document.getElementById('dropdownDish').value);
     cdBool = true;
     setTimeout(function() {
       cdBool = false;
@@ -110,19 +110,19 @@ btnDish.addEventListener('click', function () {
 //     });
 // };
 
-// // Dropdown menu
-// function dropdown() {
-//   $('.dropdown').on('show.bs.dropdown', function() {
-//     $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-//   });
-// }
-//
-// function dropdownUp() {
-//   $('.dropdown').on('hide.bs.dropdown', function() {
-//     $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-//   });
-// }
-//
+// Dropdown menu
+function dropdown() {
+  $('.dropdown').on('show.bs.dropdown', function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+  });
+}
+
+function dropdownUp() {
+  $('.dropdown').on('hide.bs.dropdown', function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+  });
+}
+
 // function play() {
 //   $(document).ready(function() {
 //     $("#audio").get(0).play();
