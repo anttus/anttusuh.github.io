@@ -34,6 +34,8 @@ var ID = function () {
 
 function writeUser(uname, uid, email) {
   var user = firebase.auth().currentUser;
+  // user.testValue = "dingdong";
+  console.log(user);
   // var uname, email, uid, groupid, ingroup;
   let groupid, ingroup;
 
@@ -170,12 +172,33 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
+  // setDBUser();
   readUsers();
   $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
   getTaskData();
-  firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
-    var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-    document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+  // firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
+  //   var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+  //   document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+  // });
+  let user = firebase.auth().currentUser;
+  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    const dbUserData = snap.val();
+    if(dbUserData) {
+      snap.forEach((childSnap) => {
+        let dbValue = childSnap.val();
+          dbUser = {
+          username: dbValue.username,
+          uid: dbValue.uid,
+          email: dbValue.email,
+          groupid: dbValue.groupid,
+          ingroup: dbValue.ingroup
+        };
+        firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
+          var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+          document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+        });
+      });
+    }
   });
 }
 
