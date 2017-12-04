@@ -37,24 +37,12 @@ function writeUser(uname, uid, email) {
   // user.testValue = "dingdong";
   console.log(user);
   // var uname, email, uid, groupid, ingroup;
-  let groupid, ingroup;
+  let groupid;
 
   firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
     const userData = snap.val();
     if (userData) {
-      snap.forEach(function(childSnap) {
-        var childKey = childSnap.key;
-        var childData = childSnap.val();
-        // console.log('User ID: ' + childKey + " user in group: " + childData.ingroup);
-        // console.log('User group: ' + childData.groupid);
-        ingroup = childData.ingroup;
-        groupid = childData.groupid;
-        if (!ingroup) {
-          groupid = ID();
-          ingroup = true;
-        }
-        updateUser(user.displayName, user.uid, user.email, ingroup, groupid);
-      });
+
     }
     else {
       console.log('creating a new user for the database.');
@@ -64,7 +52,6 @@ function writeUser(uname, uid, email) {
         uid: uid,
         email: email,
         groupid: groupid,
-        ingroup: true
       });
     }
   });
@@ -77,36 +64,57 @@ function setDBUser() {
     if(dbUserData) {
       snap.forEach((childSnap) => {
         let dbValue = childSnap.val();
-          dbUser = {
+        dbUser = {
           username: dbValue.username,
           uid: dbValue.uid,
           email: dbValue.email,
           groupid: dbValue.groupid,
-          ingroup: dbValue.ingroup
         };
       });
     }
   });
 }
 
-function updateUser(uname, uid, email, ingroup, groupid) {
+function updateUser(uname, uid, email, groupid) {
   firebase.database().ref('Users' + '/User/' + uid).set({
     username: uname,
     uid: uid,
     email: email,
     groupid: groupid,
-    ingroup: ingroup
   });
 }
 
-
-
-function updateGroupStatus(boolean) {
+//Adding people to the group
+document.getElementById('btnGroup').addEventListener('click', function() {
   var user = firebase.auth().currentUser;
-  user.updateProfile({
-    ingroup: boolean
+
+  bootbox.prompt({
+    title: "Lisää käyttäjiä ryhmään käyttäjätunnuksella tai sähköpostilla",
+
+    callback: function (result) {
+      firebase.database().ref().child('Users/User').orderByChild('email').equalTo(result).once('value', snap => {
+        firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+          const dbUserData = snap.val();
+          if(dbUserData) {
+            snap.forEach((childSnap) => {
+              let dbValue = childSnap.val();
+              dbUser = {
+                username: dbValue.username,
+                uid: dbValue.uid,
+                email: dbValue.email,
+                groupid: dbValue.groupid,
+              };
+            });
+          }
+        });
+        snap.forEach(function(data) {
+          updateUser(data.val().username, data.val().uid, data.val().email, dbUser.groupid);
+        });
+      });
+    }
   });
-}
+});
+
 
 //Writing the tasks
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
@@ -144,8 +152,8 @@ function writeTask() {
 }
 
 //Get (latest) task's data
-function getTaskData() {
-  firebase.database().ref('Tasks').on("value", function(snap) {
+function getTaskData(groupid) {
+  firebase.database().ref('Tasks').orderByChild(groupid).on("value", function(snap) {
     snap.forEach(function(data) {
       taskID = data.key;
       latestTask = data.val().username + ": " + data.val().date + " | " + data.val().time;
@@ -173,33 +181,35 @@ function returnTaskID() {
 //Reading and listing the tasks
 function readTasks() {
   // setDBUser();
-  readUsers();
-  $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
-  getTaskData();
-  // firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
-  //   var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-  //   document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
-  // });
   let user = firebase.auth().currentUser;
-  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
-    const dbUserData = snap.val();
-    if(dbUserData) {
-      snap.forEach((childSnap) => {
-        let dbValue = childSnap.val();
+  if(user) {
+    readUsers();
+    $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
+    // firebase.database().ref('Tasks').orderByValue().on("child_added", function(snap) {
+    //   var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+    //   document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+    // });
+    firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+      const dbUserData = snap.val();
+      if(dbUserData) {
+        snap.forEach((childSnap) => {
+          let dbValue = childSnap.val();
           dbUser = {
-          username: dbValue.username,
-          uid: dbValue.uid,
-          email: dbValue.email,
-          groupid: dbValue.groupid,
-          ingroup: dbValue.ingroup
-        };
-        firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
-          var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
-          document.getElementById('task').insertAdjacentHTML("afterbegin", task + "<p></p>");
+            username: dbValue.username,
+            uid: dbValue.uid,
+            email: dbValue.email,
+            groupid: dbValue.groupid,
+          };
+          firebase.database().ref('Tasks').equalTo(dbUser.groupid).on("child_added", function(snap) {
+            getTaskData(dbUser.groupid);
+
+            var task = snap.val().username + ": " + snap.val().date + " | " + snap.val().time;
+            document.getElementById('task').insertAdjacentHTML("beforeend", task + "<p></p>");
+          });
         });
-      });
-    }
-  });
+      }
+    });
+  }
 }
 
 function readUsers() {

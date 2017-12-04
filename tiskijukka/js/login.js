@@ -154,7 +154,6 @@ btnSignUp.addEventListener('click', e => {
 //Real time listener
 firebase.auth().onAuthStateChanged(function(checkUser) {
   var user = firebase.auth().currentUser;
-  readTasks();
 
   if (checkUser) {
     verifyUser();
@@ -162,6 +161,8 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
       writeUser(user.displayName, user.uid, user.email);
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
+      readTasks();
+
     }
     else {
       //firebase.auth().signOut();
@@ -170,13 +171,17 @@ firebase.auth().onAuthStateChanged(function(checkUser) {
     console.log('logged in');
   } else {
     displayLogin();
-    console.log('logged out');
+    // console.log('logged out');
   }
 });
 
 //Logout
 btnLogout.addEventListener('click', e => {
-  firebase.auth().signOut();
+  firebase.auth().signOut().then(function() {
+    console.log('Signed Out');
+  }, function(error) {
+    console.error('Sign Out Error', error);
+  });
   modalLogin.style.display = 'block';
   mainBody.style.display = 'none';
   txtEmail_SI.value = "";
