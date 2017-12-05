@@ -48,7 +48,6 @@ function getCurUser() {
 }
 
 // BUTTONS
-// "Tiskit tehty!" -button
 const btnDish = document.getElementById('btnDish');
 var cdBool = false;
 btnDish.addEventListener('click', function () {
@@ -65,22 +64,7 @@ btnDish.addEventListener('click', function () {
   }
 });
 
-//function setProfImg()
-
-// Dropdown menu
-function dropdown() {
-  $('.dropdown').on('show.bs.dropdown', function() {
-    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-  });
-}
-
-function dropdownUp() {
-  $('.dropdown').on('hide.bs.dropdown', function() {
-    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-  });
-}
-
-$("#scoreButton").click(function() {
+$('#scoreButton').click(function() {
   if ($('#scoreCountList').is(":hidden")) {
     $('#scoreCountList').slideDown("fast");
     $('#scoreGlyph').removeClass('glyphicon-chevron-down');
@@ -91,6 +75,16 @@ $("#scoreButton").click(function() {
     $('#scoreGlyph').removeClass('glyphicon-chevron-up');
   }
 });
+
+// Add slideDown animation to Bootstrap dropdown when expanding.
+ // $('#dropdownDish').on('show.bs.dropdown', function() {
+ //   $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+ // });
+ //
+ // // Add slideUp animation to Bootstrap dropdown when collapsing.
+ // $('#dropdownDish').on('hide.bs.dropdown', function() {
+ //   $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+ // });
 
 // function play() {
 //   $(document).ready(function() {

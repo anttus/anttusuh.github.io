@@ -268,10 +268,9 @@ body::after {
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
-  /*padding: 13.5px;*/
-  padding: 10px 10px 10px 30px;
+  padding: 10px 20px 10px 20px;
   height: 58px;
-  width: 115px;
+  width: auto;
 }
 
 #dropdownDish:hover {
