@@ -115,11 +115,13 @@ span.psw {
   margin: 5% auto 0 auto; /* 5% from the top, 15% from the bottom and centered */
   width: 500px;
   border-radius: 0px;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {
   .modal-content {
     width: 90%;
+    margin-bottom: 20px;
   }
 
   .modal {

@@ -1,9 +1,12 @@
 #groupForm {
-  width: 50%;
-  margin-left: 25%;
-  margin-bottom: 20px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 16px;
   text-align: left;
+  padding-bottom: 20px;
+  border: none;
+  outline: none;
 }
 
 #groupForm h1 {
@@ -15,9 +18,11 @@
   width: 50%;
   margin-left: 25%;
 }
+
 .groupRow .button {
-  width: 49%;
+  width: 100%;
 }
+
 .button {
   background-color: #333;
   color: white;
@@ -26,9 +31,32 @@
   border: none;
   cursor: pointer;
   width: 100%;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
+
+.button:hover {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: #333333c9;
+}
+
+#btnAcceptInvite {
+  background-color: #49a85b;
+}
+
+#btnAcceptInvite:hover {
+  background-color: #49a85bc4;
+}
+
+#btnDeclineInvite {
+  background-color: #cc2626;
+}
+
+#btnDeclineInvite:hover {
+  background-color: #cc2626c4;
+}
+
 #groupClose {
   background-color: #333;
   color: white;
@@ -39,4 +67,23 @@
   width: 100%;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+}
+
+#groupClose:hover {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: #333333c9;
+}
+
+@media screen and (max-width: 800px) {
+  #groupForm {
+    width: auto;
+  }
+
+}
+
+@media screen and (max-width: 412px) {
+  #groupForm {
+    width: 400px;
+  }
 }

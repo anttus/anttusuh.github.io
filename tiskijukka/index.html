@@ -108,7 +108,7 @@
               <div class="collapse navbar-collapse" id="toggle-nav">
                 <div class="nav navbar-nav navbar-right" id="navbar-nav">
                   <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
-                  <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" ><i class="glyphicon glyphicon-cog"></i> Ryhmät</button>
+                  <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" ><i id="notification" class="glyphicon glyphicon-exclamation-sign" style="color: #F00; display: none;"></i> <i class="glyphicon glyphicon-cog"></i> Ryhmät</button>
                   <h1 id="curUser"></h1>
                 </div>
               </div>
@@ -131,9 +131,12 @@
                   <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
 
                   <!-- Profile image from facebook -->
-                  <br />
+                  <!-- <br /> -->
 
                   <!-- BUTTON -->
+                  <p style="text-align: center;">
+                    Valitse tehtävän tyyppi ja paina "Tehty!"
+                  </p>
                   <select type="dropdown" class="btn btn-success dropdown" id="dropdownDish">
                     <option value="Tiskit">Tiskit</option>
                     <option value="Imurointi">Imurointi</option>
@@ -166,29 +169,32 @@
             </div>
           </div>
 
-<div id="groupForm" class="modal" style="display: none">
-  <div class="modal-content animate">
-    <h1>Ryhmät</h1>
-    <div id="groupInvite">
-      <h3>Kutsu ryhmään</h3>
-      <form>
-        <label for="groupEmail">Email:</label>
-        <input type="text" name="groupEmail"/>
-        <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
-      </form>
-      <div id="divInvitations">
-        <h3>Saadut kutsut</h3>
-        <p id="showInvitation">Sinulla ei ole kutsuja... </p>
-        <div class="groupRow" id="divAcceptDecline">
-          <input type="button" id="btnAcceptInvite" class="button" value="Hyväksy"/>
-          <input type="button" id="btnDeclineInvite" class="button" value="Kieltäydy"
-        </div>
-      </div>
+<!-- Group form -->
+          <div id="groupForm" class="modal" style="display: none">
+            <div class="modal-content animate">
+              <h1>Ryhmät</h1>
+              <div id="groupInvite">
+                <h3>Kutsu ryhmään</h3>
+                <form>
+                  <label for="groupEmail">Email:</label>
+                  <input type="text" name="groupEmail"/>
+                  <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+                </form>
+                <div id="divInvitations">
+                  <h3>Saadut kutsut</h3>
+                  <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+                  <div class="groupRow" id="divAcceptDecline">
+                    <!-- <input type="button" id="btnAcceptInvite" class="button" value="Hyväksy"/> -->
+                    <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
+                    <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
+                    <!-- <input type="button" id="btnDeclineInvite" class="button" value="Kieltäydy"/> -->
+                  </div>
+                </div>
 
-      <input type="button" id="groupClose" class="button" value="Sulje"/>
-    </div>
-  </div>
-</div>
+                <input type="button" id="groupClose" class="button" value="Sulje"/>
+              </div>
+            </div>
+          </div>
           <script type="text/javascript" src="js/fbase.js"></script>
           <script type="text/javascript" src="js/scripts.js"></script>
           <script type="text/javascript" src="js/login.js"></script>
