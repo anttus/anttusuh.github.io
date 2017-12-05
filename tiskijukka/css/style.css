@@ -82,6 +82,10 @@ a:hover {
   color: #333;
   background-color: #F1F1F100;
   font-size: 32px;
+  width: 0;
+  padding: 0;
+  margin: 0;
+  margin-right: 32px;
 }
 
 #scoreButton:active {
