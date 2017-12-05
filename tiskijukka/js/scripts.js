@@ -80,6 +80,10 @@ function dropdownUp() {
   });
 }
 
+$("#scoreButton").click(function() {
+  $('#scoreCountList').toggle();
+});
+
 // function play() {
 //   $(document).ready(function() {
 //     $("#audio").get(0).play();

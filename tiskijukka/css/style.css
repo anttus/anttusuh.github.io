@@ -76,6 +76,22 @@ a:hover {
   font-size: 25px;
 }
 
+#scoreButton {
+  text-align: center;
+  border-radius: 50%;
+  outline: none;
+  color: #333;
+  background-color: #3330;
+  font-size: 32px;
+}
+
+#scoreButton:active {
+  width: 30px;
+  text-align: center;
+  border-radius: 50%;
+  outline: none;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
   overflow: auto;
