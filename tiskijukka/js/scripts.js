@@ -67,49 +67,6 @@ btnDish.addEventListener('click', function () {
 
 //function setProfImg()
 
-// ANALYTICS
-// function getCount(name) {
-//   var result = null;
-//   var scriptUrl = "php/getCount.php?name=" + name;
-//   $.ajax({
-//     url: scriptUrl,
-//     type: 'get',
-//     dataType: 'html',
-//     async: false,
-//     success: function(data) {
-//       result = data;
-//     }
-//   });
-//   return result;
-// }
-
-// Get usernames and calculate the precentage of entries/user
-// function getUsernames() {
-//     $.ajax({
-//         type: 'POST',
-//         url: 'php/getUsernames.php',
-//         data: 'id=testdata',
-//         dataType: 'json',
-//         cache: false,
-//         success: function(names) {
-//           var arrLen = Object.keys(names).length;
-//           var counts = new Array(arrLen);
-//           var percents = new Array(arrLen);
-//           var total = 0;
-//           for (var i = 0; i < arrLen; i++) {
-//             counts[i] = parseFloat(getCount(names[i]));
-//             total += counts[i];
-//           }
-//           for (var i = 0; i < arrLen; i++) {
-//             percents[i] = (counts[i] / total * 100.0).toFixed(2);
-//           }
-//           for (var i = 0; i < arrLen; i++) {
-//             $('#scoreCount').append(names[i] + " - " + getCount(names[i]) + "(" + percents[i] + "%)<br/>");
-//           }
-//         },
-//     });
-// };
-
 // Dropdown menu
 function dropdown() {
   $('.dropdown').on('show.bs.dropdown', function() {
