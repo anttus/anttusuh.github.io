@@ -34,15 +34,20 @@ var ID = function () {
 
 function writeUser(uname, uid, email) {
   var user = firebase.auth().currentUser;
-  // user.testValue = "dingdong";
-  console.log(user);
+  // console.log(user);
   // var uname, email, uid, groupid, ingroup;
   let groupid;
 
   firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
     const userData = snap.val();
     if (userData) {
-
+      snap.forEach((data) => {
+        if (data.val().invitedToGroup) {
+          $('#notification').show();
+        } else {
+          $('#notification').hide();
+        }
+      });
     }
     else {
       console.log('creating a new user for the database.');
@@ -112,6 +117,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   let user = firebase.auth().currentUser;
   let dbUser, inviter;
 
+//Pending invite functionality
   firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
     snap.forEach((childSnap) => {
       let dbValue = childSnap.val();
@@ -128,15 +134,18 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         }
         acceptInvite.addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.invitedToGroup);
+          location.reload();
         });
 
         declineInvite.addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
+          location.reload();
         });
       }
     });
   });
 
+// Invite button
   groupInvite.addEventListener('click', e => {
     let txtEmail = document.getElementById('txtInviteEmail').value;
     let inviter, dbUser;
@@ -173,6 +182,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     // console.log(dbUser);
   });
 
+  //Close group view
   closeGroup.addEventListener('click', e => {
     groupForm.style.display = 'none';
     mainBody.style.display = 'block';
