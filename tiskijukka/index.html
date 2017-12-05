@@ -155,7 +155,7 @@
 
                     <!-- SCORES -->
                     <div id="scoreCount"></div>
-                    <button id="scoreButton"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                    <button id="scoreButton"><i id="scoreGlyph" class="glyphicon glyphicon-chevron-down"></i></button>
                     <div id="scoreCountList" style="display: none"></div>
 
 
@@ -168,7 +168,7 @@
                   <footer class="container-fluid text-center" >
                     <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
                       <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
-                      <!-- </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a> -->
+                      </br><p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a>
                     </div>
                   </footer>
                 </div>
@@ -182,8 +182,7 @@
                 <div id="groupInvite">
                   <h3>Kutsu ryhmään</h3>
                   <label for="groupEmail">Email:</label>
-                  <input type="email" name="email" placeholder="Enter email address" data-validation="email" data-validation-error-msg="This is not a valid email address"
-                  id="txtInviteEmail"/>
+                  <div><input type="email" name="email" placeholder="Enter email address" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
                   <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
                   <div id="inviteError" class="text-danger"></div>
                   <div id="inviteMessage" class="text-success"></div>

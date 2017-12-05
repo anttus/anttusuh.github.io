@@ -81,7 +81,15 @@ function dropdownUp() {
 }
 
 $("#scoreButton").click(function() {
-  $('#scoreCountList').toggle();
+  if ($('#scoreCountList').is(":hidden")) {
+    $('#scoreCountList').slideDown("fast");
+    $('#scoreGlyph').removeClass('glyphicon-chevron-down');
+    $('#scoreGlyph').addClass('glyphicon-chevron-up');
+  } else {
+    $('#scoreCountList').slideUp("fast");
+    $('#scoreGlyph').addClass('glyphicon-chevron-down');
+    $('#scoreGlyph').removeClass('glyphicon-chevron-up');
+  }
 });
 
 // function play() {

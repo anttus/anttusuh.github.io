@@ -360,11 +360,12 @@ function readTasks() {
                   }
                 }));
 
-                dishPercent = ((dishes/totalDishes)*100).toFixed(2);
-                cleanPercent = ((cleaning/totalCleaning)*100).toFixed(2);
-                vacuumPercent = ((vacuuming/totalVacuuming)*100).toFixed(2);
-                laundryPercent = ((laundry/totalLaundry)*100).toFixed(2);
+                dishPercent = ((dishes/totalDishes)*100).toFixed(1);
+                cleanPercent = ((cleaning/totalCleaning)*100).toFixed(1);
+                vacuumPercent = ((vacuuming/totalVacuuming)*100).toFixed(1);
+                laundryPercent = ((laundry/totalLaundry)*100).toFixed(1);
 
+                //NEEDS A BETTER IMPLEMENTATION
                 $('#scoreCount').html(
                 'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
                 '</strong><br>Tiskit: ' + totalDishes +
