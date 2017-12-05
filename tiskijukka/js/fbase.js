@@ -85,7 +85,7 @@ function updateUser(uname, uid, email, groupid) {
 }
 
 function inviteUser(dbUser, inviter) {
-  firebase.database().ref('Users/User/' + uid).set({
+  firebase.database().ref('Users/User/' + dbUser.uid).set({
     username: dbUser.username,
     uid: dbUser.uid,
     email: dbUser.email,
@@ -138,21 +138,25 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   });
 
   groupInvite.addEventListener('click', e => {
-    firebase.database().ref().child('Users/User').orderByChild('email').equalTo(result).once('value', snap => {
-      firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
-        const dbUserData = snap.val();
-        if(dbUserData) {
-          snap.forEach((childSnap) => {
-            let dbValue = childSnap.val();
-            inviter = {
-              username: dbValue.username,
-              uid: dbValue.uid,
-              email: dbValue.email,
-              groupid: dbValue.groupid
-            };
-          });
-        }
-      });
+    let txtEmail = document.getElementById('txtInviteEmail').value;
+    let inviter, dbUser;
+
+    firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+      const dbUserData = snap.val();
+      if(dbUserData) {
+        snap.forEach((childSnap) => {
+          let dbValue = childSnap.val();
+          inviter = {
+            username: dbValue.username,
+            uid: dbValue.uid,
+            email: dbValue.email,
+            groupid: dbValue.groupid
+          };
+        });
+        setupInvite(inviter);
+      }
+    });
+    firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
       snap.forEach(function(data) {
         let dbData = data.val();
         dbUser = {
@@ -161,9 +165,12 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           email: dbData.email,
           groupid: dbData.groupid
         }
-        inviteUser(dbUser, inviter);
+        //inviteUser(dbUser, inviter);
+        setupInvite(dbUser);
       });
     });
+    // console.log(inviter);
+    // console.log(dbUser);
   });
 
   closeGroup.addEventListener('click', e => {
@@ -179,6 +186,16 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   // });
 });
 
+let groupArr = [];
+function setupInvite(obj) {
+  groupArr.push(obj);
+  if (groupArr.length >= 2) {
+    inviteUser(groupArr[1], groupArr[0]);
+    console.log(groupArr[1]);
+    console.log(groupArr[0]);
+    groupArr = [];
+  }
+}
 
 //Writing the tasks
 //Need to implement a way to separate groups (Group#X/Tasks/Task#X)?

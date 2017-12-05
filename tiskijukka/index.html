@@ -169,6 +169,7 @@
             </div>
           </div>
 
+<<<<<<< HEAD
 <!-- Group form -->
           <div id="groupForm" class="modal" style="display: none">
             <div class="modal-content animate">
@@ -177,7 +178,7 @@
                 <h3>Kutsu ryhmään</h3>
                 <form>
                   <label for="groupEmail">Email:</label>
-                  <input type="text" name="groupEmail"/>
+                  <input type="text" id="txtInviteEmail" name="txtInviteEmail"/>
                   <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
                 </form>
                 <div id="divInvitations">
@@ -190,6 +191,26 @@
                     <!-- <input type="button" id="btnDeclineInvite" class="button" value="Kieltäydy"/> -->
                   </div>
                 </div>
+=======
+<div id="groupForm" class="modal" style="display: none">
+  <div class="modal-content animate">
+    <h1>Ryhmät</h1>
+    <div id="groupInvite">
+      <h3>Kutsu ryhmään</h3>
+      <form>
+        <label for="groupEmail">Email:</label>
+        <input type="text" id="txtInviteEmail" name="txtInviteEmail"/>
+        <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+      </form>
+      <div id="divInvitations">
+        <h3>Saadut kutsut</h3>
+        <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+        <div class="groupRow" id="divAcceptDecline">
+          <input type="button" id="btnAcceptInvite" class="button" value="Hyväksy"/>
+          <input type="button" id="btnDeclineInvite" class="button" value="Kieltäydy"
+        </div>
+      </div>
+>>>>>>> ac9a72c4c3fe735e3f421f7218c480ef1e72d7d5
 
                 <input type="button" id="groupClose" class="button" value="Sulje"/>
               </div>
