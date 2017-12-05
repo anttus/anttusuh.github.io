@@ -337,6 +337,7 @@ function readTasks() {
 
             for (var j = 0; j < uniqueNames.length; j++) {
               let dishes = 0, cleaning = 0, vacuuming = 0, laundry = 0;
+              let dishPercent, cleanPercent, vacuumPercent, laundryPercent;
               let name = uniqueNames[j];
               firebase.database().ref('Tasks').orderByChild('username').equalTo(uniqueNames[j]).once('value', snap =>{
                 snap.forEach((data => {
@@ -359,10 +360,10 @@ function readTasks() {
                   }
                 }));
 
-                let dishPercent = ((dishes/totalDishes)*100).toFixed(2);
-                let cleanPercent = ((cleaning/totalCleaning)*100).toFixed(2);
-                let vacuumPercent = ((vacuuming/totalVacuuming)*100).toFixed(2);
-                let laundryPercent = ((laundry/totalLaundry)*100).toFixed(2);
+                dishPercent = ((dishes/totalDishes)*100).toFixed(2);
+                cleanPercent = ((cleaning/totalCleaning)*100).toFixed(2);
+                vacuumPercent = ((vacuuming/totalVacuuming)*100).toFixed(2);
+                laundryPercent = ((laundry/totalLaundry)*100).toFixed(2);
 
                 $('#scoreCount').html(
                 'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
