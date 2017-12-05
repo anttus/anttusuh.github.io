@@ -117,7 +117,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   let user = firebase.auth().currentUser;
   let dbUser, inviter;
 
-//Pending invite functionality
+  //Pending invite functionality
   firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
     snap.forEach((childSnap) => {
       let dbValue = childSnap.val();
@@ -147,9 +147,21 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     });
   });
 
-// Invite button
+  // Invite button
   groupInvite.addEventListener('click', e => {
+
     let txtEmail = document.getElementById('txtInviteEmail').value;
+    firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
+      if(snap.val()) {
+        $('#inviteMessage').html("<br>Kutsu lähetetty!");
+        $('#inviteError').html("");
+      }
+      else {
+        $('#inviteError').html("<br>Tarkista osoite.");
+        $('#inviteMessage').html("");
+      }
+    });
+
     let inviter, dbUser;
 
     firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
@@ -342,25 +354,25 @@ function readTasks() {
             });
 
             $('#scoreCount').html('TJ-PISTEET:<br>' + 'Yhteensä: ' + totalTasks +
-             '<br>Tiskit: ' + totalTiskit +
-             '<br>Siivous: ' + totalSiivous +
-             '<br>Imurointi: ' + totalImurointi +
-             '<br>Pyykit: ' + totalPyykit +
-             '<p></p>Ryhmä:<br>'
-            );
+            '<br>Tiskit: ' + totalTiskit +
+            '<br>Siivous: ' + totalSiivous +
+            '<br>Imurointi: ' + totalImurointi +
+            '<br>Pyykit: ' + totalPyykit +
+            '<p></p>Ryhmä:<br>'
+          );
 
-            for (var j = 0; j < uniqueNames.length; j++) {
-              $('#scoreCount').append("<li>" + uniqueNames[j] + "</li>");
-            }
+          for (var j = 0; j < uniqueNames.length; j++) {
+            $('#scoreCount').append("<li>" + uniqueNames[j] + "</li>");
+          }
 
-          });
         });
-      } else {
-        // document.getElementById('task').innerHTML = "";
-        $('#task').html("");
-      }
-    });
-  }
+      });
+    } else {
+      // document.getElementById('task').innerHTML = "";
+      $('#task').html("");
+    }
+  });
+}
 }
 
 //Read the total number of users

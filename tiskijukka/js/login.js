@@ -88,6 +88,12 @@ $("#txtUsername").keyup(function(event) {
   }
 });
 
+$("#txtInviteEmail").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#btnGroupInvite").click();
+  }
+});
+
 function verifyUser() {
   var user = firebase.auth().currentUser;
 
