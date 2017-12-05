@@ -10,20 +10,8 @@
     messagingSenderId: "591860487071"
   };
   firebase.initializeApp(config);
-
-
-  // // Get a reference to the database service
-  // const db = firebase.database();
-  //
-  // //Get elements
-  // const preObject = document.getElementById('task');
-  //
-  // //Create references
-  // const refObject = db.ref('Tasks').orderByChild('Tasks');
-
 }());
 
-// var taskID = 0;
 var latestTask;
 let dbUser;
 
@@ -151,49 +139,46 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   groupInvite.addEventListener('click', e => {
 
     let txtEmail = document.getElementById('txtInviteEmail').value;
+    let inviter, dbUser;
+
     firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
       if(snap.val()) {
         $('#inviteMessage').html("<br>Kutsu lähetetty!");
         $('#inviteError').html("");
+        firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+          const dbUserData = snap.val();
+          if(dbUserData) {
+            snap.forEach((childSnap) => {
+              let dbValue = childSnap.val();
+              inviter = {
+                username: dbValue.username,
+                uid: dbValue.uid,
+                email: dbValue.email,
+                groupid: dbValue.groupid
+              };
+            });
+            setupInvite(inviter);
+          }
+        });
+        firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
+          snap.forEach(function(data) {
+            let dbData = data.val();
+            dbUser = {
+              username: dbData.username,
+              uid: dbData.uid,
+              email: dbData.email,
+              groupid: dbData.groupid
+            }
+            //inviteUser(dbUser, inviter);
+            setupInvite(dbUser);
+          });
+        });
       }
       else {
         $('#inviteError').html("<br>Tarkista osoite.");
         $('#inviteMessage').html("");
       }
     });
-
-    let inviter, dbUser;
-
-    firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
-      const dbUserData = snap.val();
-      if(dbUserData) {
-        snap.forEach((childSnap) => {
-          let dbValue = childSnap.val();
-          inviter = {
-            username: dbValue.username,
-            uid: dbValue.uid,
-            email: dbValue.email,
-            groupid: dbValue.groupid
-          };
-        });
-        setupInvite(inviter);
-      }
-    });
-    firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
-      snap.forEach(function(data) {
-        let dbData = data.val();
-        dbUser = {
-          username: dbData.username,
-          uid: dbData.uid,
-          email: dbData.email,
-          groupid: dbData.groupid
-        }
-        //inviteUser(dbUser, inviter);
-        setupInvite(dbUser);
-      });
-    });
-    // console.log(inviter);
-    // console.log(dbUser);
   });
 
   //Close group view
@@ -201,13 +186,6 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     groupForm.style.display = 'none';
     mainBody.style.display = 'block';
   });
-
-  // bootbox.prompt({
-  //   title: "Lisää käyttäjiä ryhmään käyttäjätunnuksella tai sähköpostilla",
-  //
-  //   callback: function (result) {
-  //   }
-  // });
 });
 
 let groupArr = [];
@@ -215,14 +193,11 @@ function setupInvite(obj) {
   groupArr.push(obj);
   if (groupArr.length >= 2) {
     inviteUser(groupArr[1], groupArr[0]);
-    console.log(groupArr[1]);
-    console.log(groupArr[0]);
     groupArr = [];
   }
 }
 
 //Writing the tasks
-//Need to implement a way to separate groups (Group#X/Tasks/Task#X)?
 function writeTask(tasktype) {
   setDBUser();
   var user = firebase.auth().currentUser;
@@ -249,8 +224,8 @@ function writeTask(tasktype) {
     });
 
     taskid = count + 1;
-    // console.log(count);
-    console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid + " task id: " + taskid);
+
+    // console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid + " task id: " + taskid);
 
     //Sets a new Task table with task id as an identifier
     firebase.database().ref('Tasks/' + taskid).set({
@@ -263,6 +238,10 @@ function writeTask(tasktype) {
       date: getDate(),
       time: getTime()
     });
+
+    var task = uname + " -> " + tasktype + ": " + getDate() + " | " + getTime();
+    $('#task').prepend(task + "<p></p>");
+
   });
 }
 
@@ -275,14 +254,14 @@ function getTaskData(groupid) {
     returnLatestTask();
   });
 }
-//
+
+//Returns the latest task to the navbar
 function returnLatestTask() {
   var latestTask_ = latestTask;
-  var navbarTitle = document.getElementById('navbarTitle');
   if (latestTask_ != undefined) {
-    navbarTitle.innerHTML = "Viimeisin: <p></p>" + latestTask_;
+    $('#navbarTitle').html("Viimeisin: <p></p>" + latestTask_);
   } else {
-    navbarTitle.innerHTML = "Aikoja ei ole vielä merkitty"
+    $('#navbarTitle').html("Aikoja ei ole vielä merkitty");
   }
 }
 
@@ -297,12 +276,11 @@ function returnTaskID() {
 
 //Reading and listing the tasks
 function readTasks() {
-  // setDBUser();
   let user = firebase.auth().currentUser;
+
   if(user) {
-    // readUsers();
-    // readGroupTasks();
     $("#curUser").html("<p></p>" + getCurUser() + "<br><p></p>");
+
     firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
       const dbUserData = snap.val();
       if(dbUserData) {
@@ -314,18 +292,19 @@ function readTasks() {
             email: dbValue.email,
             groupid: dbValue.groupid,
           };
+
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
             getTaskData(dbUser.groupid);
-            // console.log(snap.val());
             var task = snap.val().username + " -> " + snap.val().tasktype + ": " + snap.val().date + " | " + snap.val().time;
-            // document.getElementById('task').insertAdjacentHTML("beforeend", task + "<p></p>");
+
             $('#task').append(task + "<p></p>");
+            // $('#task').html(task + "\n");
           });
 
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on('value', function(snap) {
             let userArr = [], uniqueNames = [];
 
-            let totalTasks = 0, totalTiskit = 0, totalSiivous = 0, totalImurointi = 0, totalPyykit = 0;
+            let totalTasks = 0, totalDishes = 0, totalCleaning = 0, totalVacuuming = 0, totalLaundry = 0;
             let i = 0;
 
             snap.forEach(function(data) {
@@ -335,16 +314,16 @@ function readTasks() {
               totalTasks++;
               switch(dbData.tasktype) {
                 case 'Tiskit':
-                totalTiskit++;
+                totalDishes++;
                 break;
                 case 'Siivous':
-                totalSiivous++;
+                totalCleaning++;
                 break;
                 case 'Imurointi':
-                totalImurointi++;
+                totalVacuuming++;
                 break;
                 case 'Pyykit':
-                totalPyykit++;
+                totalLaundry++;
                 break;
               }
             });
@@ -353,22 +332,56 @@ function readTasks() {
               if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
             });
 
-            $('#scoreCount').html('TJ-PISTEET:<br>' + 'Yhteensä: ' + totalTasks +
-            '<br>Tiskit: ' + totalTiskit +
-            '<br>Siivous: ' + totalSiivous +
-            '<br>Imurointi: ' + totalImurointi +
-            '<br>Pyykit: ' + totalPyykit +
-            '<p></p>Ryhmä:<br>'
-          );
+            let counter = 0;
+            $('#scoreCountList').empty();
 
-          for (var j = 0; j < uniqueNames.length; j++) {
-            $('#scoreCount').append("<li>" + uniqueNames[j] + "</li>");
+            for (var j = 0; j < uniqueNames.length; j++) {
+              let dishes = 0, cleaning = 0, vacuuming = 0, laundry = 0;
+              let name = uniqueNames[j];
+              firebase.database().ref('Tasks').orderByChild('username').equalTo(uniqueNames[j]).once('value', snap =>{
+                snap.forEach((data => {
+                  let dbTask = data.val();
+                  if(dbTask.groupid == dbUser.groupid) {
+                    switch(dbTask.tasktype) {
+                      case 'Tiskit':
+                      dishes++;
+                      break;
+                      case 'Siivous':
+                      cleaning++;
+                      break;
+                      case 'Imurointi':
+                      vacuuming++;
+                      break;
+                      case 'Pyykit':
+                      laundry++;
+                      break;
+                    }
+                  }
+                }));
+
+                let dishPercent = ((dishes/totalDishes)*100).toFixed(2);
+                let cleanPercent = ((cleaning/totalCleaning)*100).toFixed(2);
+                let vacuumPercent = ((vacuuming/totalVacuuming)*100).toFixed(2);
+                let laundryPercent = ((laundry/totalLaundry)*100).toFixed(2);
+
+                $('#scoreCount').html(
+                'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
+                '</strong><br>Tiskit: ' + totalDishes +
+                '<br>Siivous: ' + totalCleaning +
+                '<br>Imurointi: ' + totalVacuuming +
+                '<br>Pyykit: ' + totalLaundry + '<p></p>');
+
+                $('#scoreCountList').append(
+                uniqueNames[counter++] + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
+                cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
+                vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
+                laundry + " (" + laundryPercent + "%)<p></p>"
+              );
+            });
           }
-
         });
       });
     } else {
-      // document.getElementById('task').innerHTML = "";
       $('#task').html("");
     }
   });
@@ -376,7 +389,7 @@ function readTasks() {
 }
 
 //Read the total number of users
-function readUsers() {
+function readUsers(groupid) {
   firebase.database().ref('Users').on("child_added", function(snap) {
     numUsers = snap.numChildren();
   });

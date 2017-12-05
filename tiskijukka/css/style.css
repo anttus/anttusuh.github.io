@@ -60,7 +60,7 @@ a:hover {
   padding-right: 8px;
 }
 
-#scoreCount {
+#scoreCount, #scoreCountList {
   font-size: 22px;
   border-style: solid;
   text-align: left;
@@ -103,7 +103,7 @@ footer {
     position: fixed;
   }
 
-  #scoreCount {
+  #scoreCount, #scoreCountList {
     text-align: left;
     margin-bottom: 20px;
     margin-left: auto;
@@ -111,6 +111,11 @@ footer {
     width: 40%;
     padding-left: 60px;
     min-width: 230px;
+  }
+
+  #scoreCountList {
+    margin-bottom: 20%;
+    padding-left: 20px;
   }
 }
 
