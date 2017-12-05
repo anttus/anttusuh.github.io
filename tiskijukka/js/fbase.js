@@ -134,11 +134,13 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         }
         acceptInvite.addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.invitedToGroup);
+          acceptDecline.style.display = 'none';
           location.reload();
         });
 
         declineInvite.addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
+          acceptDecline.style.display = 'none';
           location.reload();
         });
       }
