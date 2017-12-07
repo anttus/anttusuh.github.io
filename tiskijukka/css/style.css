@@ -82,17 +82,7 @@ a:hover {
   background-color: #F1F1F100;
   font-size: 32px;
   width: 0;
-  margin-bottom: 20px;
   width: 50%;
-}
-
-#scoreButton:active {
-  text-align: center;
-  outline: none;
-}
-
-#showMoreButton:focus {
-  float: right;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -135,6 +125,19 @@ footer {
   #scoreCountList {
     margin-bottom: 20%;
     padding-left: 20px;
+  }
+
+  #scoreButton, #showMoreButton {
+    margin-bottom: 100px;
+  }
+
+  #scoreButton:focus {
+    margin-bottom: 40px;
+  }
+
+  #showMoreButton {
+    float: right;
+    width: 50%;
   }
 
 }
