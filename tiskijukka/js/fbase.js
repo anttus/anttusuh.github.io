@@ -68,6 +68,23 @@ function setDBUser() {
   });
 }
 
+function updateUserGroup(uid, groupid) {
+  firebase.database().ref('Users/User').orderByChild('uid').equalTo(uid).once('value', snap => {
+    let dbUserData = snap.val();
+    if(dbUserData) {
+      snap.forEach(data => {
+        let dbValue = data.val();
+        firebase.database().ref('Users/User/' + uid).set({
+          username: dbValue.username,
+          uid: uid,
+          email: dbValue.email,
+          groupid: groupid
+        });
+      })
+    }
+  });
+}
+
 function updateUser(uname, uid, email, groupid) {
   firebase.database().ref('Users' + '/User/' + uid).set({
     username: uname,
@@ -98,6 +115,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   const acceptDecline = document.getElementById('divAcceptDecline');
   const acceptInvite = document.getElementById('btnAcceptInvite');
   const declineInvite = document.getElementById('btnDeclineInvite');
+  const leaveGroup = document.getElementById('btnGroupLeave');
 
   mainBody.style.display = 'none';
   groupForm.style.display = 'block';
@@ -179,6 +197,13 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         $('#inviteMessage').html("");
       }
     });
+  });
+
+  leaveGroup.addEventListener('click', e => {
+    groupid = ID();
+    updateUserGroup(user.uid, groupid);
+    updateTaskList(groupid);
+    $('#groupClose').click();
   });
 
   //Close group view
@@ -293,12 +318,11 @@ function readTasks() {
             groupid: dbValue.groupid,
           };
 
+          //New task functionality
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
+            // Update latest task to navbar
             getTaskData(dbUser.groupid);
-            // var task = snap.val().username + " -> " + snap.val().tasktype + ": " + snap.val().date + " | " + snap.val().time;
-            //
-            // $('#task').append(task + "<p></p>");
-            // $('#task').html(task + "\n");
+            // Update the task listing
             updateTaskList(dbUser.groupid);
           });
 
