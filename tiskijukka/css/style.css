@@ -144,7 +144,8 @@ footer {
 
 body {
   font-family: 'Oswald';
-  background-color: #f1f1f1;
+  /*background-color: #f1f1f1;*/
+  background-color: #fff;
   position: relative;
   min-width: 410px;
   position: absolute;
@@ -376,8 +377,8 @@ body::after {
   z-index: 100;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(192, 192, 192, 0.5);
-  background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+  background-color: #fff;
+  background-image: url("../img/loading.gif");
   background-repeat: no-repeat;
   background-position: center;
 }
