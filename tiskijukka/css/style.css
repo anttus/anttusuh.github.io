@@ -76,7 +76,7 @@ a:hover {
   font-size: 25px;
 }
 
-#scoreButton {
+#scoreButton, #showMoreButton {
   text-align: center;
   outline: none;
   color: #333;
@@ -88,7 +88,7 @@ a:hover {
   margin-right: 32px;
 }
 
-#scoreButton:active {
+#scoreButton:active, #showMoreButton:active {
   text-align: center;
   outline: none;
 }

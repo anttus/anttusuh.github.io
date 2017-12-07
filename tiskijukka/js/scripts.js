@@ -76,18 +76,8 @@ $('#scoreButton').click(function() {
   }
 });
 
-// Add slideDown animation to Bootstrap dropdown when expanding.
- // $('#dropdownDish').on('show.bs.dropdown', function() {
- //   $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
- // });
- //
- // // Add slideUp animation to Bootstrap dropdown when collapsing.
- // $('#dropdownDish').on('hide.bs.dropdown', function() {
- //   $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
- // });
-
-// function play() {
-//   $(document).ready(function() {
-//     $("#audio").get(0).play();
-//   });
-// }
+$('#task').click(function() {
+  var numOfNodes = $('#task > p').length;
+  $('#task p:gt(9)').hide();
+  console.log(numOfNodes);
+});

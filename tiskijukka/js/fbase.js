@@ -395,9 +395,12 @@ function updateTaskList(groupid) {
   $('#task').empty();
   firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).once('value', snap => {
     snap.forEach(data => {
-      var task = data.val().username + " -> " + data.val().tasktype + ": " + data.val().date + " | " + data.val().time;
+      var task = "<p>" + data.val().username + " -> " + data.val().tasktype + ": " + data.val().date + " | " + data.val().time + "</p>";
+      $('#task').prepend(task);
 
-      $('#task').prepend(task + "<p></p>");
+      // Shows only the 10 latest tasks
+      var numOfNodes = $('#task > p').length;
+      $('#task p:gt(9)').hide();
     });
   });
 }
