@@ -240,7 +240,7 @@ function writeTask(tasktype) {
     });
 
     var task = uname + " -> " + tasktype + ": " + getDate() + " | " + getTime();
-    $('#task').prepend(task + "<p></p>");
+    // $('#task').prepend(task + "<p></p>");
 
   });
 }
@@ -295,10 +295,11 @@ function readTasks() {
 
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on("child_added", function(snap) {
             getTaskData(dbUser.groupid);
-            var task = snap.val().username + " -> " + snap.val().tasktype + ": " + snap.val().date + " | " + snap.val().time;
-
-            $('#task').append(task + "<p></p>");
+            // var task = snap.val().username + " -> " + snap.val().tasktype + ": " + snap.val().date + " | " + snap.val().time;
+            //
+            // $('#task').append(task + "<p></p>");
             // $('#task').html(task + "\n");
+            updateTaskList(dbUser.groupid);
           });
 
           firebase.database().ref('Tasks').orderByChild('groupid').equalTo(dbUser.groupid).on('value', function(snap) {
@@ -388,6 +389,17 @@ function readTasks() {
     }
   });
 }
+}
+
+function updateTaskList(groupid) {
+  $('#task').empty();
+  firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).once('value', snap => {
+    snap.forEach(data => {
+      var task = data.val().username + " -> " + data.val().tasktype + ": " + data.val().date + " | " + data.val().time;
+
+      $('#task').prepend(task + "<p></p>");
+    });
+  });
 }
 
 //Read the total number of users
