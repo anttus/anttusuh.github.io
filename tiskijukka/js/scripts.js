@@ -67,17 +67,23 @@ btnDish.addEventListener('click', function () {
 $('#scoreButton').click(function() {
   if ($('#scoreCountList').is(":hidden")) {
     $('#scoreCountList').slideDown("fast");
-    $('#scoreGlyph').removeClass('glyphicon-chevron-down');
-    $('#scoreGlyph').addClass('glyphicon-chevron-up');
+    $('#scoreButton').removeClass('glyphicon-chevron-down');
+    $('#scoreButton').addClass('glyphicon-chevron-up');
   } else {
     $('#scoreCountList').slideUp("fast");
-    $('#scoreGlyph').addClass('glyphicon-chevron-down');
-    $('#scoreGlyph').removeClass('glyphicon-chevron-up');
+    $('#scoreButton').addClass('glyphicon-chevron-down');
+    $('#scoreButton').removeClass('glyphicon-chevron-up');
   }
 });
 
-$('#task').click(function() {
-  var numOfNodes = $('#task > p').length;
-  $('#task p:gt(9)').hide();
-  console.log(numOfNodes);
+$('#showMoreButton').click(function() {
+  if ($('#task p:gt(9)').is(":hidden")) {
+    $('#task > p').slideDown("fast");
+    $('#showMoreButton').removeClass('glyphicon-chevron-down');
+    $('#showMoreButton').addClass('glyphicon-chevron-up');
+  } else {
+    $('#task p:gt(9)').slideUp("fast");
+    $('#showMoreButton').removeClass('glyphicon-chevron-up');
+    $('#showMoreButton').addClass('glyphicon-chevron-down');
+  }
 });

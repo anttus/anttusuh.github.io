@@ -263,10 +263,6 @@ function writeTask(tasktype) {
       date: getDate(),
       time: getTime()
     });
-
-    var task = uname + " -> " + tasktype + ": " + getDate() + " | " + getTime();
-    // $('#task').prepend(task + "<p></p>");
-
   });
 }
 
@@ -424,7 +420,14 @@ function updateTaskList(groupid) {
 
       // Shows only the 10 latest tasks
       var numOfNodes = $('#task > p').length;
-      $('#task p:gt(9)').hide();
+      if (numOfNodes >= 10) {
+        $('#task p:gt(9)').hide();
+        $('#showMoreGlyph').show();
+        $('#showMoreButton').show();
+      } else {
+        $('#showMoreGlyph').hide();
+        $('#showMoreButton').hide();
+      }
     });
   });
 }
