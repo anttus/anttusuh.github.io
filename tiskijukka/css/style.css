@@ -48,6 +48,7 @@ a:hover {
 
 #leftCol {
   margin-top: 40px;
+  padding: 0;
 }
 
 #curUser {
@@ -81,10 +82,8 @@ a:hover {
   background-color: #F1F1F100;
   font-size: 32px;
   width: 0;
-  padding: 0;
-  margin: 0;
-  margin-right: 32px;
   margin-bottom: 20px;
+  width: 50%;
 }
 
 #scoreButton:active {
@@ -93,7 +92,7 @@ a:hover {
 }
 
 #showMoreButton:focus {
-  width: 0;
+  float: right;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -169,8 +168,6 @@ body::after {
   }
   .sidenav {
     height: auto;
-    padding: 15px;
-    padding-right: 0;
     margin-bottom: 10px;
   }
   .row.content {height:100%;}
@@ -207,17 +204,14 @@ body::after {
     margin-top: 10px;
   }
 
-  #showMoreButton {
-    width: -webkit-fill-available;
-    margin: 10px;
+  #showMoreButton, #scoreButton {
+    width: 100%;
+    margin-right: 0;
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
   }
 
-  #scoreButton {
-    margin-right: auto;
-    width: -webkit-fill-available;
-    margin: 10px;
-    overflow: auto;
-  }
 }
 
 #navbarTitle {
