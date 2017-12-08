@@ -49,7 +49,9 @@ $('#btnProfile').click(function() {
 
   // Accept the new username
   $('#acceptUsername').click(function() {
+    var newUsername = $('#newUsername').val();
 
+    
   });
 
   // Close the profile window
