@@ -219,6 +219,7 @@ btnGoogle.addEventListener('click', e => {
 
 btnFacebook.addEventListener('click', e => {
   var provider = new firebase.auth.FacebookAuthProvider();
+  provider.addScope('email');
   firebase.auth().signInWithRedirect(provider);
 
   firebase.auth().getRedirectResult().then(function(result) {
