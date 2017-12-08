@@ -177,7 +177,8 @@ document.getElementById('btnGroup').addEventListener('click', e => {
 
   //Close group view
   closeGroup.addEventListener('click', e => {
-    groupForm.style.display = 'none';
+    $('#groupForm').fadeOut("fast");
+    // groupForm.style.display = 'none';
     mainBody.style.display = 'block';
   });
 });
