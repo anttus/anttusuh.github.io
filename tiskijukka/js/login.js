@@ -71,33 +71,6 @@ function displayLogin() {
   // txtEmail.focus();
 }
 
-//To be able to press enter on login
-$("#txtPassword_SI").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignIn").click();
-  }
-});
-$("#txtEmail_SI").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignIn").click();
-  }
-});
-$("#txtUsername").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignUp").click();
-  }
-});
-$("#txtInviteEmail").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnGroupInvite").click();
-  }
-});
-$("#newUsername").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#acceptUsername").click();
-  }
-});
-
 function verifyUser() {
   var user = firebase.auth().currentUser;
 

@@ -65,3 +65,30 @@ $('#btnProfile').click(function() {
     mainBody.style.display = 'block';
   });
 });
+
+//To be able to press enter on input
+$("#txtPassword_SI").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#btnSignIn").click();
+  }
+});
+$("#txtEmail_SI").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#btnSignIn").click();
+  }
+});
+$("#txtUsername").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#btnSignUp").click();
+  }
+});
+$("#txtInviteEmail").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#btnGroupInvite").click();
+  }
+});
+$("#newUsername").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#acceptUsername").click();
+  }
+});
