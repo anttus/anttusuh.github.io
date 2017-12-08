@@ -75,7 +75,7 @@ function getProfileImg() {
        $("#profileImgMobile").show();
        $("#profileImg").hide();
      } else {
-       $("#profileImg").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImg").attr("src", imgUrl);
        $("#profileImg").show();
        $("#profileImgMobile").hide();
      }
