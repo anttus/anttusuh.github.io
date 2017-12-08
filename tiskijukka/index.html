@@ -9,7 +9,7 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/login.css">
-  <link rel="stylesheet" href="css/group.css">
+  <link rel="stylesheet" href="css/form.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
@@ -184,9 +184,10 @@
               <div id="profile">
                 <h3>Vaihda käyttäjänimi</h3>
                 <label for="username">Käyttäjänimi:</label>
-                <div><input id="changeUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
+                <div><input id="newUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
                   data-validation="length alphanumeric" data-validation-length="min3"
                   data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"/></div>
+                <input type="button" id="acceptUsername" class="button" value="Vaihda"/>
 
                 <input type="button" id="profileClose" class="button" value="Sulje"/>
               </div>
