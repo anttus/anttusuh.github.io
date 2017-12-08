@@ -8,11 +8,9 @@ function onReady(callback) {
     }
   }
 }
-
 function show(id, value) {
   document.getElementById(id).style.display = value ? 'block' : 'none';
 }
-
 onReady(function () {
   show('mainBody', true);
   show('loading', false);
@@ -47,54 +45,12 @@ function getCurUser() {
   return uname;
 }
 
-// BUTTONS
-const btnDish = document.getElementById('btnDish');
-var cdBool = false;
-btnDish.addEventListener('click', function () {
-  if(!cdBool) {
-    writeTask(document.getElementById('dropdownDish').value);
-    cdBool = true;
-    setTimeout(function() {
-      cdBool = false;
-      $('#dishSuccess').hide();
-    }, 3000);
-  }
-  else {
-    $('#dishSuccess').show();
-  }
-});
-
-$('#scoreButton').click(function() {
-  if ($('#scoreCountList').is(":hidden")) {
-    $('#scoreCountList').slideDown("fast");
-    $('#scoreButton').removeClass('glyphicon-chevron-down');
-    $('#scoreButton').addClass('glyphicon-chevron-up');
-  } else {
-    $('#scoreCountList').slideUp("fast");
-    $('#scoreButton').addClass('glyphicon-chevron-down');
-    $('#scoreButton').removeClass('glyphicon-chevron-up');
-  }
-});
-
-$('#showMoreButton').click(function() {
-  if ($('#task p:gt(9)').is(":hidden")) {
-    $('#task > p').slideDown("fast");
-    $('#showMoreButton').removeClass('glyphicon-chevron-down');
-    $('#showMoreButton').addClass('glyphicon-chevron-up');
-  } else {
-    $('#task p:gt(9)').slideUp("fast");
-    $('#showMoreButton').removeClass('glyphicon-chevron-up');
-    $('#showMoreButton').addClass('glyphicon-chevron-down');
-  }
-});
-
 window.onload = function() {
   var numOfNodes = $('#task > p').length;
   if (numOfNodes == 0) {
     $('#navbarTitle').html('Aloita kutsumalla muita ryhmääsi.');
+    $('#task').html('Et ole vielä merkinnyt tehtäviä.<br><br>Aloita kutsumalla muita ryhmääsi.');
     $('#showMoreGlyph').hide();
     $('#showMoreButton').hide();
-    // $('#scoreCountList').hide();
-    // $('#scoreButton').hide();
   }
 }

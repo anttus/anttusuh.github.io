@@ -111,6 +111,7 @@
                   <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" >
                     <i id="notification" class="glyphicon glyphicon-exclamation-sign" style="color: #F00; display: none;"></i>
                     <i class="glyphicon glyphicon-cog"></i> Ryhmät</button>
+                    <button id="btnProfile" class="navbarButton btn btn-default btn-lg btn-square"><i class="glyphicon glyphicon-user"></i> Profiili</button>
                     <h1 id="curUser"></h1>
                   </div>
                 </div>
@@ -171,43 +172,60 @@
                     <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
                       <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
                     </br><p style="font-size: 10px; padding-top: 5px; margin-bottom: 0;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a>
-                    </div>
-                  </footer>
-                </div>
-              </div>
-            </div>
-
-            <!-- Group form -->
-            <div id="groupForm" class="modal" style="display: none">
-              <div class="modal-content animate">
-                <h1>Ryhmät</h1>
-                <div id="groupInvite">
-                  <h3>Kutsu ryhmään</h3>
-                  <label for="groupEmail">Email:</label>
-                  <div><input type="email" name="email" placeholder="Enter email address" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
-                  <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
-                  <div id="inviteError" class="text-danger"></div>
-                  <div id="inviteMessage" class="text-success"></div>
-                  <h3>Poistu ryhmästä</h3>
-                  <input type="button" id="btnGroupLeave" class="button" value="Poistu ryhmästä" />
-                  <div id="divInvitations">
-                    <h3>Saadut kutsut</h3>
-                    <p id="showInvitation">Sinulla ei ole kutsuja... </p>
-                    <br />
-                    <div class="groupRow" id="divAcceptDecline" style="display:none">
-                      <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
-                      <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
-                    </div>
                   </div>
-
-                  <input type="button" id="groupClose" class="button" value="Sulje"/>
-                </div>
+                </footer>
               </div>
             </div>
-            <script type="text/javascript" src="js/fbase.js"></script>
-            <script type="text/javascript" src="js/scripts.js"></script>
-            <script type="text/javascript" src="js/login.js"></script>
+          </div>
 
-          </body>
+          <div id="profileForm" class="modal" style="display: none;">
+            <div class="modal-content animate">
+              <h1>Profiili</h1>
+              <div id="profile">
+                <h3>Vaihda käyttäjänimi</h3>
+                <label for="username">Käyttäjänimi:</label>
+                <div><input id="changeUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
+                  data-validation="length alphanumeric" data-validation-length="min3"
+                  data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"/></div>
 
-          </html>
+                <input type="button" id="profileClose" class="button" value="Sulje"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group form -->
+          <div id="groupForm" class="modal" style="display: none;">
+            <div class="modal-content animate">
+              <h1>Ryhmät</h1>
+              <div id="groupInvite">
+                <h3>Kutsu ryhmään</h3>
+                <label for="email">Email:</label>
+                <div><input type="email" name="email" placeholder="Sähköpostiosoite" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
+                <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+                <div id="inviteError" class="text-danger"></div>
+                <div id="inviteMessage" class="text-success"></div>
+                <h3>Poistu ryhmästä</h3>
+                <input type="button" id="btnGroupLeave" class="button" value="Poistu ryhmästä" />
+                <div id="divInvitations">
+                  <h3>Saadut kutsut</h3>
+                  <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+                  <br />
+                  <div class="groupRow" id="divAcceptDecline" style="display:none">
+                    <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
+                    <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
+                  </div>
+                </div>
+
+                <input type="button" id="groupClose" class="button" value="Sulje"/>
+              </div>
+            </div>
+          </div><!-- End of groupform  -->
+
+          <script type="text/javascript" src="js/fbase.js"></script>
+          <script type="text/javascript" src="js/scripts.js"></script>
+          <script type="text/javascript" src="js/buttons.js"></script>
+          <script type="text/javascript" src="js/login.js"></script>
+
+        </body>
+
+        </html>

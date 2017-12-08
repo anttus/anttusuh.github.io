@@ -196,10 +196,20 @@ body::after {
 
   .navbarButton {
     font-size: 15px;
+    margin: 10px;
+    margin-right: auto;
+    margin-top: 7px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    float: right;
+    width: 50%;
   }
 
   #navbar-nav {
     margin: 0;
+    margin-top: 10px;
   }
 
   .rightCol {
@@ -211,7 +221,8 @@ body::after {
   #curUser {
     float: left;
     font-size: 20px;
-    margin-top: 10px;
+    margin: 10px;
+    width: auto;
   }
 
   #showMoreButton, #scoreButton {
@@ -238,19 +249,20 @@ body::after {
   #navbarTitle {
     font-size: 25px;
   }
+
+  .navbarButton {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-align: center;
+    margin: 10px;
+    padding: 13px;
+    border: none;
+    border-radius: 0;
+    float: right;
+    width: auto;
+  }
 }
 
-.navbarButton {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  text-align: center;
-  margin: 10px;
-  padding: 13px;
-  border: none;
-  border-radius: 0;
-  float: right;
-  width: auto;
-}
 
 .navbarButton:focus {
   outline: none;
