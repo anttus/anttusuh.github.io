@@ -196,7 +196,6 @@ document.getElementById('btnGroup').addEventListener('click', e => {
               groupid: dbData.groupid
             }
         });
-        console.log(dbUser);
         firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
           const dbUserData = snap.val();
           if(dbUserData) {
@@ -208,19 +207,6 @@ document.getElementById('btnGroup').addEventListener('click', e => {
             inviteUser(dbUser, dbInvGroupId, dbInvBy);
           }
         });
-        // firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
-        //   snap.forEach(function(data) {
-        //     let dbData = data.val();
-        //     dbUser = {
-        //       username: dbData.username,
-        //       uid: dbData.uid,
-        //       email: dbData.email,
-        //       groupid: dbData.groupid
-        //     }
-        //     //inviteUser(dbUser, inviter);
-        //     setupInvite(dbUser);
-        //   });
-        // });
       }
       else {
         $('#inviteError').html("<br>Tarkista osoite.");
@@ -242,16 +228,6 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     mainBody.style.display = 'block';
   });
 });
-
-// let groupArr = [];
-// function setupInvite(obj) {
-//   groupArr.push(obj);
-//   if (groupArr.length >= 2) {
-//     inviteUser(groupArr[1], groupArr[0]);
-//     groupArr = [];
-//   }
-// }
-// "_r27qcvi25"
 
 //Writing the tasks
 function writeTask(tasktype) {
