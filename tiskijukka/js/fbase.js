@@ -146,6 +146,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
             snap.forEach(data => {
               updateUserGroup(data.val().uid, groupid)});
           });
+          showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
           acceptDecline.style.display = 'none';
           groupForm.style.display = 'none';
           mainBody.style.display = 'block';
@@ -155,6 +156,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         declineInvite.addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
           acceptDecline.style.display = 'none';
+          showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
           location.reload();
         });
       }
@@ -201,6 +203,8 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         $('#inviteMessage').html("");
       }
     });
+
+    txtEmail.value = "";
   });
 
   leaveGroup.addEventListener('click', e => {
