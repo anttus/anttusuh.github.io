@@ -46,6 +46,7 @@ function getCurUser() {
 }
 
 window.onload = function() {
+  getProfileImg();
   var numOfNodes = $('#task > p').length;
   if (numOfNodes == 0) {
     $('#navbarTitle').html('Aloita kutsumalla muita ryhmääsi.');
