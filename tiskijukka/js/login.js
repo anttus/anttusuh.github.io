@@ -143,6 +143,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       modalLogin.style.display = 'none';
       mainBody.style.display = 'block';
       readTasks();
+      getProfileImg();
     }
     else {
       displayLogin();
