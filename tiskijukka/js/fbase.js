@@ -38,7 +38,7 @@ function writeUser(uname, uid, email) {
       });
     }
     else {
-      console.log('creating a new user for the database.');
+      // console.log('creating a new user for the database.');
       groupid = ID();
       firebase.database().ref('Users' + '/User/' + uid).set({
         username: uname,
@@ -69,20 +69,23 @@ function setDBUser() {
 }
 
 function updateUserGroup(uid, groupid) {
-  firebase.database().ref('Users/User').orderByChild('uid').equalTo(uid).once('value', snap => {
-    let dbUserData = snap.val();
-    if(dbUserData) {
-      snap.forEach(data => {
-        let dbValue = data.val();
-        firebase.database().ref('Users/User/' + uid).set({
-          username: dbValue.username,
-          uid: uid,
-          email: dbValue.email,
-          groupid: groupid
-        });
-      })
-    }
+  firebase.database().ref('Users/User/' + uid).update({
+    groupid: groupid
   });
+  // firebase.database().ref('Users/User').orderByChild('uid').equalTo(uid).once('value', snap => {
+  //   let dbUserData = snap.val();
+  //   if(dbUserData) {
+  //     snap.forEach(data => {
+  //       let dbValue = data.val();
+  //       firebase.database().ref('Users/User/' + uid).set({
+  //         username: dbValue.username,
+  //         uid: uid,
+  //         email: dbValue.email,
+  //         groupid: groupid
+  //       });
+  //     })
+  //   }
+  // });
 }
 
 function updateUser(uname, uid, email, groupid) {
@@ -155,7 +158,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
             snap.forEach(data => {
-              console.log(data.val().uid);
+              // console.log(data.val().uid);
               updateUserGroup(data.val().uid, groupid)});
           });
           acceptDecline.style.display = 'none';
