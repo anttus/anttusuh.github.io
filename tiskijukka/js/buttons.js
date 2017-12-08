@@ -51,7 +51,12 @@ $('#btnProfile').click(function() {
   $('#acceptUsername').click(function() {
     var newUsername = $('#newUsername').val();
 
-    
+    // function call to change the username
+
+    $('#usernameMessage').html('Käyttäjänimi vaihdettu!');
+    setTimeout(function() {
+      $('#usernameMessage').fadeOut();
+    }, 3000);
   });
 
   // Close the profile window
