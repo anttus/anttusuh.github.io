@@ -54,3 +54,11 @@ window.onload = function() {
     $('#showMoreButton').hide();
   }
 }
+
+function getProfileImg() {
+  let user = firebase.auth().currentUser;
+  let imgUrl = user.photoUrl;
+
+  $("#profileImg").attr("src", imgUrl);
+
+}
