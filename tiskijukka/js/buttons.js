@@ -1,5 +1,6 @@
 // BUTTONS
 
+// Task button
 const btnDish = document.getElementById('btnDish');
 var cdBool = false;
 btnDish.addEventListener('click', function () {
@@ -16,6 +17,7 @@ btnDish.addEventListener('click', function () {
   }
 });
 
+// Show more/less info -buttons
 $('#scoreButton').click(function() {
   if ($('#scoreCountList').is(":hidden")) {
     $('#scoreCountList').slideDown("fast");
@@ -40,6 +42,19 @@ $('#showMoreButton').click(function() {
   }
 });
 
+// Profile button
 $('#btnProfile').click(function() {
-  
+  mainBody.style.display = 'none';
+  profileForm.style.display = 'block';
+
+  // Accept the new username
+  $('#acceptUsername').click(function() {
+
+  });
+
+  // Close the profile window
+  $('#profileClose').click(function() {
+    profileForm.style.display = 'none';
+    mainBody.style.display = 'block';
+  });
 });

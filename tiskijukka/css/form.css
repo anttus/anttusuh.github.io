@@ -1,4 +1,4 @@
-#groupForm {
+#groupForm, #profileForm {
   width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -7,14 +7,14 @@
   padding-bottom: 20px;
   border: none;
   outline: none;
+  overflow: auto;
 }
 
-#groupForm h1 {
+#groupForm h1, #profileForm h1 {
   text-align: center;
-
 }
 
-#groupInvite {
+#groupInvite, #profile {
   width: 50%;
   margin-left: 25%;
 }
@@ -57,7 +57,7 @@
   background-color: #cc2626c4;
 }
 
-#groupClose {
+#groupClose, #profileClose {
   background-color: #333;
   color: white;
   padding: 14px 20px;
@@ -69,21 +69,21 @@
   transition-duration: 0.4s;
 }
 
-#groupClose:hover {
+#groupClose:hover, #profileClose:hover {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   background-color: #333333c9;
 }
 
 @media screen and (max-width: 800px) {
-  #groupForm {
+  #groupForm, #profileForm {
     width: auto;
   }
 
 }
 
 @media screen and (max-width: 412px) {
-  #groupForm {
+  #groupForm, #profileForm {
     width: 400px;
   }
 }
