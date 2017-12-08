@@ -142,7 +142,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           let groupid = ID();
           updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
-            snap.forEach(data => { updateUserGroup(snap.val().uid, groupid)});
+            snap.forEach(data => { updateUserGroup(data.val().uid, groupid)});
           });
           acceptDecline.style.display = 'none';
           location.reload();
@@ -164,16 +164,20 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     let inviter, dbUser, dbInvGroupId, dbInvBy;
 
     firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
-      let dbData = snap.val();
+
       if(snap.val()) {
         $('#inviteMessage').html("<br>Kutsu lähetetty!");
         $('#inviteError').html("");
-        dbUser = {
-          username: dbData.username,
-          uid: dbData.uid,
-          email: dbData.email,
-          groupid: dbData.groupid
-        }
+        snap.forEach(data => {
+            let dbData = data.val();
+            dbUser = {
+              username: dbData.username,
+              uid: dbData.uid,
+              email: dbData.email,
+              groupid: dbData.groupid
+            }
+        });
+        console.log(dbUser);
         firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
           const dbUserData = snap.val();
           if(dbUserData) {
@@ -182,7 +186,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
               dbInvGroupId = dbValue.groupid;
               dbInvBy = dbValue.username;
             });
-            setupInvite(dbUser, dbInvGroupId, dbInvBy);
+            inviteUser(dbUser, dbInvGroupId, dbInvBy);
           }
         });
         // firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
