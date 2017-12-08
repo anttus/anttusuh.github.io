@@ -58,10 +58,27 @@ window.onload = function() {
 function getProfileImg() {
   let user = firebase.auth().currentUser;
   let imgUrl = user.providerData[0].photoURL;
-  let imgUrl2 = user.photoURL;
 
-  console.log(user.displayName + " " + imgUrl + " " + imgUrl2);
-
-  $("#profileImg").attr("src", imgUrl);
+   if (imgUrl == undefined) {
+     if ($(window).innerWidth() <= 767) {
+       $("#profileImgMobile").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImgMobile").show();
+       $("#profileImg").hide();
+     } else {
+       $("#profileImg").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImg").show();
+       $("#profileImgMobile").hide();
+     }
+   } else {
+     if ($(window).innerWidth() <= 767) {
+       $("#profileImgMobile").attr("src", imgUrl);
+       $("#profileImgMobile").show();
+       $("#profileImg").hide();
+     } else {
+       $("#profileImg").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImg").show();
+       $("#profileImgMobile").hide();
+     }
+   }
 
 }

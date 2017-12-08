@@ -221,7 +221,10 @@ body::after {
     float: left;
     font-size: 20px;
     margin: 10px;
-    width: auto;
+    text-align: center;
+    width: 42%;
+    margin-top: 45px;
+    padding: 0;
   }
 
   #showMoreButton, #scoreButton {
@@ -402,6 +405,15 @@ body::after {
   background-image: url("../img/loading.gif");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#profileImg {
+  margin-bottom: 20px;
+}
+
+#profileImgMobile {
+  margin: 20px;
+  position: absolute;
 }
 
 /* Loading icon */
