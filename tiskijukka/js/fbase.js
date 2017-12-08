@@ -94,14 +94,14 @@ function updateUser(uname, uid, email, groupid) {
   });
 }
 
-function inviteUser(dbUser, inviter) {
+function inviteUser(dbUser, invGroupId, invByUser) {
   firebase.database().ref('Users/User/' + dbUser.uid).set({
     username: dbUser.username,
     uid: dbUser.uid,
     email: dbUser.email,
     groupid: dbUser.groupid,
-    invitedToGroup: inviter.groupid,
-    invitedBy: inviter.username
+    invitedToGroup: invGroupId,
+    invitedBy: invByUser
   });
 }
 
@@ -139,7 +139,11 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           invitedBy: dbValue.invitedBy
         }
         acceptInvite.addEventListener('click', e => {
-          updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.invitedToGroup);
+          let groupid = ID();
+          updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
+          firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
+            snap.forEach(data => { updateUserGroup(snap.val().uid, groupid)});
+          });
           acceptDecline.style.display = 'none';
           location.reload();
         });
@@ -157,40 +161,43 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   groupInvite.addEventListener('click', e => {
 
     let txtEmail = document.getElementById('txtInviteEmail').value;
-    let inviter, dbUser;
+    let inviter, dbUser, dbInvGroupId, dbInvBy;
 
     firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
+      let dbData = snap.val();
       if(snap.val()) {
         $('#inviteMessage').html("<br>Kutsu lähetetty!");
         $('#inviteError').html("");
+        dbUser = {
+          username: dbData.username,
+          uid: dbData.uid,
+          email: dbData.email,
+          groupid: dbData.groupid
+        }
         firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
           const dbUserData = snap.val();
           if(dbUserData) {
             snap.forEach((childSnap) => {
               let dbValue = childSnap.val();
-              inviter = {
-                username: dbValue.username,
-                uid: dbValue.uid,
-                email: dbValue.email,
-                groupid: dbValue.groupid
-              };
+              dbInvGroupId = dbValue.groupid;
+              dbInvBy = dbValue.username;
             });
-            setupInvite(inviter);
+            setupInvite(dbUser, dbInvGroupId, dbInvBy);
           }
         });
-        firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
-          snap.forEach(function(data) {
-            let dbData = data.val();
-            dbUser = {
-              username: dbData.username,
-              uid: dbData.uid,
-              email: dbData.email,
-              groupid: dbData.groupid
-            }
-            //inviteUser(dbUser, inviter);
-            setupInvite(dbUser);
-          });
-        });
+        // firebase.database().ref().child('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
+        //   snap.forEach(function(data) {
+        //     let dbData = data.val();
+        //     dbUser = {
+        //       username: dbData.username,
+        //       uid: dbData.uid,
+        //       email: dbData.email,
+        //       groupid: dbData.groupid
+        //     }
+        //     //inviteUser(dbUser, inviter);
+        //     setupInvite(dbUser);
+        //   });
+        // });
       }
       else {
         $('#inviteError').html("<br>Tarkista osoite.");
@@ -213,14 +220,15 @@ document.getElementById('btnGroup').addEventListener('click', e => {
   });
 });
 
-let groupArr = [];
-function setupInvite(obj) {
-  groupArr.push(obj);
-  if (groupArr.length >= 2) {
-    inviteUser(groupArr[1], groupArr[0]);
-    groupArr = [];
-  }
-}
+// let groupArr = [];
+// function setupInvite(obj) {
+//   groupArr.push(obj);
+//   if (groupArr.length >= 2) {
+//     inviteUser(groupArr[1], groupArr[0]);
+//     groupArr = [];
+//   }
+// }
+// "_r27qcvi25"
 
 //Writing the tasks
 function writeTask(tasktype) {
