@@ -19,6 +19,10 @@
   margin-left: 25%;
 }
 
+#newUsername {
+  margin-top: 10px;
+}
+
 .groupRow .button {
   width: 100%;
 }

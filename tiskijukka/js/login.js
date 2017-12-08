@@ -87,10 +87,14 @@ $("#txtUsername").keyup(function(event) {
     $("#btnSignUp").click();
   }
 });
-
 $("#txtInviteEmail").keyup(function(event) {
   if (event.keyCode === 13) {
     $("#btnGroupInvite").click();
+  }
+});
+$("#newUsername").keyup(function(event) {
+  if (event.keyCode === 13) {
+    $("#acceptUsername").click();
   }
 });
 

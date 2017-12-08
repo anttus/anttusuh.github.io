@@ -94,6 +94,18 @@ function updateUser(uname, uid, email, groupid) {
   });
 }
 
+function updateUsername(username) {
+  let user = firebase.auth().currentUser;
+
+  user.updateProfile({
+    displayName: username
+  });
+
+  firebase.database().ref('Users/User/' + user.uid).update({
+    username: username
+  });
+}
+
 function inviteUser(dbUser, invGroupId, invByUser) {
   firebase.database().ref('Users/User/' + dbUser.uid).set({
     username: dbUser.username,

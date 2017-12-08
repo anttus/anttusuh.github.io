@@ -51,7 +51,7 @@ $('#btnProfile').click(function() {
   $('#acceptUsername').click(function() {
     var newUsername = $('#newUsername').val();
 
-    // function call to change the username
+    updateUsername(newUsername);
 
     $('#usernameMessage').html('Käyttäjänimi vaihdettu!');
     setTimeout(function() {
