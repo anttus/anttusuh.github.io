@@ -59,6 +59,8 @@ function getProfileImg() {
   let user = firebase.auth().currentUser;
   let imgUrl = user.photoUrl;
 
+  console.log('asdf');
+
   $("#profileImg").attr("src", imgUrl);
 
 }
