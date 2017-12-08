@@ -87,3 +87,14 @@ $('#showMoreButton').click(function() {
     $('#showMoreButton').addClass('glyphicon-chevron-down');
   }
 });
+
+window.onload = function() {
+  var numOfNodes = $('#task > p').length;
+  if (numOfNodes == 0) {
+    $('#navbarTitle').html('Aloita kutsumalla muita ryhmääsi.');
+    $('#showMoreGlyph').hide();
+    $('#showMoreButton').hide();
+    // $('#scoreCountList').hide();
+    // $('#scoreButton').hide();
+  }
+}

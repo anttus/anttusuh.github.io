@@ -420,7 +420,7 @@ function updateTaskList(groupid) {
 
       // Shows only the 10 latest tasks
       var numOfNodes = $('#task > p').length;
-      if (numOfNodes >= 10) {
+      if (numOfNodes > 10) {
         $('#task p:gt(9)').hide();
         $('#showMoreGlyph').show();
         $('#showMoreButton').show();

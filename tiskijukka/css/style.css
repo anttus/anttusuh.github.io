@@ -38,7 +38,7 @@ a:hover {
 }
 
 .rightCol {
-  margin-bottom: 66px;
+  margin-bottom: 63px;
   margin-top: 40px;
   font-family: 'Oswald', sans-serif;
   font-size: large;
@@ -123,16 +123,16 @@ footer {
   }
 
   #scoreCountList {
-    margin-bottom: 20%;
+    /*margin-bottom: 20%;*/
     padding-left: 20px;
   }
 
-  #scoreButton, #showMoreButton {
-    margin-bottom: 100px;
+  #scoreButton {
+    margin-bottom: 40px;
   }
 
-  #scoreButton:focus {
-    margin-bottom: 40px;
+  #showMoreButton {
+    margin-bottom: 100px;
   }
 
   #showMoreButton {
@@ -140,6 +140,12 @@ footer {
     width: 50%;
   }
 
+}
+
+@media (max-height: 850px) {
+  #scoreButton {
+    margin-bottom: 100px;
+  }
 }
 
 body {
@@ -214,6 +220,10 @@ body::after {
     text-align: center;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  #scoreButton {
+    margin-bottom: 0;
   }
 
 }
