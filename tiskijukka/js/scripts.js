@@ -57,9 +57,10 @@ window.onload = function() {
 
 function getProfileImg() {
   let user = firebase.auth().currentUser;
-  let imgUrl = user.providerData[0].photoUrl;
+  let imgUrl = user.providerData[0].photoURL;
+  let imgUrl2 = user.photoURL;
 
-  console.log(user.displayName + " " + imgUrl);
+  console.log(user.displayName + " " + imgUrl + " " + imgUrl2);
 
   $("#profileImg").attr("src", imgUrl);
 
