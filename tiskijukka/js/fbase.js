@@ -142,10 +142,14 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           let groupid = ID();
           updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
-            snap.forEach(data => { updateUserGroup(data.val().uid, groupid)});
+            snap.forEach(data => {
+              console.log(data.val().uid);
+              updateUserGroup(data.val().uid, groupid)});
           });
           acceptDecline.style.display = 'none';
-          location.reload();
+          groupForm.style.display = 'none';
+          mainBody.style.display = 'block';
+        //  location.reload();
         });
 
         declineInvite.addEventListener('click', e => {
@@ -168,6 +172,9 @@ document.getElementById('btnGroup').addEventListener('click', e => {
       if(snap.val()) {
         $('#inviteMessage').html("<br>Kutsu lähetetty!");
         $('#inviteError').html("");
+        setTimeout(function() {
+          $('#inviteMessage').fadeOut();
+        }, 3000);
         snap.forEach(data => {
             let dbData = data.val();
             dbUser = {
