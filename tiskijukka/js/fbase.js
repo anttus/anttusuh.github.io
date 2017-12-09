@@ -222,21 +222,30 @@ function readTasks() {
             if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
           });
 
-          // Show unique group members. 
+          // Show unique group members.
           showGroupMembers(uniqueNames);
           console.log(uniqueNames);
 
           let counter = 0;
+
+          //Empty the score count.
           $('#scoreCountList').empty();
 
+          // HORRORVILLE
+          // Generate Single users in a group
+          // Generate tasks for each user by tasktype
+          // Calculate percentages from total tasks
+          // Display all of the above.
+          // In a for loop.
           for (var j = 0; j < uniqueNames.length; j++) {
-            let dishes = 0,
-              cleaning = 0,
-              vacuuming = 0,
-              laundry = 0;
+
+            //Variables for each user.
+            let dishes = 0, cleaning = 0, vacuuming = 0, laundry = 0;
             let dishPercent, cleanPercent, vacuumPercent, laundryPercent;
             let name = uniqueNames[j];
 
+            // Generate Single users in a group
+            // Generate tasks for each user by tasktype
             firebase.database().ref('Tasks').orderByChild('username').equalTo(uniqueNames[j]).once('value', snap => {
               snap.forEach((data => {
                 let dbTask = data.val();
@@ -258,11 +267,13 @@ function readTasks() {
                 }
               }));
 
+              // Calculate percentages from total tasks
               dishPercent = ((dishes / totalDishes) * 100).toFixed(1);
               cleanPercent = ((cleaning / totalCleaning) * 100).toFixed(1);
               vacuumPercent = ((vacuuming / totalVacuuming) * 100).toFixed(1);
               laundryPercent = ((laundry / totalLaundry) * 100).toFixed(1);
 
+              // Display all of the above.
               //NEEDS A BETTER IMPLEMENTATION
               $('#scoreCount').html(
                 'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
