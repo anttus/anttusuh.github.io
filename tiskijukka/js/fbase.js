@@ -278,12 +278,16 @@ function readTasks() {
                 '<br>Imurointi: ' + totalVacuuming +
                 '<br>Pyykit: ' + totalLaundry + '<p></p>');
 
+                $('#groupMembers').html("<br>Ryhmäsi jäsenet:<p>" + uniqueNames[counter] + "</p>");
+
                 $('#scoreCountList').append(
                 uniqueNames[counter++] + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
                 cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
                 vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
                 laundry + " (" + laundryPercent + "%)<p></p>"
               );
+
+
             });
           }
         });

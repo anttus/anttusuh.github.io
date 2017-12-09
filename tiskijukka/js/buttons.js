@@ -137,7 +137,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
         $('#inviteError').html("");
         setTimeout(function() {
           $('#inviteMessage').fadeOut();
-        }, 3000);
+        }, 2000);
         snap.forEach(data => {
             let dbData = data.val();
             dbUser = {
@@ -162,6 +162,9 @@ document.getElementById('btnGroup').addEventListener('click', e => {
       else {
         $('#inviteError').html("<br>Tarkista osoite.");
         $('#inviteMessage').html("");
+        setTimeout(function() {
+          $('#inviteError').fadeOut();
+        }, 2000);
       }
     });
 
