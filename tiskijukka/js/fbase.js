@@ -237,6 +237,9 @@ function readTasks() {
               if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
             });
 
+            showGroupMembers(uniqueNames);
+            console.log(uniqueNames);
+
             let counter = 0;
             $('#scoreCountList').empty();
 
@@ -272,57 +275,61 @@ function readTasks() {
 
                 //NEEDS A BETTER IMPLEMENTATION
                 $('#scoreCount').html(
-                'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
-                '</strong><br>Tiskit: ' + totalDishes +
-                '<br>Siivous: ' + totalCleaning +
-                '<br>Imurointi: ' + totalVacuuming +
-                '<br>Pyykit: ' + totalLaundry + '<p></p>');
+                  'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
+                  '</strong><br>Tiskit: ' + totalDishes +
+                  '<br>Siivous: ' + totalCleaning +
+                  '<br>Imurointi: ' + totalVacuuming +
+                  '<br>Pyykit: ' + totalLaundry + '<p></p>');
 
-                $('#groupMembers').html("<br>Ryhmäsi jäsenet:<p>" + uniqueNames[counter] + "</p>");
-
-                $('#scoreCountList').append(
-                uniqueNames[counter++] + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
-                cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
-                vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
-                laundry + " (" + laundryPercent + "%)<p></p>"
-              );
-
-
+                  $('#scoreCountList').append(
+                    uniqueNames[counter++] + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
+                    cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
+                    vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
+                    laundry + " (" + laundryPercent + "%)<p></p>"
+                  );
+                });
+              }
             });
-          }
-        });
+          });
+        } else {
+          $('#task').html("");
+        }
       });
-    } else {
-      $('#task').html("");
     }
-  });
-}
-}
+  }
 
-function updateTaskList(groupid) {
-  $('#task').empty();
-  firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).once('value', snap => {
-    snap.forEach(data => {
-      var task = "<p>" + data.val().username + " -> " + data.val().tasktype + ": " + data.val().date + " | " + data.val().time + "</p>";
-      $('#task').prepend(task);
+  function showGroupMembers(uniqueNames) {
+    $('#groupMembers').empty();
+    $('#groupMembers').html('<br /><p>Ryhmäsi jäsenet:</p>');
+    for (var x = 0; x < uniqueNames.length; x++) {
+      $('#groupMembers').append("<li><strong>" + uniqueNames[x] + "<strong></li>");
+    }
+  }
 
-      // Shows only the 10 latest tasks
-      var numOfNodes = $('#task > p').length;
-      if (numOfNodes > 10) {
-        $('#task p:gt(9)').hide();
-        $('#showMoreGlyph').show();
-        $('#showMoreButton').show();
-      } else {
-        $('#showMoreGlyph').hide();
-        $('#showMoreButton').hide();
-      }
+  function updateTaskList(groupid) {
+    $('#task').empty();
+    firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).once('value', snap => {
+      snap.forEach(data => {
+        var task = "<p>" + data.val().username + " -> " + data.val().tasktype + ": " + data.val().date + " | " + data.val().time + "</p>";
+        $('#task').prepend(task);
+
+        // Shows only the 10 latest tasks
+        var numOfNodes = $('#task > p').length;
+        if (numOfNodes > 10) {
+          $('#task p:gt(9)').hide();
+          $('#showMoreGlyph').show();
+          $('#showMoreButton').show();
+        } else {
+          $('#showMoreGlyph').hide();
+          $('#showMoreButton').hide();
+        }
+      });
     });
-  });
-}
+  }
 
-//Read the total number of users
-function readUsers(groupid) {
-  firebase.database().ref('Users').on("child_added", function(snap) {
-    numUsers = snap.numChildren();
-  });
-}
+  //Read the total number of users
+  function readUsers(groupid) {
+    firebase.database().ref('Users').on("child_added", function(snap) {
+      numUsers = snap.numChildren();
+    });
+  }

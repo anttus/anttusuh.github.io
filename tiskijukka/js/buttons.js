@@ -175,6 +175,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     groupid = ID();
     updateUserGroup(user.uid, groupid);
     updateTaskList(groupid);
+    location.reload();
     $('#groupClose').click();
   });
 
