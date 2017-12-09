@@ -106,47 +106,42 @@ function inviteUser(dbUser, invGroupId, invByUser) {
   });
 }
 
-//Writing the tasks
-function writeTask(tasktype) {
-  setDBUser();
-  var user = firebase.auth().currentUser;
-  var uname, email, uid, groupid, taskid;
+function setTask(taskid, tasktype){
+  let user = firebase.auth().currentUser;
 
-  if (user) {
-    //Getting user's information
-    if (user != null) {
-      uname = user.displayName;
-      email = user.email;
-      uid = user.uid;
-      groupid = dbUser.groupid;
-    }
-  }
-
-  //Returns the running id of tasks
-  firebase.database().ref('Tasks').once("value", function(snap) {
-    let count = 0;
-
-    snap.forEach(function(data) {
-      if (data.key) {
-        count++;
-      }
+  firebase.database().ref('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    let groupid;
+    snap.forEach(data => {
+      let dbValue = data.val();
+      groupid = dbValue.groupid;
     });
-
-    taskid = count + 1;
-
-    // console.log("Username: " + uname + " email: " + email + " user id: " + uid + " group id: " + groupid + " task id: " + taskid);
-
     //Sets a new Task table with task id as an identifier
     firebase.database().ref('Tasks/' + taskid).set({
-      username: uname,
-      email: email,
-      uid: uid,
+      username: user.displayName,
+      email: user.email,
+      uid: user.uid,
       groupid: groupid,
       taskid: taskid,
       tasktype: tasktype,
       date: getDate(),
       time: getTime()
     });
+  });
+}
+
+//Writing the tasks
+function writeTask(tasktype) {
+
+  //Returns the running id of tasks
+  firebase.database().ref('Tasks').once("value", function(snap) {
+    let count = 0;
+    snap.forEach(function(data) {
+      if (data.key) {
+        count++;
+      }
+    });
+    taskid = count + 1;
+    setTask(taskid, tasktype);
   });
 }
 
