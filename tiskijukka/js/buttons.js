@@ -2,10 +2,39 @@
 
 // Task button
 const btnDish = document.getElementById('btnDish');
+const otherTask = document.getElementById('otherTask');
+const dropdownDish = document.getElementById('dropdownDish');
 var cdBool = false;
+
+function otherTaskFunc() {
+  var selectedValue = dropdownDish.options[dropdownDish.selectedIndex].value;
+  if (selectedValue == "Muu") {
+    var prompt = window.prompt("Kirjoita jokin muu tehtävän tyyppi.");
+
+    if (prompt == null || prompt == "") {
+      txt = "Cancelled.";
+      console.log(txt);
+      dropdownDish.value = "Tiskit";
+    } else {
+      if(!cdBool) {
+        writeTask(prompt);
+        dropdownDish.value = "Tiskit";
+        cdBool = true;
+        setTimeout(function() {
+          cdBool = false;
+          $('#dishSuccess').hide();
+        }, 3000);
+      }
+      else {
+        $('#dishSuccess').show();
+      }
+    }
+  }
+}
+
 btnDish.addEventListener('click', function () {
   if(!cdBool) {
-    writeTask(document.getElementById('dropdownDish').value);
+    writeTask(dropdownDish.value);
     cdBool = true;
     setTimeout(function() {
       cdBool = false;
@@ -106,39 +135,39 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
             snap.forEach(data => {
               updateUserGroup(data.val().uid, groupid)});
+            });
+            showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
+            acceptDecline.style.display = 'none';
+            groupForm.style.display = 'none';
+            mainBody.style.display = 'block';
+            //  location.reload();
           });
-          showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
-          acceptDecline.style.display = 'none';
-          groupForm.style.display = 'none';
-          mainBody.style.display = 'block';
-        //  location.reload();
-        });
 
-        declineInvite.addEventListener('click', e => {
-          updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
-          acceptDecline.style.display = 'none';
-          showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
-          location.reload();
-        });
-      }
+          declineInvite.addEventListener('click', e => {
+            updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
+            acceptDecline.style.display = 'none';
+            showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
+            location.reload();
+          });
+        }
+      });
     });
-  });
 
-  // Invite button
-  groupInvite.addEventListener('click', e => {
+    // Invite button
+    groupInvite.addEventListener('click', e => {
 
-    let txtEmail = document.getElementById('txtInviteEmail').value;
-    let inviter, dbUser, dbInvGroupId, dbInvBy;
+      let txtEmail = document.getElementById('txtInviteEmail').value;
+      let inviter, dbUser, dbInvGroupId, dbInvBy;
 
-    firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
+      firebase.database().ref('Users/User').orderByChild('email').equalTo(txtEmail).once('value', snap => {
 
-      if(snap.val()) {
-        $('#inviteMessage').html("<br>Kutsu lähetetty!");
-        $('#inviteError').html("");
-        setTimeout(function() {
-          $('#inviteMessage').fadeOut();
-        }, 2000);
-        snap.forEach(data => {
+        if(snap.val()) {
+          $('#inviteMessage').html("<br>Kutsu lähetetty!");
+          $('#inviteError').html("");
+          setTimeout(function() {
+            $('#inviteMessage').fadeOut();
+          }, 2000);
+          snap.forEach(data => {
             let dbData = data.val();
             dbUser = {
               username: dbData.username,
@@ -146,70 +175,70 @@ document.getElementById('btnGroup').addEventListener('click', e => {
               email: dbData.email,
               groupid: dbData.groupid
             }
-        });
-        firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
-          const dbUserData = snap.val();
-          if(dbUserData) {
-            snap.forEach((childSnap) => {
-              let dbValue = childSnap.val();
-              dbInvGroupId = dbValue.groupid;
-              dbInvBy = dbValue.username;
-            });
-            inviteUser(dbUser, dbInvGroupId, dbInvBy);
-          }
-        });
-      }
-      else {
-        $('#inviteError').html("<br>Tarkista osoite.");
-        $('#inviteMessage').html("");
-        setTimeout(function() {
-          $('#inviteError').fadeOut();
-        }, 2000);
-      }
+          });
+          firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+            const dbUserData = snap.val();
+            if(dbUserData) {
+              snap.forEach((childSnap) => {
+                let dbValue = childSnap.val();
+                dbInvGroupId = dbValue.groupid;
+                dbInvBy = dbValue.username;
+              });
+              inviteUser(dbUser, dbInvGroupId, dbInvBy);
+            }
+          });
+        }
+        else {
+          $('#inviteError').html("<br>Tarkista osoite.");
+          $('#inviteMessage').html("");
+          setTimeout(function() {
+            $('#inviteError').fadeOut();
+          }, 2000);
+        }
+      });
+
+      txtEmail.value = "";
     });
 
-    txtEmail.value = "";
+    leaveGroup.addEventListener('click', e => {
+      groupid = ID();
+      updateUserGroup(user.uid, groupid);
+      updateTaskList(groupid);
+      location.reload();
+      $('#groupClose').click();
+    });
+
+    //Close group view
+    closeGroup.addEventListener('click', e => {
+      $('#groupForm').fadeOut("fast");
+      // groupForm.style.display = 'none';
+      mainBody.style.display = 'block';
+    });
   });
 
-  leaveGroup.addEventListener('click', e => {
-    groupid = ID();
-    updateUserGroup(user.uid, groupid);
-    updateTaskList(groupid);
-    location.reload();
-    $('#groupClose').click();
+  //To be able to press enter on input
+  $("#txtPassword_SI").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#btnSignIn").click();
+    }
   });
-
-  //Close group view
-  closeGroup.addEventListener('click', e => {
-    $('#groupForm').fadeOut("fast");
-    // groupForm.style.display = 'none';
-    mainBody.style.display = 'block';
+  $("#txtEmail_SI").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#btnSignIn").click();
+    }
   });
-});
-
-//To be able to press enter on input
-$("#txtPassword_SI").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignIn").click();
-  }
-});
-$("#txtEmail_SI").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignIn").click();
-  }
-});
-$("#txtUsername").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnSignUp").click();
-  }
-});
-$("#txtInviteEmail").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#btnGroupInvite").click();
-  }
-});
-$("#newUsername").keyup(function(event) {
-  if (event.keyCode === 13) {
-    $("#acceptUsername").click();
-  }
-});
+  $("#txtUsername").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#btnSignUp").click();
+    }
+  });
+  $("#txtInviteEmail").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#btnGroupInvite").click();
+    }
+  });
+  $("#newUsername").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#acceptUsername").click();
+    }
+  });
