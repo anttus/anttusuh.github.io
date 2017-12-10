@@ -132,11 +132,12 @@
                       Kutsu muita ryhmään painamalla "Ryhmät" -painiketta.<br /><br />
                       Valitse tehtävän tyyppi ja paina "Tehty!"
                     </p><br />
-                    <select type="dropdown" class="btn btn-success dropdown" id="dropdownDish">
+                    <select type="dropdown" class="btn btn-success dropdown" id="dropdownDish" onchange="otherTaskFunc();">
                       <option value="Tiskit">Tiskit</option>
                       <option value="Imurointi">Imurointi</option>
                       <option value="Siivous">Siivous</option>
                       <option value="Pyykit">Pyykit</option>
+                      <option value="Muu">Muu</option>
                     </select>
                     <input type="submit" value="...Tehty!" class="btn btn-success" id="btnDish" >
                     <div class="text-danger" id="dishSuccess" style="display: none">
@@ -197,7 +198,7 @@
                 <div id="inviteError" class="text-danger"></div>
                 <div id="inviteMessage" class="text-success"></div>
 
-                
+
                 <div id="groupMembers"></div>
 
                 <h3>Poistu ryhmästä</h3>
