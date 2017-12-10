@@ -222,7 +222,7 @@ function readTasks() {
             if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
           });
 
-          // Show unique group members. 
+          // Show unique group members.
           showGroupMembers(uniqueNames);
           console.log(uniqueNames);
 
@@ -272,7 +272,7 @@ function readTasks() {
                 '<br>Pyykit: ' + totalLaundry + '<p></p>');
 
               $('#scoreCountList').append(
-                uniqueNames[counter++] + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
+                "<strong>" + uniqueNames[counter++] + "</strong>" + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
                 cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
                 vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
                 laundry + " (" + laundryPercent + "%)<p></p>"
