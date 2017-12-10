@@ -175,7 +175,6 @@ function readTasks() {
         snap.forEach(data => {
           groupid = data.val().groupid;
         });
-
         //New task functionality
         firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).on("child_added", function(snap) {
           // Update latest task to navbar
@@ -183,119 +182,123 @@ function readTasks() {
           // Update the task listing
           updateTaskList(groupid);
         });
-
-        // NIGHTMARE TERRITORY
-        // Get tasks based on groupid
-        firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).on('value', function(snap) {
-          // Arrays to store users and names.
-          let userArr = [], uniqueNames = [];
-
-          // Variables to hold total tasks by type.
-          let totalTasks = 0, totalDishes = 0, totalCleaning = 0, totalVacuuming = 0, totalLaundry = 0;
-          let i = 0;
-
-          // Get users and total tasks by type.
-          snap.forEach(function(data) {
-            let dbData = data.val();
-            userArr[i++] = dbData.username;
-
-            totalTasks++;
-            switch (dbData.tasktype) {
-              case 'Tiskit':
-                totalDishes++;
-                break;
-              case 'Siivous':
-                totalCleaning++;
-                break;
-              case 'Imurointi':
-                totalVacuuming++;
-                break;
-              case 'Pyykit':
-                totalLaundry++;
-                break;
-            }
-          });
-          console.log(userArr);
-
-          // Filter userArr, take unique users and add to uniqueNames.
-          $.each(userArr, function(i, el) {
-            if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-          });
-
-          // Show unique group members.
-          showGroupMembers(uniqueNames);
-          console.log(uniqueNames);
-
-          let counter = 0;
-
-          //Empty the score count.
-          $('#scoreCountList').empty();
-
-          // HORRORVILLE
-          // Generate Single users in a group
-          // Generate tasks for each user by tasktype
-          // Calculate percentages from total tasks
-          // Display all of the above.
-          // In a for loop.
-          for (var j = 0; j < uniqueNames.length; j++) {
-
-            //Variables for each user.
-            let dishes = 0, cleaning = 0, vacuuming = 0, laundry = 0;
-            let dishPercent, cleanPercent, vacuumPercent, laundryPercent;
-            let name = uniqueNames[j];
-
-            // Generate Single users in a group
-            // Generate tasks for each user by tasktype
-            firebase.database().ref('Tasks').orderByChild('username').equalTo(uniqueNames[j]).once('value', snap => {
-              snap.forEach((data => {
-                let dbTask = data.val();
-                if (dbTask.groupid == groupid) {
-                  switch (dbTask.tasktype) {
-                    case 'Tiskit':
-                      dishes++;
-                      break;
-                    case 'Siivous':
-                      cleaning++;
-                      break;
-                    case 'Imurointi':
-                      vacuuming++;
-                      break;
-                    case 'Pyykit':
-                      laundry++;
-                      break;
-                  }
-                }
-              }));
-
-              // Calculate percentages from total tasks
-              dishPercent = ((dishes / totalDishes) * 100).toFixed(1);
-              cleanPercent = ((cleaning / totalCleaning) * 100).toFixed(1);
-              vacuumPercent = ((vacuuming / totalVacuuming) * 100).toFixed(1);
-              laundryPercent = ((laundry / totalLaundry) * 100).toFixed(1);
-
-              // Display all of the above.
-              //NEEDS A BETTER IMPLEMENTATION
-              $('#scoreCount').html(
-                'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks +
-                '</strong><br>Tiskit: ' + totalDishes +
-                '<br>Siivous: ' + totalCleaning +
-                '<br>Imurointi: ' + totalVacuuming +
-                '<br>Pyykit: ' + totalLaundry + '<p></p>');
-
-              $('#scoreCountList').append(
-                "<strong>" + uniqueNames[counter++] + "</strong>" + ":<br>Tiskit: " + dishes + " (" + dishPercent + "%)<br>Siivous: " +
-                cleaning + " (" + cleanPercent + "%)<br>Imurointi: " +
-                vacuuming + " (" + vacuumPercent + "%)<br>Pyykit: " +
-                laundry + " (" + laundryPercent + "%)<p></p>"
-              );
-            });
-          }
-        });
-      } else {
+        // Calculate the scores.
+        calculateScores(groupid);
+      }
+       else {
         $('#task').html("");
       }
     });
   }
+}
+
+function calculateScores(groupid) {
+  // Get tasks based on groupid
+  firebase.database().ref('Tasks').orderByChild('groupid').equalTo(groupid).on('value', function(snap) {
+    // Arrays to store users and names.
+    let userArr = [], uniqueNames = [];
+
+    // Variables to hold total tasks by type.
+    let totalTasks = {total: 0, dishes: 0, cleaning: 0, vacuuming: 0, laundry: 0};
+    let i = 0;
+
+    // Get users and total tasks by type.
+    snap.forEach(function(data) {
+      let dbData = data.val();
+      userArr[i++] = dbData.username;
+
+      totalTasks.total++;
+      switch (dbData.tasktype) {
+        case 'Tiskit':
+          totalTasks.dishes++;
+          break;
+        case 'Siivous':
+          totalTasks.cleaning++;
+          break;
+        case 'Imurointi':
+          totalTasks.vacuuming++;
+          break;
+        case 'Pyykit':
+          totalTasks.laundry++;
+          break;
+      }
+    });
+
+    // Filter userArr, take unique users and add to uniqueNames.
+    $.each(userArr, function(i, el) {
+      if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+    });
+
+    // Show unique group members.
+    showGroupMembers(uniqueNames);
+    // Update the total score count.
+    updateScoreCount(totalTasks);
+    // Calculate each group members scores.
+    calculatePersonalScore(uniqueNames, totalTasks, groupid);
+    // console.log(uniqueNames);
+  });
+}
+
+function calculatePersonalScore(uniqueNames, totalTasks, groupid) {
+  for (var j = 0; j < uniqueNames.length; j++) {
+    //Variables for each user.
+    let tasks = {total: 0, dishes: 0, cleaning: 0, vacuuming: 0, laundry: 0,
+      totalPercent: 0, dishPercent: 0, cleanPercent: 0, vacuumPercent: 0, laundryPercent: 0
+    };
+    let name = uniqueNames[j];
+
+    // Generate Single users in a group
+    // Generate tasks for each user by tasktype
+    firebase.database().ref('Tasks').orderByChild('username').equalTo(uniqueNames[j]).once('value', snap => {
+      snap.forEach((data => {
+        let dbTask = data.val();
+        tasks.total++;
+        if (dbTask.groupid == groupid) {
+          switch (dbTask.tasktype) {
+            case 'Tiskit':
+              tasks.dishes++;
+              break;
+            case 'Siivous':
+              tasks.cleaning++;
+              break;
+            case 'Imurointi':
+              tasks.vacuuming++;
+              break;
+            case 'Pyykit':
+              tasks.laundry++;
+              break;
+          }
+        }
+      }));
+      // Calculate percentages from total tasks
+      tasks.totalPercent = ((tasks.total / totalTasks.total) * 100).toFixed(1);
+      tasks.dishPercent = ((tasks.dishes / totalTasks.dishes) * 100).toFixed(1);
+      tasks.cleanPercent = ((tasks.cleaning / totalTasks.cleaning) * 100).toFixed(1);
+      tasks.vacuumPercent = ((tasks.vacuuming / totalTasks.vacuuming) * 100).toFixed(1);
+      tasks.laundryPercent = ((tasks.laundry / totalTasks.laundry) * 100).toFixed(1);
+      updateScoreCountList(name, tasks);
+    });
+  }
+}
+
+function updateScoreCount(totalTasks) {
+  //NEEDS A BETTER IMPLEMENTATION
+  $('#scoreCountList').empty();
+  $('#scoreCount').html(
+    'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks.total +
+    '</strong><br>Tiskit: ' + totalTasks.dishes +
+    '<br>Siivous: ' + totalTasks.cleaning +
+    '<br>Imurointi: ' + totalTasks.vacuuming +
+    '<br>Pyykit: ' + totalTasks.laundry + '<p></p>');
+}
+
+function updateScoreCountList(name, tasks) {
+  $('#scoreCountList').append(
+    "<strong>" + name + "</strong>" + ":<br>Tiskit: " + tasks.dishes + " (" + tasks.dishPercent + "%)<br>Siivous: " +
+    tasks.cleaning + " (" + tasks.cleanPercent + "%)<br>Imurointi: " +
+    tasks.vacuuming + " (" + tasks.vacuumPercent + "%)<br>Pyykit: " +
+    tasks.laundry + " (" + tasks.laundryPercent + "%)<p></p>"
+  );
 }
 
 function showGroupMembers(uniqueNames) {
