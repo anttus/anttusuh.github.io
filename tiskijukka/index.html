@@ -22,7 +22,7 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 
-  <!-- ICONS -->
+  <!-- Icons -->
   <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
@@ -90,7 +90,6 @@
 
             <!-- NAVBAR -->
             <nav class="navbar navbar-inverse" id="navbar">
-              <!-- <div class="container"> -->
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
                   <span class="sr-only">Toggle navigation</span>
@@ -102,21 +101,18 @@
               </div>
 
               <div class="collapse navbar-collapse" id="toggle-nav">
-                <img id="profileImgMobile" class="img-circle" width="140" height="140">
+                <img id="profileImgMobile" alt="[profiilikuva]" src="img/blankimage.png" class="img-circle" width="140" height="140">
                 <div class="nav navbar-nav navbar-right" id="navbar-nav">
                   <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
                   <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" >
                     <i id="notification" class="glyphicon glyphicon-exclamation-sign" style="color: #F00; display: none;"></i>
                     <i class="glyphicon glyphicon-cog"></i> Ryhmät</button>
                     <button id="btnProfile" class="navbarButton btn btn-default btn-lg btn-square"><i class="glyphicon glyphicon-user"></i> Profiili</button>
-                    <h1 id="curUser"></h1>
+                    <div id="curUser"></div>
                   </div>
                 </div>
-
-                <!-- close container div -->
               </nav> <!-- close navbar nav -->
 
-              <!-- BODY -->
               <div class="container-fluid text-center">
 
                 <div class="row content">
@@ -125,14 +121,14 @@
                   <div class="col-sm-6 sidenav" id="leftCol">
 
                     <!-- Profile image -->
-                    <img id="profileImg" class="img-circle" width="180" height="180">
+                    <img id="profileImg" src="img/blankimage.png" alt="[profiilikuva]" class="img-circle" width="180" height="180">
 
-                    <!-- BUTTON -->
+                    <!-- Task selector and button -->
                     <p style="text-align: center; font-size: 16px;">
                       Kutsu muita ryhmään painamalla "Ryhmät" -painiketta.<br /><br />
                       Valitse tehtävän tyyppi ja paina "Tehty!"
                     </p><br />
-                    <select type="dropdown" class="btn btn-success dropdown" id="dropdownDish" onchange="otherTaskFunc();">
+                    <select class="btn btn-success dropdown" id="dropdownDish" onchange="otherTaskFunc();">
                       <option value="Tiskit">Tiskit</option>
                       <option value="Imurointi">Imurointi</option>
                       <option value="Siivous">Siivous</option>
@@ -146,7 +142,7 @@
                     </div>
                     <br />
 
-                    <!-- SCORES -->
+                    <!-- Statistics -->
                     <div id="scoreCount"></div>
                     <div id="scoreCountList" style="display: none"></div>
                     <button id="scoreButton" class="glyphicon glyphicon-chevron-down"></button>
@@ -157,72 +153,72 @@
                   <div class="col-sm-6 sidenav rightCol" id="task"></div>
                   <div><button id="showMoreButton" class="glyphicon glyphicon-chevron-down"></button></div>
 
-
-
                   <!-- FOOTER -->
                   <footer class="container-fluid text-center" >
                     <div id="footerText">Copyright @ 2017 Anttu Suhonen | <a target="_blank"  href="https://github.com/anttus/" >GitHub</a>
                       <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIn</a>
-                    </br><p style="font-size: 10px; padding-top: 5px; margin-bottom: 0;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a>
-                  </div>
-                </footer>
+                      <br><p style="font-size: 10px; padding-top: 5px; margin-bottom: 0;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</a></p>
+                    </div>
+                  </footer><!-- End of footer -->
+
+                </div>
               </div>
             </div>
-          </div>
 
-          <div id="profileForm" class="modal" style="display: none;">
-            <div class="modal-content animate">
-              <h1>Profiili</h1>
-              <div id="profile">
-                <h3>Vaihda käyttäjänimi</h3>
-                <label for="username">Käyttäjänimi:</label>
-                <div><input id="newUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
-                  data-validation="length alphanumeric" data-validation-length="min3"
-                  data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"/></div>
-                <input type="button" id="acceptUsername" class="button" value="Vaihda"/>
-                <p></p><div id="usernameMessage" class="text-success"></div><p></p>
-                <input type="button" id="profileClose" class="button" value="Sulje"/>
-              </div>
-            </div>
-          </div>
-
-          <!-- Group form -->
-          <div id="groupForm" class="modal" style="display: none;">
-            <div class="modal-content animate">
-              <h1>Ryhmät</h1>
-              <div id="groupInvite">
-                <h3>Kutsu ryhmään</h3>
-                <label for="email">Email:</label>
-                <div><input type="email" name="email" placeholder="Sähköpostiosoite" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
-                <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
-                <div id="inviteError" class="text-danger"></div>
-                <div id="inviteMessage" class="text-success"></div>
-
-
-                <div id="groupMembers"></div>
-
-                <h3>Poistu ryhmästä</h3>
-                <input type="button" id="btnGroupLeave" class="button" value="Poistu ryhmästä" />
-                <div id="divInvitations">
-                  <h3>Saadut kutsut</h3>
-                  <p id="showInvitation">Sinulla ei ole kutsuja... </p>
-                  <br />
-                  <div class="groupRow" id="divAcceptDecline" style="display:none">
-                    <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
-                    <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
+            <!-- Profile editing form -->
+            <div id="profileForm" class="modal" style="display: none;">
+              <div class="modal-content animate">
+                <h1>Profiili</h1>
+                <div id="profile">
+                  <h3>Vaihda käyttäjänimi</h3>
+                  <label>Käyttäjänimi:</label>
+                  <div><input id="newUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
+                    data-validation="length alphanumeric" data-validation-length="min3"
+                    data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"/></div>
+                    <input type="button" id="acceptUsername" class="button" value="Vaihda"/>
+                    <p></p><div id="usernameMessage" class="text-success"></div><p></p>
+                    <input type="button" id="profileClose" class="button" value="Sulje"/>
                   </div>
                 </div>
+              </div><!-- End of profile form -->
 
-                <input type="button" id="groupClose" class="button" value="Sulje"/>
-              </div>
-            </div>
-          </div><!-- End of groupform  -->
+              <!-- Group form -->
+              <div id="groupForm" class="modal" style="display: none;">
+                <div class="modal-content animate">
+                  <h1>Ryhmät</h1>
+                  <div id="groupInvite">
+                    <h3>Kutsu ryhmään</h3>
+                    <label>Email:</label>
+                    <div><input type="email" name="email" placeholder="Sähköpostiosoite" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
+                    <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+                    <div id="inviteError" class="text-danger"></div>
+                    <div id="inviteMessage" class="text-success"></div>
 
-          <script type="text/javascript" src="js/fbase.js"></script>
-          <script type="text/javascript" src="js/scripts.js"></script>
-          <script type="text/javascript" src="js/buttons.js"></script>
-          <script type="text/javascript" src="js/login.js"></script>
 
-        </body>
+                    <div id="groupMembers"></div>
 
-        </html>
+                    <h3>Poistu ryhmästä</h3>
+                    <input type="button" id="btnGroupLeave" class="button" value="Poistu ryhmästä" />
+                    <div id="divInvitations">
+                      <h3>Saadut kutsut</h3>
+                      <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+                      <br />
+                      <div class="groupRow" id="divAcceptDecline" style="display:none">
+                        <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
+                        <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
+                      </div>
+                    </div>
+
+                    <input type="button" id="groupClose" class="button" value="Sulje"/>
+                  </div>
+                </div>
+              </div><!-- End of groupform  -->
+
+              <script src="js/fbase.js"></script>
+              <script src="js/scripts.js"></script>
+              <script src="js/buttons.js"></script>
+              <script src="js/login.js"></script>
+
+            </body>
+
+            </html>

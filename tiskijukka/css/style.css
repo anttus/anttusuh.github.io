@@ -68,6 +68,7 @@ body::after {
 }
 
 #curUser {
+  font-size: 32px;
   float: right;
   color: #ecb206;
   margin-top: 1%;

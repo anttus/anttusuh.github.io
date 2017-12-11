@@ -61,11 +61,11 @@ function getProfileImg() {
 
    if (imgUrl == undefined) {
      if ($(window).innerWidth() <= 767) {
-       $("#profileImgMobile").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImgMobile").attr("src", 'img/blankimage.png');
        $("#profileImgMobile").show();
        $("#profileImg").hide();
      } else {
-       $("#profileImg").attr("src", '../tiskijukka/img/blankimage.png');
+       $("#profileImg").attr("src", 'img/blankimage.png');
        $("#profileImg").show();
        $("#profileImgMobile").hide();
      }
