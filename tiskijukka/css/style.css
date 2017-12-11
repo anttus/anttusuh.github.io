@@ -37,6 +37,22 @@ a:hover {
   color: #81bef1;
 }
 
+body {
+  font-family: 'Oswald';
+  background-color: #f1f1f1;
+  position: relative;
+  min-width: 410px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body::after {
+  content: '';
+  display: block;
+}
+
 .rightCol {
   margin-bottom: 63px;
   margin-top: 40px;
@@ -123,7 +139,6 @@ footer {
   }
 
   #scoreCountList {
-    /*margin-bottom: 20%;*/
     padding-left: 20px;
   }
 
@@ -146,22 +161,6 @@ footer {
   #scoreButton {
     margin-bottom: 100px;
   }
-}
-
-body {
-  font-family: 'Oswald';
-  background-color: #f1f1f1;
-  position: relative;
-  min-width: 410px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-}
-
-body::after {
-  content: '';
-  display: block;
 }
 
 #footerText {
@@ -265,7 +264,6 @@ body::after {
   }
 }
 
-
 .navbarButton:focus {
   outline: none;
   border: none;
@@ -358,10 +356,6 @@ body::after {
   border-color: #333;
 }
 
-.dropdown-menu {
-  /*margin-top: 32px;*/
-}
-
 #successLogin {
   margin-bottom: 0;
   font-size: 15px;
@@ -444,12 +438,3 @@ to { -webkit-transform: rotate(360deg); }
 from {transform:rotate(0deg);}
 to {transform:rotate(360deg);}
 }*/
-
-/* Prompt window */
-.jqiclose {
-  font-size: 40px;
-}
-
-.jqibox {
-  height: auto;
-}
