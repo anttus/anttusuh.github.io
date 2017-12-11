@@ -144,9 +144,9 @@ document.getElementById('btnGroup').addEventListener('click', e => {
             acceptDecline.style.display = 'none';
             groupForm.style.display = 'none';
             mainBody.style.display = 'block';
-            // setTimeout(function() {
-            //   location.reload();
-            // }, 500);
+            setTimeout(function() {
+              location.reload();
+            }, 500);
           });
 
           // Decline invite button
