@@ -25,6 +25,14 @@
   width: auto;
 }
 
+#notificationMobile {
+  float: right;
+  color: #f00;
+  font-size: 15px;
+  margin: 10px;
+  display: none;
+}
+
 .navbar-collapse.in {
   overflow-y: hidden;
 }

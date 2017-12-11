@@ -35,6 +35,11 @@ function writeUser(uname, uid, email) {
         } else {
           $('#notification').hide();
         }
+        if (data.val().invitedToGroup && $(window).innerWidth() <= 767) {
+          $('#notificationMobile').show();
+        } else {
+          $('#notificationMobile').hide();
+        }
       });
     } else {
       // console.log('creating a new user for the database.');
