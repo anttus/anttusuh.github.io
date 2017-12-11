@@ -336,7 +336,11 @@ function showGroupMembers(uniqueNames) {
   $('#groupMembers').empty();
   $('#groupMembers').html('<br /><p>Ryhmäsi jäsenet:</p>');
   for (var x = 0; x < uniqueNames.length; x++) {
-    $('#groupMembers').append("<li><strong>" + uniqueNames[x] + "<strong></li>");
+    if (uniqueNames.length === 1) {
+      $('#groupMembers').append("<strong>" + uniqueNames[x] + "<strong>");
+    } else {
+      $('#groupMembers').append("<strong>, " + uniqueNames[x] + "<strong>, ");
+    }
   }
 }
 
