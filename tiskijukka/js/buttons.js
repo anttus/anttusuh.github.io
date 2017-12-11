@@ -140,7 +140,10 @@ document.getElementById('btnGroup').addEventListener('click', e => {
             acceptDecline.style.display = 'none';
             groupForm.style.display = 'none';
             mainBody.style.display = 'block';
-            //  location.reload();
+            removeUserTasks();
+            setTimeout(function() {
+              location.reload();
+            }, 500);
           });
 
           declineInvite.addEventListener('click', e => {

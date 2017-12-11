@@ -242,18 +242,19 @@ function calculateScores(groupid) {
       }
     });
 
-    // Filter userArr, take unique users and add to uniqueNames.
-    $.each(userArr, function(i, el) {
-      if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-    });
+    firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(groupid).once('value', snap => {
+      snap.forEach(data => {
+        uniqueNames.push(data.val().username);
+      });
 
-    // Show unique group members.
-    showGroupMembers(uniqueNames);
-    // Update the total score count.
-    updateScoreCount(totalTasks);
-    // Calculate each group members scores.
-    calculatePersonalScore(uniqueNames, totalTasks, groupid);
-    // console.log(uniqueNames);
+      // Show unique group members.
+      showGroupMembers(uniqueNames);
+      // Update the total score count.
+      updateScoreCount(totalTasks);
+      // Calculate each group members scores.
+      calculatePersonalScore(uniqueNames, totalTasks, groupid);
+      // console.log(uniqueNames);
+    });
   });
 }
 
@@ -334,12 +335,16 @@ function updateScoreCountList(name, tasks) {
 
 function showGroupMembers(uniqueNames) {
   $('#groupMembers').empty();
-  $('#groupMembers').html('<br /><p>Ryhmäsi jäsenet:</p>');
+  if (uniqueNames.length < 2) {
+    $('#groupMembers').html('<br /><p>Ryhmäsi jäsenet:</p>Ryhmässäsi ei ole vielä muita jäseniä.<br>');
+  } else {
+    $('#groupMembers').html('<br /><p>Ryhmäsi jäsenet:</p>');
+  }
   for (var x = 0; x < uniqueNames.length; x++) {
-    if (uniqueNames.length === 1) {
+    if (x === 0) {
       $('#groupMembers').append("<strong>" + uniqueNames[x] + "<strong>");
     } else {
-      $('#groupMembers').append("<strong>, " + uniqueNames[x] + "<strong>, ");
+      $('#groupMembers').append("<strong>, " + uniqueNames[x] + "<strong>");
     }
   }
 }
