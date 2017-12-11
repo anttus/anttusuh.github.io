@@ -8,7 +8,7 @@ var cdBool = false;
 
 function otherTaskFunc() {
   var selectedValue = dropdownDish.options[dropdownDish.selectedIndex].value;
-  if (selectedValue == 1) {
+  if (selectedValue == "Muu") {
     var prompt = window.prompt("Kirjoita jokin muu tehtävän tyyppi.");
 
     if (prompt == null || prompt == "") {
