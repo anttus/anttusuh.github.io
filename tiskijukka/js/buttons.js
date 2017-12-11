@@ -137,12 +137,12 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
             snap.forEach(data => {
               updateUserGroup(data.val().uid, groupid)});
+              removeUserTasks(data.val().uid, false);
             });
             showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
             acceptDecline.style.display = 'none';
             groupForm.style.display = 'none';
             mainBody.style.display = 'block';
-            removeUserTasks();
             setTimeout(function() {
               location.reload();
             }, 500);
@@ -210,7 +210,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
       groupid = ID();
       updateUserGroup(user.uid, groupid);
       updateTaskList(groupid);
-      removeUserTasks();
+      removeUserTasks(user.uid, true);
       $('#groupClose').click();
     });
 

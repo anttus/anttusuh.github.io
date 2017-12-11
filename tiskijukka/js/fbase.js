@@ -101,14 +101,15 @@ function inviteUser(dbUser, invGroupId, invByUser) {
   });
 }
 
-function removeUserTasks() {
-  let user = firebase.auth().currentUser;
-  firebase.database().ref('Tasks').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+function removeUserTasks(uid, reload) {
+  firebase.database().ref('Tasks').orderByChild('uid').equalTo(uid).once('value', snap => {
     snap.forEach(data => {
       console.log(data.val().taskid);
       firebase.database().ref('Tasks/' + data.val().taskid).remove();
     });
-    location.reload();
+    if(reload) {
+      location.reload();
+    }
   });
 }
 
