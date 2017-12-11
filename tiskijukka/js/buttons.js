@@ -207,11 +207,16 @@ document.getElementById('btnGroup').addEventListener('click', e => {
     });
 
     leaveGroup.addEventListener('click', e => {
-      groupid = ID();
-      updateUserGroup(user.uid, groupid);
-      updateTaskList(groupid);
-      removeUserTasks(user.uid, true);
-      $('#groupClose').click();
+      var choice = confirm("Oletko varma? Kaikki aiemmat tehtäväsi poistuvat.");
+      if (choice == true) {
+        groupid = ID();
+        updateUserGroup(user.uid, groupid);
+        updateTaskList(groupid);
+        removeUserTasks(user.uid, true);
+        $('#groupClose').click();
+      } else {
+        console.log(choice);
+      }
     });
 
     //Close group view
