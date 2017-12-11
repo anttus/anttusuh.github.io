@@ -26,7 +26,7 @@ function writeUser(uname, uid, email) {
   // var uname, email, uid, groupid, ingroup;
   let groupid;
 
-  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+  firebase.database().ref().child('Users/User').orderByChild('uid').equalTo(user.uid).on('value', snap => {
     const userData = snap.val();
     if (userData) {
       snap.forEach((data) => {
@@ -311,7 +311,7 @@ function calcPercents(totalTasks, total) {
   if (total === 0) {
     percent = 0;
   } else {
-    percent = ((totalTasks / total) * 100).toFixed(1);
+    percent = ((total / totalTasks) * 100).toFixed(1);
   }
   return percent;
 }

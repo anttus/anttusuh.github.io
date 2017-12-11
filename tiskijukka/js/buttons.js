@@ -129,6 +129,8 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           invitedToGroup: dbValue.invitedToGroup,
           invitedBy: dbValue.invitedBy
         }
+
+        // Accept invite button
         acceptInvite.addEventListener('click', e => {
           let groupid = ID();
           updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
@@ -146,6 +148,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
             }, 500);
           });
 
+          // Decline invite button
           declineInvite.addEventListener('click', e => {
             updateUser(dbUser.username, dbUser.uid, dbUser.email, dbUser.groupid);
             acceptDecline.style.display = 'none';
