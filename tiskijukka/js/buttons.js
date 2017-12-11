@@ -136,16 +136,17 @@ document.getElementById('btnGroup').addEventListener('click', e => {
           updateUser(dbUser.username, dbUser.uid, dbUser.email, groupid);
           firebase.database().ref('Users/User/').orderByChild('groupid').equalTo(dbUser.invitedToGroup).once('value', snap => {
             snap.forEach(data => {
-              updateUserGroup(data.val().uid, groupid)});
+              updateUserGroup(data.val().uid, groupid)
               removeUserTasks(data.val().uid, false);
+            });
             });
             showInvitation.innerHTML = "Sinulla ei ole kutsuja...";
             acceptDecline.style.display = 'none';
             groupForm.style.display = 'none';
             mainBody.style.display = 'block';
-            setTimeout(function() {
-              location.reload();
-            }, 500);
+            // setTimeout(function() {
+            //   location.reload();
+            // }, 500);
           });
 
           // Decline invite button
