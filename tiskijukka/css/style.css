@@ -28,7 +28,7 @@
 #notificationMobile {
   float: right;
   color: #f00;
-  font-size: 15px;
+  font-size: 25px;
   margin: 10px;
   display: none;
 }
@@ -49,7 +49,7 @@ body {
   font-family: 'Oswald';
   background-color: #f1f1f1;
   position: relative;
-  min-width: 410px;
+  min-width: 360px;
   position: absolute;
   bottom: 0;
   width: 100%;
