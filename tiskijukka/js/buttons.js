@@ -8,7 +8,7 @@ var cdBool = false;
 
 function otherTaskFunc() {
   var selectedValue = dropdownDish.options[dropdownDish.selectedIndex].value;
-  if (selectedValue == "Muu") {
+  if (selectedValue == 1) {
     var prompt = window.prompt("Kirjoita jokin muu tehtävän tyyppi.");
 
     if (prompt == null || prompt == "") {
@@ -204,7 +204,7 @@ document.getElementById('btnGroup').addEventListener('click', e => {
       groupid = ID();
       updateUserGroup(user.uid, groupid);
       updateTaskList(groupid);
-      location.reload();
+      removeUserTasks();
       $('#groupClose').click();
     });
 

@@ -74,6 +74,15 @@ function updateUsername(username) {
   firebase.database().ref('Users/User/' + user.uid).update({
     username: username
   });
+
+  firebase.database().ref('Tasks').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    snap.forEach(data => {
+      firebase.database().ref('Tasks/' + data.val().taskid).update({
+        username: username
+      });
+    });
+    location.reload();
+  });
 }
 
 function inviteUser(dbUser, invGroupId, invByUser) {
@@ -87,19 +96,30 @@ function inviteUser(dbUser, invGroupId, invByUser) {
   });
 }
 
+function removeUserTasks() {
+  let user = firebase.auth().currentUser;
+  firebase.database().ref('Tasks').orderByChild('uid').equalTo(user.uid).once('value', snap => {
+    snap.forEach(data => {
+      console.log(data.val().taskid);
+      firebase.database().ref('Tasks/' + data.val().taskid).remove();
+    });
+    location.reload();
+  });
+}
 
 //Writing the tasks
 function writeTask(tasktype) {
 
   //Returns the running id of tasks
-  firebase.database().ref('Tasks').once("value", function(snap) {
+  firebase.database().ref('Tasks').limitToLast(1).once("value", function(snap) {
     let count = 0;
     snap.forEach(function(data) {
       if (data.key) {
+        count = data.key;
         count++;
       }
     });
-    taskid = count + 1;
+    taskid = count;
     // Set the task into the database
     setTask(taskid, tasktype);
   });
@@ -150,16 +170,14 @@ function returnLatestTask() {
   }
 }
 
-function returnTaskID() {
-  firebase.database().ref('Tasks').orderByValue().on("value", function(snap) {
-    snap.forEach(function(data) {
-      taskID = data.key;
-    });
-  });
-  return taskID++;
-}
-
-
+// function returnTaskID() {
+//   firebase.database().ref('Tasks').orderByValue().on("value", function(snap) {
+//     snap.forEach(function(data) {
+//       taskID = data.key;
+//     });
+//   });
+//   return taskID++;
+// }
 
 //Reading and listing the tasks
 function readTasks() {
@@ -271,14 +289,25 @@ function calculatePersonalScore(uniqueNames, totalTasks, groupid) {
         }
       }));
       // Calculate percentages from total tasks
-      tasks.totalPercent = ((tasks.total / totalTasks.total) * 100).toFixed(1);
-      tasks.dishPercent = ((tasks.dishes / totalTasks.dishes) * 100).toFixed(1);
-      tasks.cleanPercent = ((tasks.cleaning / totalTasks.cleaning) * 100).toFixed(1);
-      tasks.vacuumPercent = ((tasks.vacuuming / totalTasks.vacuuming) * 100).toFixed(1);
-      tasks.laundryPercent = ((tasks.laundry / totalTasks.laundry) * 100).toFixed(1);
+
+      tasks.totalPercent = calcPercents(totalTasks.total, tasks.total);
+      tasks.dishPercent = calcPercents(totalTasks.dishes, tasks.dishes);
+      tasks.cleanPercent = calcPercents(totalTasks.cleaning, tasks.cleaning);
+      tasks.vacuumPercent = calcPercents(totalTasks.vacuuming, tasks.vacuuming);
+      tasks.laundryPercent = calcPercents(totalTasks.laundry, tasks.laundry);
+
       updateScoreCountList(name, tasks);
     });
   }
+}
+
+function calcPercents(totalTasks, total) {
+  if (total === 0) {
+    percent = 0;
+  } else {
+    percent = ((totalTasks / total) * 100).toFixed(1);
+  }
+  return percent;
 }
 
 function updateScoreCount(totalTasks) {
@@ -289,12 +318,14 @@ function updateScoreCount(totalTasks) {
     '</strong><br>Tiskit: ' + totalTasks.dishes +
     '<br>Siivous: ' + totalTasks.cleaning +
     '<br>Imurointi: ' + totalTasks.vacuuming +
-    '<br>Pyykit: ' + totalTasks.laundry + '<p></p>');
+    '<br>Pyykit: ' + totalTasks.laundry +
+    '<p></p>');
 }
 
 function updateScoreCountList(name, tasks) {
   $('#scoreCountList').append(
-    "<strong>" + name + "</strong>" + ":<br>Tiskit: " + tasks.dishes + " (" + tasks.dishPercent + "%)<br>Siivous: " +
+    "<strong>" + name + "</strong>" + ":<br>Tiskit: " +
+    tasks.dishes + " (" + tasks.dishPercent + "%)<br>Siivous: " +
     tasks.cleaning + " (" + tasks.cleanPercent + "%)<br>Imurointi: " +
     tasks.vacuuming + " (" + tasks.vacuumPercent + "%)<br>Pyykit: " +
     tasks.laundry + " (" + tasks.laundryPercent + "%)<p></p>"
