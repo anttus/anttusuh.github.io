@@ -1,0 +1,94 @@
+#groupForm, #profileForm {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  text-align: left;
+  padding-bottom: 20px;
+  border: none;
+  outline: none;
+  overflow: auto;
+}
+
+#groupForm h1, #profileForm h1 {
+  text-align: center;
+}
+
+#groupInvite, #profile {
+  width: 50%;
+  margin-left: 25%;
+}
+
+#newUsername {
+  margin-top: 10px;
+}
+
+.groupRow .button {
+  width: 100%;
+}
+
+.button {
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  outline: none;
+}
+
+.button:hover {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: #333333c9;
+}
+
+#btnAcceptInvite {
+  background-color: #49a85b;
+}
+
+#btnAcceptInvite:hover {
+  background-color: #49a85bc4;
+}
+
+#btnDeclineInvite {
+  background-color: #cc2626;
+}
+
+#btnDeclineInvite:hover {
+  background-color: #cc2626c4;
+}
+
+#groupClose, #profileClose {
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+#groupClose:hover, #profileClose:hover {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: #333333c9;
+}
+
+@media screen and (max-width: 800px) {
+  #groupForm, #profileForm {
+    width: auto;
+  }
+
+}
+
+@media screen and (max-width: 412px) {
+  #groupForm, #profileForm {
+    width: 400px;
+  }
+}

@@ -1,29 +1,28 @@
-<!-- <?php require "login/loginheader.php";?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <title>Tiskijukka</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/form.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
+  <script src="../tiskijukka/vendor/jQuery-Form-Validator-master/form-validator/jquery.form-validator.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  <script src="../tiskijukka/vendor/jquery.confirm-master/jquery.confirm.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 
-<!-- ICONS -->
-  <!-- <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png"> -->
+  <!-- Icons -->
   <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
@@ -33,74 +32,196 @@
   <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-<!-- SCRIPTS -->
-  <script>
-    // fadeAlert(2000);
-    // getLatestTime();
-    // getUsernames();
-  </script>
-
-<!-- SUCCESSFUL LOGIN -->
-  <?php
-    if ($_SESSION["fadeAlertCount"] === 0): ?>
-      <div class="form-signin">
-        <div id="successLogin" class="alert alert-success">Olet kirjautunut onnistuneesti sisään käyttäjänä <strong><?php echo $_SESSION['username'] ?></strong>!</div>
-      </div>
-      <?php $_SESSION["fadeAlertCount"] = 1; ?>
-  <?php else: ?>
-  <?php endif; ?>
 </head>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-inverse" id="navbar">
-  <div class="container-fluid">
-    <a href="login/logout.php" id="logoutButton" class="btn btn-default btn-lg btn-square " >Ulos</a>
-    <div class="navbar-header">
-      <a id="navbarTitle" class="navbar-brand">Viimeisin: <p></p></a>
-    </div>
-  </div>
-</nav>
-
-<!-- BODY -->
 <body>
-  <div class="container-fluid text-center">
 
-    <div class="row content">
+  <!-- Login window -->
+  <div id="modalLogin" class="modal">
+    <div class="modal-content animate">
+      <div class="loginRow">
+        <button id="btnLogInTab">LOGIN</button>
+        <button id="btnSignUpTab">SIGN UP</button>
+      </div>
+      <h1 id="loginHeader">Welcome to Tiskijukka!</h1>
 
-      <!-- Beginning of the left column -->
-      <div class="col-sm-6 sidenav" id="leftCol">
+      <!-- Sign up -->
+      <div id="signUpForm" style="display:none">
+        <label><b>Email  </b></label>
+        <div><input type="email" name="email" id="txtEmail_SU" placeholder="Enter email address" data-validation="email"
+          data-validation-error-msg="This is not a valid email address"><br></div>
+          <label><b>Password  </b></label>
+          <div><input type="password" id="txtVerifyPassword" placeholder="Enter password"
+            name="pass_confirmation" data-validation="length" data-validation-length="min8"
+            data-validation-error-msg="The password should have at least 8 characters"><br>
 
-        <!-- Profile image -->
-        <!-- <?php $imgpath = "img/" . $_SESSION['username'] . ".jpg" ?> -->
-        <!-- <img src="<?php echo $imgpath ?>" class="img-circle" alt="Cinque Terre" width="180" height="180"> -->
-        <br />
+            <label><b>Verify password</b></label>
+            <input type="password" id="txtPassword_SU" name="pass" data-validation="confirmation" data-validation-error-msg="Please type the same password"
+            placeholder="Enter password again"><br></div>
+            <label><b>Username </b></label>
+            <div><input type="text" id="txtUsername" name="user" placeholder="Enter username"
+              data-validation="length alphanumeric" data-validation-length="min3"
+              data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"><br></div>
+              <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Sign up</button>
+              <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
+              <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+            </div>
 
-        <!-- BUTTON -->
-        <input type="submit" value="Tiskit tehty!" class="btn btn-success" href="#" id="dishButton" ></input>
-        <br />
+            <!-- Log in -->
+            <div id="loginForm">
+              <label><b>Email  </b></label>
+              <div><input type="email" name="email" id="txtEmail_SI" placeholder="Enter email address" data-validation="email"
+                data-validation-error-msg="This is not a valid email address"><br></div>
+                <label><b>Password  </b></label>
+                <input type="password" id="txtPassword_SI" placeholder="Enter password"><br>
 
-        <!-- SCORES -->
-        <div id="scoreCount">
-          TJ-PISTEET: <br/>
-        </div>
-      </div> <!-- End of the left column -->
+                <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Log in</button>
+                <button id="btnFacebook"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
+                <button id="btnGoogle"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
+              </div>
+            </div>
+          </div>
 
-      <!-- Right column - gets the times from the database -->
-      <div class="col-sm-6 sidenav rightCol" id="task"></div>
-      <!-- <div class="col-sm-6 sidenav" id="rightCol"><?php include ('php/getFromDb.php'); ?></div> -->
+          <!-- Loading icon -->
+          <div id="loading"></div>
 
-  <!-- FOOTER -->
-  <footer class="container-fluid text-center" >
-    <div id="footerText">Copyright @ 2017 Anttu Suhonen | Linkit <a target="_blank"  href="https://github.com/anttus/" >GitHubiin</a> ja
-      <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >LinkedIniin</a></br>
-      <p style="font-size: 10px; padding-top: 5px;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</p></a>
-    </div>
-  </footer>
+          <!-- Main page -->
+          <div id="mainBody" style="display: none">
 
-</body>
+            <!-- NAVBAR -->
+            <nav class="navbar navbar-inverse" id="navbar">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-nav" aria-expanded="false" id="navbarCollapsed">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <i id="notificationMobile" class="fa fa-exclamation"></i>
+                <a class="navbar-brand" id="navbarTitle"></a>
+              </div>
 
-<script type="text/javascript" src="js/fbase.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
+              <div class="collapse navbar-collapse" id="toggle-nav">
+                <img id="profileImgMobile" alt="[profiilikuva]" src="img/blankimage.png" class="img-circle" width="140" height="140">
+                <div class="nav navbar-nav navbar-right" id="navbar-nav">
+                  <button id="btnLogout" class="navbarButton btn btn-default btn-lg btn-square" aria-label="Close"><i class="glyphicon glyphicon-log-out"></i> Kirjaudu ulos</button>
+                  <button id="btnGroup" class="navbarButton btn btn-default btn-lg btn-square confirm" >
+                    <i class="glyphicon glyphicon-cog"></i> Ryhmät <i id="notification" class="fa fa-exclamation" style="color: #F00; display: none;"></i></button>
+
+                    <button id="btnProfile" class="navbarButton btn btn-default btn-lg btn-square"><i class="glyphicon glyphicon-user"></i> Profiili</button>
+                    <div id="curUser"></div>
+                  </div>
+                </div>
+              </nav> <!-- close navbar nav -->
+
+              <div class="container-fluid text-center">
+
+                <div class="row content">
+
+                  <!-- Beginning of the left column -->
+                  <div class="col-sm-6 sidenav" id="leftCol">
+
+                    <!-- Profile image -->
+                    <img id="profileImg" src="img/blankimage.png" alt="[profiilikuva]" class="img-circle" width="180" height="180">
+
+                    <!-- Task selector and button -->
+                    <p style="text-align: center; font-size: 16px;">
+                      Kutsu muita ryhmään painamalla "Ryhmät" -painiketta.<br /><br />
+                      Valitse tehtävän tyyppi ja paina "Tehty!"
+                    </p><br />
+                    <select class="btn btn-success dropdown" id="dropdownDish" onchange="otherTaskFunc();">
+                      <option value="Tiskit">Tiskit</option>
+                      <option value="Imurointi">Imurointi</option>
+                      <option value="Siivous">Siivous</option>
+                      <option value="Pyykit">Pyykit</option>
+                      <option value="Muu">Muu</option>
+                    </select>
+                    <input type="submit" value="...Tehty!" class="btn btn-success" id="btnDish" >
+                    <div class="text-danger" id="dishSuccess" style="display: none">
+                      <h3><strong>Tehtävän uudelleenlähettäminen estetty 3 sekunnin ajaksi.</strong></h3>
+                      <br>
+                    </div>
+                    <br />
+
+                    <!-- Statistics -->
+                    <div style="text-align: center;"><div id="scoreCount"></div></div>
+                    <div style="text-align: center;"><div id="scoreCountList" style="display: none"></div></div>
+                    <button id="scoreButton" class="glyphicon glyphicon-chevron-down"></button>
+
+                  </div> <!-- End of the left column -->
+
+                  <!-- Right column - gets the times from the database -->
+                  <div style="text-align: center;"><div class="col-sm-6 sidenav rightCol" id="task"></div></div>
+                  <div><button id="showMoreButton" class="glyphicon glyphicon-chevron-down"></button></div>
+
+                  <!-- FOOTER -->
+                  <footer class="container-fluid text-center" >
+                    <div id="footerText">Copyright @ 2017 <a target="_blank" href="https://www.linkedin.com/in/anttu-suhonen/" >Anttu Suhonen</a> &
+                      <a target="_blank" href="https://www.linkedin.com/in/mikaelkotkavuori">Mikael Kotkavuori</a>
+                      <br><p style="font-size: 10px; padding-top: 5px; margin-bottom: 0;">Powered by Google Firebase | <a target="_blank" href="https://firebase.google.com/terms/">Terms of Service</a></p>
+                    </div>
+                  </footer><!-- End of footer -->
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile editing form -->
+            <div id="profileForm" class="modal" style="display: none;">
+              <div class="modal-content animate">
+                <h1>Profiili</h1>
+                <div id="profile">
+                  <h3>Vaihda käyttäjänimi</h3>
+                  <label>Käyttäjänimi:</label>
+                  <div><input id="newUsername" type="text" name="username" placeholder="Uusi käyttäjänimi"
+                    data-validation="length alphanumeric" data-validation-length="min3"
+                    data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"/></div>
+                    <input type="button" id="acceptUsername" class="button" value="Vaihda"/>
+                    <p></p><div id="usernameMessage" class="text-success"></div><p></p>
+                    <input type="button" id="profileClose" class="button" value="Sulje"/>
+                  </div>
+                </div>
+              </div><!-- End of profile form -->
+
+              <!-- Group form -->
+              <div id="groupForm" class="modal" style="display: none;">
+                <div class="modal-content animate">
+                  <h1>Ryhmät</h1>
+                  <div id="groupInvite">
+                    <h3>Kutsu ryhmään</h3>
+                    <label>Sähköposti:</label>
+                    <div><input type="email" name="email" placeholder="Sähköpostiosoite" data-validation="email" data-validation-error-msg="This is not a valid email address" id="txtInviteEmail"/></div>
+                    <input type="button" id="btnGroupInvite" class="button" value="Kutsu ryhmään"/>
+                    <div id="inviteError" class="text-danger"></div>
+                    <div id="inviteMessage" class="text-success"></div>
 
 
-</html>
+                    <div id="groupMembers"></div>
+
+                    <h3>Poistu ryhmästä</h3>
+                    <p class="text-danger">Huom! Jos poistut ryhmästä, aiemmat tehtäväsi poistuvat.</p>
+                    <input type="button" id="btnGroupLeave" class="button" value="Poistu ryhmästä" />
+                    <div id="divInvitations">
+                      <h3>Saadut kutsut</h3>
+                      <p id="showInvitation">Sinulla ei ole kutsuja... </p>
+                      <br />
+                      <div class="groupRow" id="divAcceptDecline" style="display:none">
+                        <p class="text-danger">Huom! Jos hyväksyt kutsun, kaikki aiemman ryhmän tehtävät poistuvat.</p>
+                        <button id="btnAcceptInvite"><i class="glyphicon glyphicon-ok"></i> Hyväksy</button>
+                        <button id="btnDeclineInvite"><i class="glyphicon glyphicon-remove"></i> Kieltäydy</button>
+                      </div>
+                    </div>
+
+                    <input type="button" id="groupClose" class="button" value="Sulje"/>
+                  </div>
+                </div>
+              </div><!-- End of groupform  -->
+
+              <script src="js/fbase.js"></script>
+              <script src="js/scripts.js"></script>
+              <script src="js/buttons.js"></script>
+              <script src="js/login.js"></script>
+
+            </body>
+
+            </html>
