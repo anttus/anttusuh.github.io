@@ -39,7 +39,7 @@ btnDish.addEventListener('click', function () {
     setTimeout(function() {
       cdBool = false;
       $('#dishSuccess').hide();
-    }, 300000);
+    }, 3000);
   }
   else {
     $('#dishSuccess').show();
