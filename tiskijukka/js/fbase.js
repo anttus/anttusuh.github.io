@@ -153,6 +153,7 @@ function setTask(taskid, tasktype) {
       date: getDate(),
       time: getTime()
     });
+    console.log(snap.val());
   });
 }
 
