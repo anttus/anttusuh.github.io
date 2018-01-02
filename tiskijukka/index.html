@@ -40,42 +40,42 @@
   <div id="modalLogin" class="modal">
     <div class="modal-content animate">
       <div class="loginRow">
-        <button id="btnLogInTab">LOGIN</button>
-        <button id="btnSignUpTab">SIGN UP</button>
+        <button id="btnLogInTab">KIRJAUDU</button>
+        <button id="btnSignUpTab">REKISTERÖIDY</button>
       </div>
-      <h1 id="loginHeader">Welcome to Tiskijukka!</h1>
+      <h1 id="loginHeader">Tervetuloa Tiskijukkaan!</h1>
 
       <!-- Sign up -->
       <div id="signUpForm" style="display:none">
-        <label><b>Email  </b></label>
-        <div><input type="email" name="email" id="txtEmail_SU" placeholder="Enter email address" data-validation="email"
-          data-validation-error-msg="This is not a valid email address"><br></div>
-          <label><b>Password  </b></label>
-          <div><input type="password" id="txtVerifyPassword" placeholder="Enter password"
+        <label><b>Sähköposti  </b></label>
+        <div><input type="email" name="email" id="txtEmail_SU" placeholder="Syötä sähköposti" data-validation="email"
+          data-validation-error-msg="Tarkista sähköpostiosoite"><br></div>
+          <label><b>Salasana  </b></label>
+          <div><input type="password" id="txtVerifyPassword" placeholder="Syötä salasana"
             name="pass_confirmation" data-validation="length" data-validation-length="min8"
-            data-validation-error-msg="The password should have at least 8 characters"><br>
+            data-validation-error-msg="Salasanassa tulee olla vähintään 8 merkkiä"><br>
 
-            <label><b>Verify password</b></label>
-            <input type="password" id="txtPassword_SU" name="pass" data-validation="confirmation" data-validation-error-msg="Please type the same password"
-            placeholder="Enter password again"><br></div>
-            <label><b>Username </b></label>
-            <div><input type="text" id="txtUsername" name="user" placeholder="Enter username"
+            <label><b>Varmista salasana</b></label>
+            <input type="password" id="txtPassword_SU" name="pass" data-validation="confirmation" data-validation-error-msg="Syötä sama salasana uudelleen"
+            placeholder="Syötä salasana uudelleen"><br></div>
+            <label><b>Käyttäjänimi </b></label>
+            <div><input type="text" id="txtUsername" name="user" placeholder="Syötä käyttäjänimi"
               data-validation="length alphanumeric" data-validation-length="min3"
-              data-validation-error-msg="Username has to be an alphanumeric value (3-12 chars)"><br></div>
-              <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Sign up</button>
+              data-validation-error-msg="Käyttäjänimen tulee olla vähintään 3 merkkiä pitkä"><br></div>
+              <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Rekisteröidy</button>
               <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
               <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
             </div>
 
             <!-- Log in -->
             <div id="loginForm">
-              <label><b>Email  </b></label>
-              <div><input type="email" name="email" id="txtEmail_SI" placeholder="Enter email address" data-validation="email"
-                data-validation-error-msg="This is not a valid email address"><br></div>
-                <label><b>Password  </b></label>
-                <input type="password" id="txtPassword_SI" placeholder="Enter password"><br>
+              <label><b>Sähköposti  </b></label>
+              <div><input type="email" name="email" id="txtEmail_SI" placeholder="Syötä sähköposti" data-validation="email"
+                data-validation-error-msg="Tarkista sähköpostiosoite"><br></div>
+                <label><b>Salasana  </b></label>
+                <input type="password" id="txtPassword_SI" placeholder="Syötä salasana"><br>
 
-                <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Log in</button>
+                <button id="btnSignIn"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Kirjaudu</button>
                 <button id="btnFacebook"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
                 <button id="btnGoogle"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
               </div>

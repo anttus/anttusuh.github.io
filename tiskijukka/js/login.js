@@ -111,9 +111,9 @@ btnSignIn.addEventListener('click', e => {
     var errorMessage = error.message;
 
     if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
+      alert('Väärä salasana.');
     } else {
-      alert('The email address is not valid.');
+      alert('Tarkista sähköpostiosoite.');
     }
     console.log(error);
   });
