@@ -62,6 +62,7 @@
             <div><input type="text" id="txtUsername" name="user" placeholder="Syötä käyttäjänimi"
               data-validation="length alphanumeric" data-validation-length="min3"
               data-validation-error-msg="Käyttäjänimen tulee olla vähintään 3 merkkiä pitkä"><br></div>
+              <div class="text-danger">Saat rekisteröityessä varmistusviestin sähköpostiin. Kirjaudut sisään kun päivität sivun.</div>
               <button id="btnSignUp"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Rekisteröidy</button>
               <button id="btnFacebookSignUp"><i class="fa fa-facebook-square fa-fw" style="font-size:22px;"></i> Facebook</button>
               <button id="btnGoogleSignUp"><i class="fa fa-google fa-fw" aria-hidden="true" style="font-size:22px;"></i> Google</button>
@@ -132,9 +133,9 @@
                     <select class="btn btn-success dropdown" id="dropdownDish" onchange="otherTaskFunc();">
                       <option value="Tiskit">Tiskit</option>
                       <option value="Imurointi">Imurointi</option>
-                      <option value="Siivous">Siivous</option>
+                      <option value="Vessan pesu">Vessan pesu</option>
                       <option value="Pyykit">Pyykit</option>
-                      <option value="Muu">Muu</option>
+                      <option id="taskTypeOther" value="Muu">Muu</option>
                     </select>
                     <input type="submit" value="...Tehty!" class="btn btn-success" id="btnDish" >
                     <div class="text-danger" id="dishSuccess" style="display: none">

@@ -236,7 +236,7 @@ function calculateScores(groupid) {
         case 'Tiskit':
           totalTasks.dishes++;
           break;
-        case 'Siivous':
+        case 'Vessan pesu':
           totalTasks.cleaning++;
           break;
         case 'Imurointi':
@@ -283,7 +283,7 @@ function calculatePersonalScore(uniqueNames, totalTasks, groupid) {
             case 'Tiskit':
               tasks.dishes++;
               break;
-            case 'Siivous':
+            case 'Vessan pesu':
               tasks.cleaning++;
               break;
             case 'Imurointi':
@@ -323,7 +323,7 @@ function updateScoreCount(totalTasks) {
   $('#scoreCount').html(
     'TJ-PISTEET:<br>' + '<strong>Yhteensä: ' + totalTasks.total +
     '</strong><br>Tiskit: ' + totalTasks.dishes +
-    '<br>Siivous: ' + totalTasks.cleaning +
+    '<br>Vessan pesu: ' + totalTasks.cleaning +
     '<br>Imurointi: ' + totalTasks.vacuuming +
     '<br>Pyykit: ' + totalTasks.laundry +
     '<p></p>');
@@ -332,7 +332,7 @@ function updateScoreCount(totalTasks) {
 function updateScoreCountList(name, tasks) {
   $('#scoreCountList').append(
     "<strong>" + name + "</strong>" + ":<br>Tiskit: " +
-    tasks.dishes + " (" + tasks.dishPercent + "%)<br>Siivous: " +
+    tasks.dishes + " (" + tasks.dishPercent + "%)<br>Vessan pesu: " +
     tasks.cleaning + " (" + tasks.cleanPercent + "%)<br>Imurointi: " +
     tasks.vacuuming + " (" + tasks.vacuumPercent + "%)<br>Pyykit: " +
     tasks.laundry + " (" + tasks.laundryPercent + "%)<p></p>"
